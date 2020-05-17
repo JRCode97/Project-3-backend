@@ -3,11 +3,12 @@ package dev.cuny.services;
 import java.util.List;
 
 import dev.cuny.entities.Client;
+import dev.cuny.exceptions.ClientAlreadyExistedException;
 
 public interface ClientService {
 	
 	// Create
-	Client createClient(Client client);
+	Client createClient(Client client) throws ClientAlreadyExistedException;
 	
 	// Read
 	Client getClientById(int id);

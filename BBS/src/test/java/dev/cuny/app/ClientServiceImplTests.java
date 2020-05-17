@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.cuny.entities.Client;
+import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.services.ClientService;
 
 @SpringBootTest
@@ -35,7 +36,11 @@ class ClientServiceImplTests {
 		c1.setEmail("test@gmail.com");
 		c1.setRole(0);
 		
-		System.out.println(cs.createClient(c1));
+		try{
+			System.out.println(cs.createClient(c1));
+		}catch(ClientAlreadyExistedException e) {
+			System.out.println("Can not register since the username is already taken.");
+		}
 	}
 	
 	@Test

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import	dev.cuny.entities.Client;
+import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.repositories.ClientRepository;
 
 @Component
@@ -17,8 +18,16 @@ public class ClientServiceImplem implements ClientService{
 	ClientRepository cr;
 
 	@Override
-	public Client createClient(Client client) {
-		return cr.save(client);
+	public Client createClient(Client client) throws ClientAlreadyExistedException {
+		Client existedClient = new Client();
+		existedClient = cr.findByUsername(client.getfName());
+		if(existedClient != null) {
+			throw new ClientAlreadyExistedException();
+		}
+		else {
+			client.setcId(0);
+			return cr.save(client);
+		}
 	}
 
 	@Override
