@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 
@@ -34,6 +35,7 @@ public class Client {
 	private int role;
 	@OneToMany(mappedBy="client", fetch=FetchType.LAZY)
 	private List<Solution> solutions;
+
 
 	public Client() {
 		super();

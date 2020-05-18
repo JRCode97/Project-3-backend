@@ -77,6 +77,7 @@ public class BugReport {
 	}
 
 
+
 	public int getbId() {
 		return bId;
 	}
@@ -171,6 +172,7 @@ public class BugReport {
 
 	public void setCreatedTime(int createdTime) {
 		this.dateCreated = createdTime;
+
 	}
 
 	public int getPointValue() {
@@ -205,5 +207,6 @@ public class BugReport {
 				+ repSteps + ", username=" + username + ", severity=" + severity + ", priority=" + priority
 				+ ", status=" + status + ", location=" + location + ", approvedTime=" + approvedTime + ", resolvedTime="
 				+ resolvedTime + ", createdDate=" + dateCreated + ", pointValue=" + pointValue + "]";	// app is removed from here
+
 	}
 }

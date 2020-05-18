@@ -12,7 +12,6 @@ import dev.cuny.repositories.ClientRepository;
 class BbsApplicationTests {
 	@Autowired
 	ClientRepository cr;
-
 	@Test
 	void getClientbyId() {
 		System.out.println(cr.findById(1).get());
