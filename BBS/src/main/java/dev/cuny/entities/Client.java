@@ -1,10 +1,14 @@
 package dev.cuny.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -15,87 +19,115 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "client_id")
-	private int clientId;
+	private int cId;
 	@Column(name = "client_first_name")
-	private String clientFirstName;
+	private String fName;
 	@Column(name = "client_last_name")
-	private String clientLastName;
+	private String lName;
 	@Column(name = "client_username")
-	private String clientUsername;
+	private String username;
 	@Column(name = "client_email")
-	private String clientEmail;
+	private String email;
 	@Column(name = "client_password")
-	private String clientPassword;
+	private String password;
 	@Column(name = "client_role")
-	private int clientRole;
-
+	private int role;
+	@OneToMany(mappedBy="client", fetch=FetchType.LAZY)
+	private List<Solution> solutions;
 
 	public Client() {
 		super();
 	}
 	
-	
-	public int getClientId() {
-		return clientId;
+	public int getcId() {
+		return cId;
 	}
 
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
+
+
+	public void setcId(int cId) {
+		this.cId = cId;
 	}
 
-	public String getClientFirstName() {
-		return clientFirstName;
+
+
+	public String getfName() {
+		return fName;
 	}
 
-	public void setClientFirstName(String clientFirstName) {
-		this.clientFirstName = clientFirstName;
+
+
+	public void setfName(String fName) {
+		this.fName = fName;
 	}
 
-	public String getClientLastName() {
-		return clientLastName;
+
+
+	public String getlName() {
+		return lName;
 	}
 
-	public void setClientLastName(String clientLastName) {
-		this.clientLastName = clientLastName;
+
+
+	public void setlName(String lName) {
+		this.lName = lName;
 	}
 
-	public String getClientUsername() {
-		return clientUsername;
+
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setClientUsername(String clientUsername) {
-		this.clientUsername = clientUsername;
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getClientEmail() {
-		return clientEmail;
+
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setClientEmail(String clientEmail) {
-		this.clientEmail = clientEmail;
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getClientPassword() {
-		return clientPassword;
+
+
+	public String getPassword() {
+		return password;
 	}
 
-	public void setClientPassword(String clientPassword) {
-		this.clientPassword = clientPassword;
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public int getClientRole() {
-		return clientRole;
+
+
+	public int getRole() {
+		return role;
 	}
 
-	public void setClientRole(int clientRole) {
-		this.clientRole = clientRole;
+
+
+	public void setRole(int role) {
+		this.role = role;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "Client [clientId=" + clientId + ", clientFirstName=" + clientFirstName + ", clientLastName="
-				+ clientLastName + ", clientUsername=" + clientUsername + ", clientEmail=" + clientEmail
-				+ ", clientPassword=" + clientPassword + ", clientRole=" + clientRole + "]";
+		return "Client [clientId=" + cId + ", clientFirstName=" + fName + ", clientLastName="
+				+ lName + ", clientUsername=" + username + ", clientEmail=" + email
+				+ ", clientPassword=" + password + ", clientRole=" + role + "]";
 	}
 
 }

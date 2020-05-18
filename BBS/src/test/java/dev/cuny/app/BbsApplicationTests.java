@@ -12,10 +12,23 @@ import dev.cuny.repositories.ClientRepository;
 class BbsApplicationTests {
 	@Autowired
 	ClientRepository cr;
-	
+
 	@Test
 	void getClientbyId() {
 		System.out.println(cr.findById(1).get());
+	}
+	
+	@Test
+	void getClientByUsername() {
+		System.out.print(cr.findByUsername("theRaidMan"));
+	}
+	
+	@Test
+	void getClientByUsernameAndPassword() {
+		String username = "theRaidMan";
+		String password = "password";
+		
+		System.out.println(cr.findByUsernameAndPassword(username, password));
 	}
 
 }
