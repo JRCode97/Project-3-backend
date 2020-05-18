@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "bug_report")
 public class BugReport {
@@ -48,6 +51,7 @@ public class BugReport {
 	@JoinColumn(name="application_id")
 	private Application app;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)
 	private List<Solution> solutions;
 	
@@ -75,7 +79,6 @@ public class BugReport {
 		this.pointValue = pointValue;
 		this.app = app;
 	}
-
 
 
 	public int getbId() {
@@ -183,10 +186,12 @@ public class BugReport {
 		this.pointValue = pointValue;
 	}
 
+	@JsonIgnoreProperties({"reports"})
 	public Application getApp() {
 		return app;
 	}
 
+	@JsonIgnoreProperties({"reports"})
 	public void setApp(Application app) {
 		this.app = app;
 	}
