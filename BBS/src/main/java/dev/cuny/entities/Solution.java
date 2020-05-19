@@ -19,7 +19,7 @@ public class Solution {
 	private int id;
 	@Column(name="solution_title")
 	private String title;
-	@Column(name="solutiion")
+	@Column(name="solution")
 	private String description;
 	@Column(name="status")
 	private String status;
