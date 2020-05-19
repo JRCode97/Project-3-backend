@@ -33,7 +33,7 @@ public class ApplicationController {
 	}
 	@RequestMapping(value="/application",method=RequestMethod.GET)
 	@ResponseBody
-	public List<Application> getAllApplications(){
+	public List<Application> getAllAssociates(){
 		
 		return as.getApplications();
 	}

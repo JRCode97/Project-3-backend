@@ -14,5 +14,5 @@ public interface ApplicationService {
 	//UPDATE
 	public Application updateApplication(Application a);
 	//DELETE
-	public boolean deleteApplication(Application a );
+	public boolean deleteApplication(Application a);
 }

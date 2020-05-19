@@ -18,7 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
-import dev.cuny.entities.Client;
 import dev.cuny.services.BugReportService;
 
 @Component
@@ -27,42 +26,32 @@ import dev.cuny.services.BugReportService;
 public class BugReportController {
 	@Autowired
 	BugReportService brs;
-
 	@ResponseBody
-	@RequestMapping(value = "/bugreport", method = RequestMethod.POST)
+	@RequestMapping(value="/bugreport",method=RequestMethod.POST)
 	public BugReport createBugReport(@RequestBody BugReport br) {
 		return brs.createBugReport(br);
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/bugreport/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/bugreport/{id}", method=RequestMethod.GET)
 	public BugReport getBugReportById(@PathVariable int id) {
-		try {
-			return brs.getBugReportById(id);
-		} catch (NoSuchElementException e) {
-			System.out.println("I'm ending up to here:(");
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
-		}
+	try {
+	return brs.getBugReportById(id);}
+	catch(NoSuchElementException e) {
+		System.out.println("I'm ending up to here:(");
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find bug report");
 	}
-
+	}
 	@ResponseBody
-	@RequestMapping(value = "/bugreport", method = RequestMethod.PUT)
+	@RequestMapping(value="/bugreport",method=RequestMethod.PUT)
 	public BugReport updateBugReport(@RequestBody BugReport br) {
 		return brs.updateBugReport(br);
 	}
-
 	@ResponseBody
-	@RequestMapping(value = "query/bugreport", method = RequestMethod.GET)
-	public List<BugReport> query(@RequestParam int id) {
+	@RequestMapping(value="query/bugreport",method=RequestMethod.GET)
+	public List<BugReport> query(@RequestParam int id){
 		Application app = new Application();
 		app.setId(id);
 		return brs.getBugReportsByAppId(app);
 	}
-
-	@ResponseBody
-	@RequestMapping(value = "/bugreport", method = RequestMethod.GET)
-	public List<BugReport> queryAllBugReports() {
-		return brs.getAllBugReports();
-	}
-
 }

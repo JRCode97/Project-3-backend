@@ -27,7 +27,7 @@ public class SolutionServiceimpl implements SolutionService {
 
 	@Override
 	public List<Solution> getAllSolutions() {
-		return (List<Solution>) sr.findAll();
+		return sr.findAll();
 	}
 
 	@Override
