@@ -14,7 +14,7 @@ import dev.cuny.repositories.ClientRepository;
 
 @Component
 @Service
-public class ClientServiceImplem implements ClientService{
+public class ClientServiceImpl implements ClientService{
 	
 	@Autowired
 	ClientRepository cr;

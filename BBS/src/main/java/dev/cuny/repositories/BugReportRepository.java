@@ -12,11 +12,8 @@ import dev.cuny.entities.BugReport;
 @Component
 @Repository
 public interface BugReportRepository extends JpaRepository<BugReport,Integer>{
-	BugReport findBySubject(String subject);
-//	@Query("SELECT SUM(point_value),client_first_name FROM solution,bug_report,client WHERE solution.bug_report_id = bug_report.bug_report_id and solver_client_id in (SELECT client_id FROM client)  GROUP BY solution.bug_report_id")
-//	List<BugReport> getLeaderBoard();
+	BugReport findByTitle(String title);
 	
-	//@Query("SELECT br FROM bug_report br WHERE br.application_id=")
 	List<BugReport> findByApp(Application a);
-	
+
 }
