@@ -27,13 +27,13 @@ public class BugReportController {
 	@Autowired
 	BugReportService brs;
 	@ResponseBody
-	@RequestMapping(value="/BugReport",method=RequestMethod.POST)
+	@RequestMapping(value="/bugreport",method=RequestMethod.POST)
 	public BugReport createBugReport(@RequestBody BugReport br) {
 		return brs.createBugReport(br);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/BugReport/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/bugreport/{id}", method=RequestMethod.GET)
 	public BugReport getBugReportById(@PathVariable int id) {
 	try {
 	return brs.getBugReportById(id);}
@@ -43,12 +43,12 @@ public class BugReportController {
 	}
 	}
 	@ResponseBody
-	@RequestMapping(value="/BugReport",method=RequestMethod.PUT)
+	@RequestMapping(value="/bugreport",method=RequestMethod.PUT)
 	public BugReport updateBugReport(@RequestBody BugReport br) {
 		return brs.updateBugReport(br);
 	}
 	@ResponseBody
-	@RequestMapping(value="query/BugReport",method=RequestMethod.GET)
+	@RequestMapping(value="query/bugreport",method=RequestMethod.GET)
 	public List<BugReport> query(@RequestParam int id){
 		Application app = new Application();
 		app.setId(id);
