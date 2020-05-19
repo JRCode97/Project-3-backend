@@ -53,4 +53,10 @@ public class BugReportController {
 		app.setId(id);
 		return brs.getBugReportsByAppId(app);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/bugreport", method=RequestMethod.GET)
+	public List<BugReport> queryAllBugReports(){
+		return brs.getAllBugReports();
+	}
 }
