@@ -38,6 +38,7 @@ public class BugReportController {
 	try {
 	return brs.getBugReportById(id);}
 	catch(NoSuchElementException e) {
+		System.out.println("I'm ending up to here:(");
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find bug report");
 	}
 	}
