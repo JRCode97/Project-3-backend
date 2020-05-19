@@ -24,50 +24,38 @@ import dev.cuny.services.SolutionService;
 public class SolutionController {
 	@Autowired
 	SolutionService ss;
-
 	@ResponseBody
-	@RequestMapping(value = "/solution", method = RequestMethod.POST)
+	@RequestMapping(value="/solution",method=RequestMethod.POST)
 	public Solution createSolution(@RequestBody Solution s) {
 		return ss.createSolution(s);
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/solution/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/solution/{id}", method=RequestMethod.GET)
 	public Solution getSolutionById(@PathVariable int id) {
-		try {
-			return ss.getSolutionById(id);
-		} catch (NoSuchElementException e) {
-
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
-		}
+	try {
+	return ss.getSolutionById(id);}
+	catch(NoSuchElementException e) {
+		
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find solution");
 	}
-
+	}
 	@ResponseBody
-	@RequestMapping(value = "/solution", method = RequestMethod.PUT)
+	@RequestMapping(value="/solution",method=RequestMethod.PUT)
 	public Solution updateSolution(@RequestBody Solution s) {
 		return ss.updateSolution(s);
 	}
-
 	@ResponseBody
-	@RequestMapping(value = "query/solution/client", method = RequestMethod.GET)
-	public List<Solution> query(@RequestBody Client c) {
+	@RequestMapping(value="query/solution/client",method=RequestMethod.GET)
+	public List<Solution> query(@RequestBody Client c){
 
 		return ss.getSolutionsByClient(c);
 	}
-
 	@ResponseBody
-	@RequestMapping(value = "query/solution/bugreport", method = RequestMethod.GET)
-	public List<Solution> query(@RequestBody BugReport br) {
+	@RequestMapping(value="query/solution/bugreport",method=RequestMethod.GET)
+	public List<Solution> query(@RequestBody BugReport br){
 
 		return ss.getSolutionByBugReport(br);
 	}
-
-	// Get all Solution
-	@ResponseBody
-	@RequestMapping(value = "query/solutions", method = RequestMethod.GET)
-	public List<Solution> getllAllSolution() {
-
-		return ss.getAllSolutions();
-	}
-
+	
 }
