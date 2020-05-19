@@ -12,6 +12,7 @@ public interface SolutionService {
 	List<Solution> getAllSolutions();
 	List<Solution> getSolutionsByClient(Client c);
 	List<Solution>getSolutionByBugReport(BugReport br);
+	List<Solution> getSolutionByStatus(String status);
 	//UPDATE
 	Solution updateSolution(Solution s);
 	//DELETE

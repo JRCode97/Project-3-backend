@@ -26,7 +26,7 @@ public class SolutionServiceimpl implements SolutionService {
 
 	@Override
 	public List<Solution> getAllSolutions() {
-		return (List<Solution>) sr.findAll();
+		return sr.findAll();
 	}
 
 	@Override
@@ -39,6 +39,12 @@ public class SolutionServiceimpl implements SolutionService {
 	public List<Solution> getSolutionByBugReport(BugReport br) {
 		return sr.findByBr(br);
 	}
+	
+	@Override
+	public List<Solution> getSolutionByStatus(String status) {
+		
+		return sr.findByStatus(status);
+	}
 
 	@Override
 	public Solution updateSolution(Solution s) {
@@ -50,5 +56,7 @@ public class SolutionServiceimpl implements SolutionService {
 		sr.delete(s);
 		return true;
 	}
+
+	
 
 }
