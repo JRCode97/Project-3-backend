@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "application")
 public class Application {
@@ -23,6 +25,7 @@ public class Application {
 	@Column(name="application_git_link")
 	private String gitLink;
 	@OneToMany(mappedBy="app", fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<BugReport> reports;
 	
 	public Application() {
