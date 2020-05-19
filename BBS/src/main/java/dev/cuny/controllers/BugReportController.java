@@ -27,28 +27,27 @@ public class BugReportController {
 	@Autowired
 	BugReportService brs;
 	@ResponseBody
-	@RequestMapping(value="/bugreport",method=RequestMethod.POST)
+	@RequestMapping(value="/BugReport",method=RequestMethod.POST)
 	public BugReport createBugReport(@RequestBody BugReport br) {
 		return brs.createBugReport(br);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/bugreport/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/BugReport/{id}", method=RequestMethod.GET)
 	public BugReport getBugReportById(@PathVariable int id) {
 	try {
 	return brs.getBugReportById(id);}
 	catch(NoSuchElementException e) {
-		System.out.println("I'm ending up to here:(");
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find bug report");
 	}
 	}
 	@ResponseBody
-	@RequestMapping(value="/bugreport",method=RequestMethod.PUT)
+	@RequestMapping(value="/BugReport",method=RequestMethod.PUT)
 	public BugReport updateBugReport(@RequestBody BugReport br) {
 		return brs.updateBugReport(br);
 	}
 	@ResponseBody
-	@RequestMapping(value="query/bugreport",method=RequestMethod.GET)
+	@RequestMapping(value="query/BugReport",method=RequestMethod.GET)
 	public List<BugReport> query(@RequestParam int id){
 		Application app = new Application();
 		app.setId(id);

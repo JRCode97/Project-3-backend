@@ -44,6 +44,7 @@ public class ClientController {
 		return cs.getClientByUsernameAndPassword(client.getUsername(), client.getPassword());
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/clients", method = RequestMethod.PUT)
 	public Client updateClient(@RequestBody Client client) {

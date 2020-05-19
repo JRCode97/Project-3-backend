@@ -6,5 +6,6 @@ import dev.cuny.entities.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application,Integer>{
 	Application findByTitle(String title);
+	//Application updateApplication(Application app);
 	
 }
