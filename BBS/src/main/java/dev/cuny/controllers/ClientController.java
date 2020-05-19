@@ -40,8 +40,8 @@ public class ClientController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/clients/login", method = RequestMethod.GET)
-	public Client login(@RequestBody Client client) {
-		return cs.getClientByUsernameAndPassword(client.getUsername(), client.getPassword());
+	public Client login(@RequestParam String username, @RequestParam String password) {
+		return cs.getClientByUsernameAndPassword(username, password);
 	}
 	
 	@ResponseBody

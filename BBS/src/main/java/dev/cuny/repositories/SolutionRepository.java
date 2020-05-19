@@ -8,6 +8,6 @@ import dev.cuny.entities.*;
 
 public interface SolutionRepository extends JpaRepository<Solution,Integer>{
 	List<Solution> findByClient(Client client); 
-	List<Solution> findByBR(BugReport br);
-
+	List<Solution> findByBr(BugReport br);
+	List<Solution> findByStatus(String status);
 }

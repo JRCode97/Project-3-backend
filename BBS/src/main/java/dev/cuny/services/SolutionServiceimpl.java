@@ -38,7 +38,7 @@ public class SolutionServiceimpl implements SolutionService {
 
 	@Override
 	public List<Solution> getSolutionByBugReport(BugReport br) {
-		return sr.findByBR(br);
+		return sr.findByBr(br);
 	}
 
 	@Override
