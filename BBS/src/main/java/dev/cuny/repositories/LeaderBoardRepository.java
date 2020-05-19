@@ -8,11 +8,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import dev.cuny.entities.BugReport;
 import dev.cuny.entities.Client;
 
 @Component
 @Repository
-public interface LeaderBoardRepository extends CrudRepository<Client, Integer> {
+public interface LeaderBoardRepository extends CrudRepository<BugReport, Integer> {
 	
 	@Query(value = "SELECT 	solution.solver_client_id, client.client_username," + 
 			"		sum(bug_report.point_value) as point_value_sum" + 
