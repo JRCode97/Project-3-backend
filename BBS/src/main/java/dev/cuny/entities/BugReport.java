@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "bug_report")
@@ -24,7 +23,7 @@ public class BugReport {
 	@Column(name = "bug_report_id")
 	private int bId;
 	@Column(name = "bug_report_title")
-	private String subject;
+	private String title;
 	@Column(name="bug_report_description")
 	private String description;
 	@Column(name="bug_report_reproduction_steps")
@@ -49,10 +48,11 @@ public class BugReport {
 	private int pointValue;
 	@ManyToOne
 	@JoinColumn(name="application_id")
+//	@JsonIgnore
 	private Application app;
 
-	@JsonIgnore
 	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Solution> solutions;
 	
 	public BugReport() {
@@ -60,12 +60,12 @@ public class BugReport {
 	}
 	
 
-	public BugReport(int bId, String subject, String description, String repSteps, String username, String severity,
+	public BugReport(int bId, String title, String description, String repSteps, String username, String severity,
 			String priority, String status, String location, int approvedTime, int resolvedTime, int createdTime,
 			int pointValue, Application app) {
 		super();
 		this.bId = bId;
-		this.subject = subject;
+		this.title = title;
 		this.description = description;
 		this.repSteps = repSteps;
 		this.username = username;
@@ -81,6 +81,7 @@ public class BugReport {
 	}
 
 
+
 	public int getbId() {
 		return bId;
 	}
@@ -89,12 +90,12 @@ public class BugReport {
 		this.bId = bId;
 	}
 
-	public String getSubject() {
-		return subject;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -186,12 +187,10 @@ public class BugReport {
 		this.pointValue = pointValue;
 	}
 
-	@JsonIgnoreProperties({"reports"})
 	public Application getApp() {
 		return app;
 	}
 
-	@JsonIgnoreProperties({"reports"})
 	public void setApp(Application app) {
 		this.app = app;
 	}
@@ -208,7 +207,7 @@ public class BugReport {
 
 	@Override
 	public String toString() {
-		return "BugReport [bId=" + bId + ", subject=" + subject + ", description=" + description + ", repSteps="
+		return "BugReport [bId=" + bId + ", title=" + title + ", description=" + description + ", repSteps="
 				+ repSteps + ", username=" + username + ", severity=" + severity + ", priority=" + priority
 				+ ", status=" + status + ", location=" + location + ", approvedTime=" + approvedTime + ", resolvedTime="
 				+ resolvedTime + ", createdDate=" + dateCreated + ", pointValue=" + pointValue + "]";	// app is removed from here

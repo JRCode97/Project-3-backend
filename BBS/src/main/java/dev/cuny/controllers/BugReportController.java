@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
-import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
 import dev.cuny.services.BugReportService;
 
@@ -27,31 +26,34 @@ public class BugReportController {
 	@Autowired
 	BugReportService brs;
 	@ResponseBody
-	@RequestMapping(value="/BugReport",method=RequestMethod.POST)
+	@RequestMapping(value="/bugreports",method=RequestMethod.POST)
 	public BugReport createBugReport(@RequestBody BugReport br) {
 		return brs.createBugReport(br);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/BugReport/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/bugreports/{id}", method=RequestMethod.GET)
 	public BugReport getBugReportById(@PathVariable int id) {
 	try {
 	return brs.getBugReportById(id);}
 	catch(NoSuchElementException e) {
-		System.out.println("I'm ending up to here:(");
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find bug report");
 	}
 	}
 	@ResponseBody
-	@RequestMapping(value="/BugReport",method=RequestMethod.PUT)
+	@RequestMapping(value="bugreports",method=RequestMethod.PUT)
 	public BugReport updateBugReport(@RequestBody BugReport br) {
 		return brs.updateBugReport(br);
 	}
 	@ResponseBody
-	@RequestMapping(value="query/BugReport",method=RequestMethod.GET)
+	@RequestMapping(value="query/bugreports/app",method=RequestMethod.GET)
 	public List<BugReport> query(@RequestParam int id){
-		Application app = new Application();
-		app.setId(id);
-		return brs.getBugReportsByAppId(app);
+		return brs.getBugReportsByAppId(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/bugreports", method=RequestMethod.GET)
+	public List<BugReport> queryAllBugReports(){
+		return brs.getAllBugReports();
 	}
 }

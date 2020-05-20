@@ -10,8 +10,9 @@ public interface SolutionService {
 	//READ
 	Solution getSolutionById(int id);
 	List<Solution> getAllSolutions();
-	List<Solution> getSolutionsByClient(Client c);
-	List<Solution>getSolutionByBugReport(BugReport br);
+	List<Solution> getSolutionsByClientId(int id);
+	List<Solution>getSolutionByBugReportId(int id);
+	List<Solution> getSolutionByStatus(String status);
 	//UPDATE
 	Solution updateSolution(Solution s);
 	//DELETE

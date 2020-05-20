@@ -10,7 +10,7 @@ import dev.cuny.entities.Application;
 import dev.cuny.repositories.ApplicationRepository;
 @Component
 @Service
-public class ApplicationServiceimpl implements ApplicationService{
+public class ApplicationServiceImpl implements ApplicationService{
 	@Autowired
 	ApplicationRepository ar;
 	

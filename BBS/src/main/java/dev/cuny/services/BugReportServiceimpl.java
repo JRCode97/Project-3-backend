@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
 import dev.cuny.repositories.*;
 @Component
 @Service
-public class BugReportServiceimpl implements BugReportService {
+public class BugReportServiceImpl implements BugReportService {
 	@Autowired
 	BugReportRepository brr;
-	
+	@Autowired 
+	ApplicationRepository ar;
 	@Override
 	public BugReport createBugReport(BugReport br) {
 		return brr.save(br);
@@ -32,8 +32,9 @@ public class BugReportServiceimpl implements BugReportService {
 	}
 
 	@Override
-	public List<BugReport> getBugReportsByAppId(Application a) {
-		return brr.findByApp(a);
+	public List<BugReport> getBugReportsByAppId(int id) {
+		
+		return brr.findByApp(ar.findById(id).get());
 	}
 
 	@Override
