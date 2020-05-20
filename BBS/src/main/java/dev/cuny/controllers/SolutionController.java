@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
-
+import dev.cuny.entities.Client;
 import dev.cuny.entities.Solution;
 import dev.cuny.services.SolutionService;
 
@@ -26,49 +26,60 @@ import dev.cuny.services.SolutionService;
 public class SolutionController {
 	@Autowired
 	SolutionService ss;
+
 	@ResponseBody
-	@RequestMapping(value="/solutions",method=RequestMethod.POST)
+	@RequestMapping(value = "/solutions", method = RequestMethod.POST)
 	public Solution createSolution(@RequestBody Solution s) {
 		return ss.createSolution(s);
 	}
-	
-	
+
 	@ResponseBody
-	@RequestMapping(value="/solutions/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "/solutions/{id}", method = RequestMethod.GET)
 
 	public Solution getSolutionById(@PathVariable int id) {
-	try {
-	return ss.getSolutionById(id);}
-	catch(NoSuchElementException e) {
-		
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find solution");
+		try {
+			return ss.getSolutionById(id);
+		} catch (NoSuchElementException e) {
+
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
+		}
 	}
-	}
+
 	@ResponseBody
-	@RequestMapping(value="/solutions",method=RequestMethod.PUT)
+	@RequestMapping(value = "/solutions", method = RequestMethod.PUT)
 	public Solution updateSolution(@RequestBody Solution s) {
 		return ss.updateSolution(s);
 	}
-	@ResponseBody
-	@RequestMapping(value="query/solutions/client",method=RequestMethod.GET)
-	public List<Solution> bySolver(@RequestParam int id){
 
+	@ResponseBody
+	@RequestMapping(value = "query/solutions/client", method = RequestMethod.GET)
+	public List<Solution> bySolver(@RequestParam int id) {
 
 		return ss.getSolutionsByClientId(id);
 	}
-	
+
+	// Get solution by client-id
+	@ResponseBody
+	@RequestMapping(value = "query/solution/clientId/{id}", method = RequestMethod.GET)
+	public List<Solution> getSolutionByClientId(@PathVariable int id) {
+		Client c = new Client();
+		c.setcId(id);
+		return ss.getSolutionsByClientId(id);
+	}
+	//
+
 	@ResponseBody
 	@RequestMapping(value = "/solutions/status/{status}", method = RequestMethod.GET)
 
-	public List<Solution> getSolutionByStatus(@PathVariable String status){
+	public List<Solution> getSolutionByStatus(@PathVariable String status) {
 		return ss.getSolutionByStatus(status);
-		
+
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="query/solutions/bugreport",method=RequestMethod.GET)
-	public List<Solution> byBugReport(@RequestParam int id){
+	@RequestMapping(value = "query/solutions/bugreport", method = RequestMethod.GET)
+	public List<Solution> byBugReport(@RequestParam int id) {
 		return ss.getSolutionByBugReportId(id);
 	}
-	
+
 }

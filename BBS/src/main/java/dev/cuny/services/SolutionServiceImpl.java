@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dev.cuny.entities.*;
 import dev.cuny.repositories.*;
+
 @Component
 @Service
 public class SolutionServiceImpl implements SolutionService {
@@ -17,6 +18,7 @@ public class SolutionServiceImpl implements SolutionService {
 	BugReportRepository brr;
 	@Autowired
 	ClientRepository cr;
+
 	@Override
 	public Solution createSolution(Solution s) {
 		return sr.save(s);
@@ -34,7 +36,7 @@ public class SolutionServiceImpl implements SolutionService {
 
 	@Override
 	public List<Solution> getSolutionsByClientId(int id) {
-		
+
 		return sr.findByClient(cr.findById(id).get());
 	}
 
@@ -42,10 +44,10 @@ public class SolutionServiceImpl implements SolutionService {
 	public List<Solution> getSolutionByBugReportId(int id) {
 		return sr.findByBr(brr.findById(id).get());
 	}
-	
+
 	@Override
 	public List<Solution> getSolutionByStatus(String status) {
-		
+
 		return sr.findByStatus(status);
 	}
 
@@ -60,7 +62,4 @@ public class SolutionServiceImpl implements SolutionService {
 		return true;
 	}
 
-	
-
 }
-

@@ -77,4 +77,6 @@ public class ClientController {
 	public int getClientsPoints(@RequestParam int id) {
 		return cs.getClientPoints(id);
 	}
+	
+	
 }
