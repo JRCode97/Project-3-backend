@@ -21,7 +21,7 @@ import dev.cuny.services.BugReportService;
 
 @Component
 @Controller
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BugReportController {
 	@Autowired
 	BugReportService brs;

@@ -23,29 +23,25 @@ class ApplicationRepoTests {
 	ApplicationRepository ar;
 	
 	@Test
-	@Commit
 	@Order(1)
 	void createApplicationTest() {
-		Application app = new Application(0, "Bug Report App2", "www.gitlink2.com");
+		Application app = new Application(0, "Bug Report App3", "www.gitlink2.com");
 		ar.save(app);
 	}
 	
 	@Test
-	@Commit
 	@Order(2)
 	void getAllApplicationsTest() {
 		System.out.println(ar.findAll());
 	}
 	
 	@Test
-	@Commit
 	@Order(3)
 	void getApplicationByIdTest() {
 		System.out.println(ar.findById(1).get());
 	}
 	
 	@Test
-	@Commit
 	@Order(4)
 	void updateApplicaionTest() {
 		Application app = new Application();
@@ -56,7 +52,6 @@ class ApplicationRepoTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(5)
 	void getApplicationByTitleTest() {
 		String title = "Bug Report App2";

@@ -21,7 +21,7 @@ import dev.cuny.services.ApplicationService;
 
 @Component
 @Controller
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ApplicationController {
 	@Autowired
 	ApplicationService as;

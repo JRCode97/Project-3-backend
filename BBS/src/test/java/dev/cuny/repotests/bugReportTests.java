@@ -12,6 +12,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
 import dev.cuny.repositories.ApplicationRepository;
 import dev.cuny.repositories.BugReportRepository;
@@ -25,27 +26,37 @@ class bugReportTests {
 	@Autowired
 	ApplicationRepository ar;
 	@Test 
-	@Commit
 	@Order(1)
 	void createBugReport() {
-		BugReport br = new BugReport(1,"Spring dialect issue","Spring is giving a Dependency not found exception due to dialect not found.","try a test on repository","theRaidMan","super severe","high","pending","backend",0,0,020400,100,ar.findById(1).get());
-		brr.save(br);
+		BugReport br = new BugReport();
+		br.setbId(0);
+		br.setTitle("Test By Jian2");
+		br.setDescription("haha");
+		br.setRepSteps("123");
+		br.setUsername("theRaidman");
+		br.setSeverity("high");
+		br.setPriority("high");
+		br.setStatus("approved");
+		br.setLocation("anywhere");
+		br.setApprovedTime(1000);
+		br.setResolvedTime(1000);
+		br.setDateCreated(1000);
+		br.setPointValue(100);
+		
+		System.out.println(brr.save(br));
 	}
 	@Test 
-	@Commit
 	@Order(2)
 	void getBugReportById() {
 		System.out.println(brr.findById(1).get());
 	}
 	@Test
-	@Commit
 	@Order(3)
 	void getReportsBySubject() {
 		System.out.println(brr.findByTitle("Spring dialect issue"));
 	}
 
 	@Test
-	@Commit
 	@Order(4)
 	void getReportsByUsername() {
 		String username = "1";

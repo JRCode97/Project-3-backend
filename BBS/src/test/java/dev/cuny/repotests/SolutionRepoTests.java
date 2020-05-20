@@ -31,7 +31,6 @@ public class SolutionRepoTests {
 	
 	
 	@Test
-	@Commit
 	@Order(1)
 	void getByStatus() {
 		List<Solution> status = sr.findByStatus("approved");
@@ -42,7 +41,6 @@ public class SolutionRepoTests {
 		System.out.println("==========");
 	}
 	@Test
-	@Commit
 	@Order(2)
 	void getByClient() {
 		List<Solution> clientSolutions = sr.findByClient(cr.findById(1).get());
@@ -53,7 +51,6 @@ public class SolutionRepoTests {
 		System.out.println("==========");
 	}
 	@Test
-	@Commit
 	@Order(3)
 	void getByBugReport() {
 		List<Solution> bugSolutions = sr.findByBr(br.findById(1).get());
@@ -64,4 +61,9 @@ public class SolutionRepoTests {
 		System.out.println("==========");
 	}
 
+	@Test
+	@Order(4)
+	void getAllSolutions() {
+		System.out.println(sr.findAll());
+	}
 }

@@ -39,11 +39,11 @@ public class BugReport {
 	@Column(name="location")
 	private String location;
 	@Column(name="approved_time")
-	private int approvedTime;
+	private long approvedTime;
 	@Column(name="resolved_time")
-	private int resolvedTime;
+	private long resolvedTime;
 	@Column(name="date_created")
-	private int dateCreated;
+	private long dateCreated;
 	@Column(name="point_value")
 	private int pointValue;
 	@ManyToOne
@@ -54,15 +54,18 @@ public class BugReport {
 	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)
 	@JsonIgnore
 	private List<Solution> solutions;
+
 	
+
 	public BugReport() {
 		super();
 	}
 	
 
+
 	public BugReport(int bId, String title, String description, String repSteps, String username, String severity,
-			String priority, String status, String location, int approvedTime, int resolvedTime, int createdTime,
-			int pointValue, Application app) {
+			String priority, String status, String location, long approvedTime, long resolvedTime, long dateCreated,
+			int pointValue, Application app, List<Solution> solutions) {
 		super();
 		this.bId = bId;
 		this.title = title;
@@ -75,134 +78,192 @@ public class BugReport {
 		this.location = location;
 		this.approvedTime = approvedTime;
 		this.resolvedTime = resolvedTime;
-		this.dateCreated= createdTime;
+		this.dateCreated = dateCreated;
 		this.pointValue = pointValue;
 		this.app = app;
+		this.solutions = solutions;
 	}
 
-
+	
 
 	public int getbId() {
 		return bId;
 	}
 
+
+
 	public void setbId(int bId) {
 		this.bId = bId;
 	}
+
+
 
 	public String getTitle() {
 		return title;
 	}
 
+
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
 
 	public String getRepSteps() {
 		return repSteps;
 	}
 
+
+
 	public void setRepSteps(String repSteps) {
 		this.repSteps = repSteps;
 	}
+
+
 
 	public String getUsername() {
 		return username;
 	}
 
+
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
 
 	public String getSeverity() {
 		return severity;
 	}
 
+
+
 	public void setSeverity(String severity) {
 		this.severity = severity;
 	}
+
+
 
 	public String getPriority() {
 		return priority;
 	}
 
+
+
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
+
+
 
 	public String getStatus() {
 		return status;
 	}
 
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
 
 	public String getLocation() {
 		return location;
 	}
 
+
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
-	public int getApprovedTime() {
+
+
+	public long getApprovedTime() {
 		return approvedTime;
 	}
 
-	public void setApprovedTime(int approvedTime) {
+
+
+	public void setApprovedTime(long approvedTime) {
 		this.approvedTime = approvedTime;
 	}
 
-	public int getResolvedTime() {
+
+
+	public long getResolvedTime() {
 		return resolvedTime;
 	}
 
-	public void setResolvedTime(int resolvedTime) {
+
+
+	public void setResolvedTime(long resolvedTime) {
 		this.resolvedTime = resolvedTime;
 	}
 
-	public int getCreatedTime() {
+
+
+	public long getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setCreatedTime(int createdTime) {
-		this.dateCreated = createdTime;
 
+
+	public void setDateCreated(long dateCreated) {
+		this.dateCreated = dateCreated;
 	}
+
+
 
 	public int getPointValue() {
 		return pointValue;
 	}
 
+
+
 	public void setPointValue(int pointValue) {
 		this.pointValue = pointValue;
 	}
+
+
 
 	public Application getApp() {
 		return app;
 	}
 
+
+
 	public void setApp(Application app) {
 		this.app = app;
 	}
+
+
 
 	public List<Solution> getSolutions() {
 		return solutions;
 	}
 
 
+
 	public void setSolutions(List<Solution> solutions) {
 		this.solutions = solutions;
 	}
+
 
 
 	@Override

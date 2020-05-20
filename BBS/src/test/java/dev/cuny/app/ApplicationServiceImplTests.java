@@ -23,11 +23,10 @@ class ApplicationServiceImplTests {
 	ApplicationService as;
 	
 	@Test
-	@Commit
 	@Order(1)
 	void createAppService() {
 		Application app1 = new Application();
-		app1.setTitle("Service Test");
+		app1.setTitle("Test");
 		app1.setGitLink("github Link");
 		
 		as.createApplication(app1);
@@ -36,19 +35,17 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(2)
 	void getAppByTitle() {
-		Application title = as.getApplicationByTitle("Service Test");
+		Application title = as.getApplicationByTitle("Test");
 		System.out.println(title);
 	}
 	
 	@Test
-	@Commit
 	@Order(3)
 	void getAppById() {
 		Application app1 = new Application();
-		app1.setTitle("Service Test");
+		app1.setTitle("Test");
 		app1.setGitLink("github Link");
 		
 		as.createApplication(app1);
@@ -56,18 +53,16 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(4)
 	void getAllApps() {
 		System.out.println(as.getApplications());
 	}
 	
 	@Test
-	@Commit
 	@Order(5)
 	void updateApp() {
 		Application app1 = new Application();
-		app1.setTitle("Service Test");
+		app1.setTitle("Test");
 		app1.setGitLink("github Link");
 		
 		as.createApplication(app1);
@@ -78,11 +73,10 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(6)
 	void deleteApp() {
 		Application app1 = new Application();
-		app1.setTitle("Service Test");
+		app1.setTitle("Test");
 		app1.setGitLink("github Link");
 		
 		as.createApplication(app1);

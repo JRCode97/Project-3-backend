@@ -31,7 +31,6 @@ public class SolutionServiceTests {
 	BugReportRepository br;
 	
 	@Test
-	@Commit
 	@Order(1)
 	void getAllSolutionsTest(){
 		List<Solution>solutions = ss.getAllSolutions();
@@ -43,7 +42,6 @@ public class SolutionServiceTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(2)
 	void getSolutionByClient() {
 		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
@@ -56,7 +54,6 @@ public class SolutionServiceTests {
 	}	
 	
 	@Test
-	@Commit
 	@Order(3)
 	void getSolutionByBugReport() {
 		List<Solution> bugSolutions = ss.getSolutionByBugReportId(1);
@@ -68,7 +65,6 @@ public class SolutionServiceTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(4)
 	void getSolutionByStatus(){
 		

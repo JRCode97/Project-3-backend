@@ -24,7 +24,7 @@ public class Solution {
 	@Column(name="status")
 	private String status;
 	@Column(name="submitted_time")
-	private int timeSubmitted;
+	private long timeSubmitted;
 	@ManyToOne
 	@JoinColumn(name="bug_report_id")
 	@JsonIgnore
@@ -37,10 +37,8 @@ public class Solution {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
-	public Solution(int id, String title, String description, String status, int timeSubmitted, BugReport br,
+	public Solution(int id, String title, String description, String status, long timeSubmitted, BugReport br,
 			Client client) {
 		super();
 		this.id = id;
@@ -51,8 +49,6 @@ public class Solution {
 		this.br = br;
 		this.client = client;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -86,11 +82,11 @@ public class Solution {
 		this.status = status;
 	}
 
-	public int getTimeSubmitted() {
+	public long getTimeSubmitted() {
 		return timeSubmitted;
 	}
 
-	public void setTimeSubmitted(int timeSubmitted) {
+	public void setTimeSubmitted(long timeSubmitted) {
 		this.timeSubmitted = timeSubmitted;
 	}
 
@@ -109,8 +105,6 @@ public class Solution {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
-
 
 	@Override
 	public String toString() {

@@ -20,21 +20,18 @@ class BbsApplicationTests {
 	@Autowired
 	ClientRepository cr;
 	@Test
-	@Commit
 	@Order(1)
 	void getClientbyId() {
 		System.out.println(cr.findById(1).get());
 	}
 	
 	@Test
-	@Commit
 	@Order(2)
 	void getClientByUsername() {
 		System.out.print(cr.findByUsername("theRaidMan"));
 	}
 	
 	@Test
-	@Commit
 	@Order(3)
 	void getClientByUsernameAndPassword() {
 		String username = "theRaidMan";

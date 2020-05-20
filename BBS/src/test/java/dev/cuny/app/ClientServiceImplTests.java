@@ -26,7 +26,6 @@ class ClientServiceImplTests {
 	ClientService cs;
 	
 	@Test
-	@Commit
 	@Order(1)
 	void createClient() {
 		Client c1 = new Client();
@@ -46,7 +45,6 @@ class ClientServiceImplTests {
 	}
 	
 	@Test
-	@Commit
 	@Order(2)
 	void loginClient() {
 		String username = "test";
