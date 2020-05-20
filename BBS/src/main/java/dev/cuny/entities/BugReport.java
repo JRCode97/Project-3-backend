@@ -39,11 +39,11 @@ public class BugReport {
 	@Column(name="location")
 	private String location;
 	@Column(name="approved_time")
-	private int approvedTime;
+	private long approvedTime;
 	@Column(name="resolved_time")
-	private int resolvedTime;
+	private long resolvedTime;
 	@Column(name="date_created")
-	private int dateCreated;
+	private long dateCreated;
 	@Column(name="point_value")
 	private int pointValue;
 	@ManyToOne
@@ -61,7 +61,7 @@ public class BugReport {
 	
 
 	public BugReport(int bId, String title, String description, String repSteps, String username, String severity,
-			String priority, String status, String location, int approvedTime, int resolvedTime, int createdTime,
+			String priority, String status, String location, long approvedTime, long resolvedTime, long createdTime,
 			int pointValue, Application app) {
 		super();
 		this.bId = bId;
@@ -154,27 +154,27 @@ public class BugReport {
 		this.location = location;
 	}
 
-	public int getApprovedTime() {
+	public long getApprovedTime() {
 		return approvedTime;
 	}
 
-	public void setApprovedTime(int approvedTime) {
+	public void setApprovedTime(long approvedTime) {
 		this.approvedTime = approvedTime;
 	}
 
-	public int getResolvedTime() {
+	public long getResolvedTime() {
 		return resolvedTime;
 	}
 
-	public void setResolvedTime(int resolvedTime) {
+	public void setResolvedTime(long resolvedTime) {
 		this.resolvedTime = resolvedTime;
 	}
 
-	public int getCreatedTime() {
+	public long getCreatedTime() {
 		return dateCreated;
 	}
 
-	public void setCreatedTime(int createdTime) {
+	public void setCreatedTime(long createdTime) {
 		this.dateCreated = createdTime;
 
 	}
