@@ -46,7 +46,7 @@ public class BugReportController {
 		return brs.updateBugReport(br);
 	}
 	@ResponseBody
-	@RequestMapping(value="/query/bugreports/app",method=RequestMethod.GET)
+	@RequestMapping(value="query/bugreports/app",method=RequestMethod.GET)
 	public List<BugReport> query(@RequestParam int id){
 		return brs.getBugReportsByAppId(id);
 	}
@@ -57,9 +57,4 @@ public class BugReportController {
 		return brs.getAllBugReports();
 	}
 	
-	@ResponseBody
-	@RequestMapping(value ="/query/bugreports", method=RequestMethod.GET)
-	public List<BugReport> queryAllBugReportsByUsername(@RequestParam String username){
-		return brs.getBugReportsByUsername(username);
-	}
 }

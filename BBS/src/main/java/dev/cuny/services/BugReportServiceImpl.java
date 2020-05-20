@@ -48,9 +48,4 @@ public class BugReportServiceImpl implements BugReportService {
 		return true;
 	}
 
-	@Override
-	public List<BugReport> getBugReportsByUsername(String username) {
-		return brr.findByUsername(username);
-	}
-
 }

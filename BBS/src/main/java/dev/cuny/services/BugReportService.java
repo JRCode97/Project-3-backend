@@ -11,7 +11,6 @@ public interface BugReportService {
 	public BugReport getBugReportById(int id);
 	public List<BugReport> getAllBugReports();
 	public List<BugReport> getBugReportsByAppId(int id);
-	public List<BugReport> getBugReportsByUsername(String username);
 	//UPDATE
 	public BugReport updateBugReport(BugReport br);
 	//DELETE
