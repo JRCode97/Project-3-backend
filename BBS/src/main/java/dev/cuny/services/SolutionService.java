@@ -18,3 +18,4 @@ public interface SolutionService {
 	//DELETE
 	boolean deleteSolution(Solution s);
 }
+

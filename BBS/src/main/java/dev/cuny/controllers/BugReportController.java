@@ -56,4 +56,10 @@ public class BugReportController {
 	public List<BugReport> queryAllBugReports(){
 		return brs.getAllBugReports();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/bugreport", method=RequestMethod.GET)
+	public List<BugReport> queryAllBugReports(){
+		return brs.getAllBugReports();
+	}
 }

@@ -22,4 +22,5 @@ public interface LeaderBoardRepository extends JpaRepository<Client, Integer> {
 //			"	order by point_value_sum desc" + 
 //			"	limit 5;", nativeQuery = true)
 //	List<List<Integer>> getCount();
+
 }

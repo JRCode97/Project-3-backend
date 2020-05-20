@@ -41,6 +41,7 @@ public class SolutionServiceTests {
 	@Test
 	void getSolutionByClient() {
 		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
+
 		System.out.println("==========");
 		for(Solution s : clientSolutions) {
 			System.out.println(s);

@@ -32,3 +32,4 @@ public class LeaderBoard {
 				+ ", point_value_sum=" + point_value_sum + "]";
 	}
 }
+

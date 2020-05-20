@@ -33,6 +33,7 @@ public class SolutionController {
 	
 	@ResponseBody
 	@RequestMapping(value="/solutions/{id}", method=RequestMethod.GET)
+
 	public Solution getSolutionById(@PathVariable int id) {
 	try {
 	return ss.getSolutionById(id);}
@@ -50,11 +51,13 @@ public class SolutionController {
 	@RequestMapping(value="query/solutions/client",method=RequestMethod.GET)
 	public List<Solution> bySolver(@RequestParam int id){
 
+
 		return ss.getSolutionsByClientId(id);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/solutions/status/{status}", method = RequestMethod.GET)
+
 	public List<Solution> getSolutionByStatus(@PathVariable String status){
 		return ss.getSolutionByStatus(status);
 		
@@ -63,6 +66,7 @@ public class SolutionController {
 	@ResponseBody
 	@RequestMapping(value="query/solutions/bugreport",method=RequestMethod.GET)
 	public List<Solution> byBugReport(@RequestParam int id){
+
 
 		return ss.getSolutionByBugReportId(id);
 	}
