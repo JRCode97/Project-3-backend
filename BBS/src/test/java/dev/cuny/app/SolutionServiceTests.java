@@ -40,8 +40,8 @@ public class SolutionServiceTests {
 	
 	@Test
 	void getSolutionByClient() {
-		Client c = cr.findById(1).get();
-		List<Solution> clientSolutions = ss.getSolutionsByClient(c);
+		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
+
 		System.out.println("==========");
 		for(Solution s : clientSolutions) {
 			System.out.println(s);
@@ -51,8 +51,7 @@ public class SolutionServiceTests {
 	
 	@Test
 	void getSolutionByBugReport() {
-		BugReport b = br.findById(1).get();
-		List<Solution> bugSolutions = ss.getSolutionByBugReport(b);
+		List<Solution> bugSolutions = ss.getSolutionByBugReportId(1);
 		System.out.println("==========");
 		for(Solution s : bugSolutions) {
 			System.out.println(s);

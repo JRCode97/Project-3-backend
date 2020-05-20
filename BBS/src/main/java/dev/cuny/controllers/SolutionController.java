@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
-import dev.cuny.entities.BugReport;
-import dev.cuny.entities.Client;
+
 import dev.cuny.entities.Solution;
 import dev.cuny.services.SolutionService;
 
@@ -27,14 +25,15 @@ public class SolutionController {
 	@Autowired
 	SolutionService ss;
 	@ResponseBody
-	@RequestMapping(value="/solution",method=RequestMethod.POST)
+	@RequestMapping(value="/solutions",method=RequestMethod.POST)
 	public Solution createSolution(@RequestBody Solution s) {
 		return ss.createSolution(s);
 	}
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/solution/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/solutions/{id}", method=RequestMethod.GET)
+
 	public Solution getSolutionById(@PathVariable int id) {
 	try {
 	return ss.getSolutionById(id);}
@@ -44,29 +43,32 @@ public class SolutionController {
 	}
 	}
 	@ResponseBody
-	@RequestMapping(value="/solution",method=RequestMethod.PUT)
+	@RequestMapping(value="/solutions",method=RequestMethod.PUT)
 	public Solution updateSolution(@RequestBody Solution s) {
 		return ss.updateSolution(s);
 	}
 	@ResponseBody
-	@RequestMapping(value="query/solution/client",method=RequestMethod.GET)
-	public List<Solution> query(@RequestBody Client c){
+	@RequestMapping(value="query/solutions/client",method=RequestMethod.GET)
+	public List<Solution> bySolver(@RequestParam int id){
 
-		return ss.getSolutionsByClient(c);
+
+		return ss.getSolutionsByClientId(id);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/solution/status/{status}", method = RequestMethod.GET)
+	@RequestMapping(value = "/solutions/status/{status}", method = RequestMethod.GET)
+
 	public List<Solution> getSolutionByStatus(@PathVariable String status){
 		return ss.getSolutionByStatus(status);
 		
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="query/solution/bugreport",method=RequestMethod.GET)
-	public List<Solution> query(@RequestBody BugReport br){
+	@RequestMapping(value="query/solutions/bugreport",method=RequestMethod.GET)
+	public List<Solution> byBugReport(@RequestParam int id){
 
-		return ss.getSolutionByBugReport(br);
+
+		return ss.getSolutionByBugReportId(id);
 	}
 	
 }

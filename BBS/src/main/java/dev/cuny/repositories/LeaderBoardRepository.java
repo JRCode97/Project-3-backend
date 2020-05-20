@@ -12,7 +12,7 @@ import dev.cuny.entities.Client;
 
 @Component
 @Repository
-public interface LeaderBoardRepository extends CrudRepository<Client, Integer> {
+public interface LeaderBoardRepository extends JpaRepository<Client, Integer> {
 	
 //	@Query(value = "SELECT 	solution.solver_client_id, client.client_username," + 
 //			"		sum(bug_report.point_value) as point_value_sum" + 
@@ -22,4 +22,5 @@ public interface LeaderBoardRepository extends CrudRepository<Client, Integer> {
 //			"	order by point_value_sum desc" + 
 //			"	limit 5;", nativeQuery = true)
 //	List<List<Integer>> getCount();
+
 }

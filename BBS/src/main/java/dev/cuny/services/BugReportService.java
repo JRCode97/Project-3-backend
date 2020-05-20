@@ -2,7 +2,6 @@ package dev.cuny.services;
 
 import java.util.List;
 
-import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
 
 public interface BugReportService {
@@ -11,7 +10,7 @@ public interface BugReportService {
 	//READ
 	public BugReport getBugReportById(int id);
 	public List<BugReport> getAllBugReports();
-	public List<BugReport> getBugReportsByAppId(Application a);
+	public List<BugReport> getBugReportsByAppId(int id);
 	//UPDATE
 	public BugReport updateBugReport(BugReport br);
 	//DELETE

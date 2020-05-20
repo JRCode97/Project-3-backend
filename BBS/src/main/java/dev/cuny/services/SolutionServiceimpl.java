@@ -10,10 +10,13 @@ import dev.cuny.entities.*;
 import dev.cuny.repositories.*;
 @Component
 @Service
-public class SolutionServiceimpl implements SolutionService {
+public class SolutionServiceImpl implements SolutionService {
 	@Autowired
 	SolutionRepository sr;
-
+	@Autowired
+	BugReportRepository brr;
+	@Autowired
+	ClientRepository cr;
 	@Override
 	public Solution createSolution(Solution s) {
 		return sr.save(s);
@@ -30,14 +33,14 @@ public class SolutionServiceimpl implements SolutionService {
 	}
 
 	@Override
-	public List<Solution> getSolutionsByClient(Client c) {
+	public List<Solution> getSolutionsByClientId(int id) {
 		
-		return sr.findByClient(c);
+		return sr.findByClient(cr.findById(id).get());
 	}
 
 	@Override
-	public List<Solution> getSolutionByBugReport(BugReport br) {
-		return sr.findByBr(br);
+	public List<Solution> getSolutionByBugReportId(int id) {
+		return sr.findByBr(brr.findById(id).get());
 	}
 	
 	@Override
@@ -60,3 +63,4 @@ public class SolutionServiceimpl implements SolutionService {
 	
 
 }
+
