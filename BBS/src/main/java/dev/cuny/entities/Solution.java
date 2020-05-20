@@ -24,7 +24,7 @@ public class Solution {
 	@Column(name="status")
 	private String status;
 	@Column(name="submitted_time")
-	private int timeSubmitted;
+	private long timeSubmitted;
 	@ManyToOne
 	@JoinColumn(name="bug_report_id")
 	@JsonIgnore
@@ -86,11 +86,11 @@ public class Solution {
 		this.status = status;
 	}
 
-	public int getTimeSubmitted() {
+	public long getTimeSubmitted() {
 		return timeSubmitted;
 	}
 
-	public void setTimeSubmitted(int timeSubmitted) {
+	public void setTimeSubmitted(long timeSubmitted) {
 		this.timeSubmitted = timeSubmitted;
 	}
 
