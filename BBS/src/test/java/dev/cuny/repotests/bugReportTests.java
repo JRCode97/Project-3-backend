@@ -39,10 +39,5 @@ class bugReportTests {
 	void getReportsBySubject() {
 		System.out.println(brr.findByTitle("Spring dialect issue"));
 	}
-	@Test
-	@Order(4)
-	void getByApp() {
-		System.out.println(brr.findByApp(ar.findById(1).get()));
-		
-	}
+
 }
