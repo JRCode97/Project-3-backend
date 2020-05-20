@@ -27,18 +27,18 @@ public class ApplicationController {
 	ApplicationService as;
 	
 	@ResponseBody
-	@RequestMapping(value="/Application",method=RequestMethod.POST)
+	@RequestMapping(value="/applications",method=RequestMethod.POST)
 	public Application createApplication(@RequestBody Application a) {
 		return as.createApplication(a);
 	}
-	@RequestMapping(value="/Application",method=RequestMethod.GET)
+	@RequestMapping(value="/applications",method=RequestMethod.GET)
 	@ResponseBody
 	public List<Application> getAllApplications(){
 		
 		return as.getApplications();
 	}
 	@ResponseBody
-	@RequestMapping(value="/Application/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/applications/{id}",method=RequestMethod.GET)
 	public Application getApplicationById(@PathVariable int id) {
 		try {
 			return as.getApplicationById(id);
@@ -47,12 +47,12 @@ public class ApplicationController {
 		}
 	}
 	@ResponseBody
-	@RequestMapping(value="/Application",method=RequestMethod.PUT)
+	@RequestMapping(value="/applications",method=RequestMethod.PUT)
 	public Application updateApplication(@RequestBody Application application) {
 		return as.updateApplication(application);
 	}
 	@ResponseBody
-	@RequestMapping(value="/query/Application",method=RequestMethod.GET)
+	@RequestMapping(value="/query/applications",method=RequestMethod.GET)
 	public Application query(@RequestParam String title){
 		return as.getApplicationByTitle(title);
 		

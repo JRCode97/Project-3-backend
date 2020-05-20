@@ -17,6 +17,6 @@ public interface ClientRepository extends JpaRepository<Client,Integer>
 	Client findByUsernameAndPassword(String username, String password);
 	List<Client> findByRole(int role);
 	
-//	@Query(value="SELECT sum(bug_report.point_value) as totalPoints from solution,bug_report,client where solution.bug_report_id =bug_report.bug_report_id  and solution.solver_client_id=client.client_id and client.client_id =?1 and solution.status ='approved'")
-//	int getClientPoints(int id);
+	@Query(value="SELECT sum(br.pointValue) from Solution s,BugReport br,Client c where s.br =br.bId  and s.client=c.cId and c.cId =?1 and s.status ='approved'")
+	int getClientPoints(int id);
 }

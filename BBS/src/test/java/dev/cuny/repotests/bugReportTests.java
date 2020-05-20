@@ -16,7 +16,6 @@ import dev.cuny.repositories.ApplicationRepository;
 import dev.cuny.repositories.BugReportRepository;
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
-@Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class bugReportTests {
 	@Autowired 

@@ -17,6 +17,7 @@ public interface ClientService {
 	Client getClientByUsername(String username);
 	List<Client> getClientsByRole(int role);
 	List<Client> getAllClients();
+	int getClientPoints(int id);
 	
 	// Update
 	Client updateClient(Client client);

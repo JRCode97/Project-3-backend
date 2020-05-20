@@ -67,4 +67,9 @@ public class ClientServiceImpl implements ClientService{
 	public Client getClientById(int id) {
 		return cr.findById(id).get();
 	}
+
+	@Override
+	public int getClientPoints(int id) {
+		return cr.getClientPoints(id);
+	}
 }

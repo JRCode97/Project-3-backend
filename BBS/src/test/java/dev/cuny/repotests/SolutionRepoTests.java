@@ -15,7 +15,6 @@ import dev.cuny.repositories.SolutionRepository;
 
 @SpringBootTest
 @ContextConfiguration(classes = dev.cuny.app.BbsApplication.class)
-@Transactional
 public class SolutionRepoTests {
 	@Autowired
 	SolutionRepository sr;

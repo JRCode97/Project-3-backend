@@ -72,4 +72,9 @@ public class ClientController {
 	public List<Client> getAllClients(){
 		return cs.getAllClients();
 	}
+	@ResponseBody
+	@RequestMapping(value="/clients/points",method=RequestMethod.GET)
+	public int getClientsPoints(@RequestParam int id) {
+		return cs.getClientPoints(id);
+	}
 }

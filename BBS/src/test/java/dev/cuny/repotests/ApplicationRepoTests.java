@@ -14,7 +14,6 @@ import dev.cuny.repositories.ApplicationRepository;
 
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
-@Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ApplicationRepoTests {
 	
@@ -56,5 +55,6 @@ class ApplicationRepoTests {
 		String title = "Bug Report App2";
 		System.out.println(ar.findByTitle(title));
 	}
+
 	
 }
