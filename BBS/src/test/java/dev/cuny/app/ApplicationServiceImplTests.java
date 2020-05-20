@@ -6,6 +6,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ class ApplicationServiceImplTests {
 	ApplicationService as;
 	
 	@Test
+	@Commit
 	@Order(1)
 	void createAppService() {
 		Application app1 = new Application();
@@ -34,6 +36,7 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
+	@Commit
 	@Order(2)
 	void getAppByTitle() {
 		Application title = as.getApplicationByTitle("Service Test");
@@ -41,6 +44,7 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
+	@Commit
 	@Order(3)
 	void getAppById() {
 		Application app1 = new Application();
@@ -52,12 +56,14 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
+	@Commit
 	@Order(4)
 	void getAllApps() {
 		System.out.println(as.getApplications());
 	}
 	
 	@Test
+	@Commit
 	@Order(5)
 	void updateApp() {
 		Application app1 = new Application();
@@ -72,6 +78,7 @@ class ApplicationServiceImplTests {
 	}
 	
 	@Test
+	@Commit
 	@Order(6)
 	void deleteApp() {
 		Application app1 = new Application();

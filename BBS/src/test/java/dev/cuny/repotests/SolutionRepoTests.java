@@ -5,6 +5,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,8 @@ public class SolutionRepoTests {
 	
 	
 	@Test
+	@Commit
+	@Order(1)
 	void getByStatus() {
 		List<Solution> status = sr.findByStatus("approved");
 		System.out.println("==========");
@@ -38,6 +42,8 @@ public class SolutionRepoTests {
 		System.out.println("==========");
 	}
 	@Test
+	@Commit
+	@Order(2)
 	void getByClient() {
 		List<Solution> clientSolutions = sr.findByClient(cr.findById(1).get());
 		System.out.println("==========");
@@ -47,6 +53,8 @@ public class SolutionRepoTests {
 		System.out.println("==========");
 	}
 	@Test
+	@Commit
+	@Order(3)
 	void getByBugReport() {
 		List<Solution> bugSolutions = sr.findByBr(br.findById(1).get());
 		System.out.println("==========");

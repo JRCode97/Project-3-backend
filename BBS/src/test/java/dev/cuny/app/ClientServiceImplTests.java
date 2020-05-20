@@ -8,6 +8,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ class ClientServiceImplTests {
 	ClientService cs;
 	
 	@Test
+	@Commit
 	@Order(1)
 	void createClient() {
 		Client c1 = new Client();
@@ -44,6 +46,7 @@ class ClientServiceImplTests {
 	}
 	
 	@Test
+	@Commit
 	@Order(2)
 	void loginClient() {
 		String username = "test";
