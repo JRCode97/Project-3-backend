@@ -15,5 +15,4 @@ public interface BugReportRepository extends JpaRepository<BugReport,Integer>{
 	
 	List<BugReport> findByApp(Application a);
 
-	List<BugReport> findByUsername(String username);
 }
