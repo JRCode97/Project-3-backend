@@ -50,6 +50,7 @@ public class BugReport {
 	@ManyToOne
 	@JoinColumn(name="application_id")
 	@JsonIgnore
+	@JsonIgnoreProperties({"reports"})
 	private Application app;
 
 	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)

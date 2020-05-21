@@ -3,6 +3,8 @@ package dev.cuny.controllers;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -23,18 +25,19 @@ import dev.cuny.services.ApplicationService;
 @Controller
 @CrossOrigin("*")
 public class ApplicationController {
+	private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	@Autowired
 	ApplicationService as;
 	
 	@ResponseBody
 	@RequestMapping(value="/applications",method=RequestMethod.POST)
 	public Application createApplication(@RequestBody Application a) {
+		logger.info("Application Created: "+a.toString());
 		return as.createApplication(a);
 	}
 	@RequestMapping(value="/applications",method=RequestMethod.GET)
 	@ResponseBody
 	public List<Application> getAllApplications(){
-		
 		return as.getApplications();
 	}
 	@ResponseBody
@@ -43,12 +46,14 @@ public class ApplicationController {
 		try {
 			return as.getApplicationById(id);
 		}catch(NoSuchElementException e) {
+			logger.error("Unable to find the application with id: "+id);
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"could not find application");
 		}
 	}
 	@ResponseBody
 	@RequestMapping(value="/applications",method=RequestMethod.PUT)
 	public Application updateApplication(@RequestBody Application application) {
+		logger.info("Application was updated: "+application.toString());
 		return as.updateApplication(application);
 	}
 	@ResponseBody
