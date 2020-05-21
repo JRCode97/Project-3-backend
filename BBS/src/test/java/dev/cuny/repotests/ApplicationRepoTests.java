@@ -6,7 +6,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +24,7 @@ class ApplicationRepoTests {
 	@Test
 	@Order(1)
 	void createApplicationTest() {
-		Application app = new Application(0, "Br app 22", "www.gitlink2.com");
+		Application app = new Application(0, "Br app 23", "www.gitlink2.com");
 		ar.save(app);
 	}
 	

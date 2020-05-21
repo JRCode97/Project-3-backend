@@ -1,9 +1,10 @@
 package dev.cuny.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -19,14 +20,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Client;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
-
 import dev.cuny.services.ClientService;
 
 @Component
 @Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClientController {
-
+	private static Logger logger = LoggerFactory.getLogger(ClientController.class);
 	@Autowired
 	ClientService cs;
 
@@ -34,8 +34,10 @@ public class ClientController {
 	@RequestMapping(value = "/clients", method = RequestMethod.POST)
 	public Client signup(@RequestBody Client client) {
 		try {
+			logger.info("Client was created: "+client.toString());
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
+			logger.info("Unable to create the client: "+client.toString());
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -49,6 +51,7 @@ public class ClientController {
 	@ResponseBody
 	@RequestMapping(value = "/clients", method = RequestMethod.PUT)
 	public Client updateClient(@RequestBody Client client) {
+		logger.info("Client was updated: "+client.toString());
 		return cs.updateClient(client);
 	}
 
@@ -64,6 +67,7 @@ public class ClientController {
 		try {
 			return cs.getClientById(id);
 		} catch (NoSuchElementException e) {
+			logger.error("Unable to find a client with id: "+id);
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -71,25 +75,28 @@ public class ClientController {
 	@ResponseBody
 	@RequestMapping(value = "/clients", method = RequestMethod.GET)
 	public List<Client> getAllClients() {
+		logger.info("A list of all clients was accessed.");
 		return cs.getAllClients();
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/clients/points", method = RequestMethod.GET)
 	public int getClientsPoints(@RequestParam int id) {
+		logger.info("Client with id: "+id+" has "+cs.getClientPoints(id)+" points");
 		return cs.getClientPoints(id);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/clients/leaderboard/username", method = RequestMethod.GET)
 	public List<String> getLeaderboardusernames() {
+		logger.info("Leaderboard usernames are: "+cs.leaderboardusername());
 		return cs.leaderboardusername();
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/clients/leaderboard/points", method = RequestMethod.GET)
 	public List<Integer> getLeaderboardpoints() {
-
+		logger.info("Leaderboard points are: "+cs.leaderboardpoints());
 		return cs.leaderboardpoints();
 
 	}
