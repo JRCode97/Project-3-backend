@@ -25,8 +25,5 @@ class ClientRepoTests {
 	void getLeaderBoardByPoints() {
 		System.out.println(cr.getLeaderBoardPoints());
 	}
-	@Test
-	void getLeaderBoard() {
-		System.out.println(cr.getLeaderBoard());
-	}
+
 }
