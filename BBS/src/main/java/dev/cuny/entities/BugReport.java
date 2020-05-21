@@ -49,7 +49,6 @@ public class BugReport {
 	private int pointValue;
 	@ManyToOne
 	@JoinColumn(name="application_id")
-	@JsonIgnore
 	@JsonIgnoreProperties({"reports"})
 	private Application app;
 
