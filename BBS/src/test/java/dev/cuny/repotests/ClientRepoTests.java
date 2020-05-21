@@ -15,7 +15,14 @@ class ClientRepoTests {
 	ClientRepository cr;
 	@Test
 	void getUsersPoints() {
-		System.out.println(cr.getClientPoints(1));
+		System.out.println(cr.getClientPoints(20));
 	}
-
+	@Test
+	void getLeaderBoardByUsernames() {
+		System.out.println(cr.getLeaderBoardUsernames());
+	}
+	@Test
+	void getLeaderBoardByPoints() {
+		System.out.println(cr.getLeaderBoardPoints());
+	}
 }

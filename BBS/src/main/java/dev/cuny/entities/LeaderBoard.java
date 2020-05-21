@@ -2,18 +2,12 @@ package dev.cuny.entities;
 
 public class LeaderBoard {
 	
-	private int solver_client_id;
 	private String client_username;
 	private int point_value_sum;
 	public LeaderBoard() {
 		super();
 	}
-	public int getSolver_client_id() {
-		return solver_client_id;
-	}
-	public void setSolver_client_id(int solver_client_id) {
-		this.solver_client_id = solver_client_id;
-	}
+	
 	public String getClient_username() {
 		return client_username;
 	}
@@ -28,7 +22,7 @@ public class LeaderBoard {
 	}
 	@Override
 	public String toString() {
-		return "LeaderBoard [solver_client_id=" + solver_client_id + ", client_username=" + client_username
+		return "Leaderboard client_username=" + client_username
 				+ ", point_value_sum=" + point_value_sum + "]";
 	}
 }
