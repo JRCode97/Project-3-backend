@@ -62,4 +62,9 @@ public class BugReportController {
 		return brs.getClientBugReports(username);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/bugreports/status/{status}", method = RequestMethod.GET)
+	public List<BugReport> getByStatus(@PathVariable String status){
+		return brs.getByStatus(status);
+	}
 }
