@@ -16,13 +16,13 @@ import dev.cuny.repositories.ApplicationRepository;
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Transactional
 class ApplicationRepoTests {
 	
 	@Autowired
 	ApplicationRepository ar;
 	
 	@Test
-	@Rollback
 	@Order(1)
 	void createApplicationTest() {
 		Application app = new Application(0, "Br app 22", "www.gitlink2.com");

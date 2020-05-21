@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Client;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
-import dev.cuny.repositories.LeaderBoardRepository;
+
 import dev.cuny.services.ClientService;
 
 @Component
@@ -81,13 +81,13 @@ public class ClientController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/getleaderboardusername", method = RequestMethod.GET)
+	@RequestMapping(value = "/clients/leaderboard/username", method = RequestMethod.GET)
 	public List<String> getLeaderboardusernames() {
 		return cs.leaderboardusername();
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/getleaderboardpoints", method = RequestMethod.GET)
+	@RequestMapping(value = "/clients/leaderboard/points", method = RequestMethod.GET)
 	public List<Integer> getLeaderboardpoints() {
 
 		return cs.leaderboardpoints();
