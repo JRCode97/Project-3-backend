@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "bug_report")
@@ -48,11 +49,11 @@ public class BugReport {
 	private int pointValue;
 	@ManyToOne
 	@JoinColumn(name="application_id")
-//	@JsonIgnore
+	@JsonIgnore
 	private Application app;
 
 	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)
-	@JsonIgnore
+	@JsonIgnoreProperties({"client","br"})
 	private List<Solution> solutions;
 	
 	public BugReport() {
