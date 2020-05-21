@@ -1,21 +1,19 @@
 package dev.cuny.services;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import	dev.cuny.entities.Client;
+import dev.cuny.entities.Client;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.repositories.ClientRepository;
 
-
 @Component
 @Service
-public class ClientServiceImpl implements ClientService{
-	
+public class ClientServiceImpl implements ClientService {
+
 	@Autowired
 	ClientRepository cr;
 
@@ -23,10 +21,9 @@ public class ClientServiceImpl implements ClientService{
 	public Client createClient(Client client) throws ClientAlreadyExistedException {
 		Client existedClient = new Client();
 		existedClient = cr.findByUsername(client.getfName());
-		if(existedClient != null) {
+		if (existedClient != null) {
 			throw new ClientAlreadyExistedException();
-		}
-		else {
+		} else {
 			client.setcId(0);
 			return cr.save(client);
 		}
@@ -49,7 +46,7 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	public List<Client> getAllClients() {
-		return (List<Client>)cr.findAll();
+		return (List<Client>) cr.findAll();
 	}
 
 	@Override
@@ -71,5 +68,17 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public int getClientPoints(int id) {
 		return cr.getClientPoints(id);
+	}
+
+	@Override
+	public List<String> leaderboardusername() {
+
+		return cr.getLeaderBoardUsernames();
+	}
+
+	@Override
+	public List<Integer> leaderboardpoints() {
+
+		return cr.getLeaderBoardPoints();
 	}
 }
