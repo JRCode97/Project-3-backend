@@ -36,7 +36,6 @@ class BugReportServiceImplTests {
 	@Order(1)
 	void createBugReport() {
 		BugReport br1 = new BugReport();
-		Application a = new Application();
 		a.setId(0);
 		
 		br1.setbId(0);
@@ -52,7 +51,7 @@ class BugReportServiceImplTests {
  br1.setResolvedTime(0);
 	 br1.setCreatedTime(0);
 		 br1.setPointValue(9000);
-		 br1.setApp(a);
+		 br1.setApp(as.getApplicationById(1));
 		System.out.println(brs.createBugReport(br1));
 	}
 	
