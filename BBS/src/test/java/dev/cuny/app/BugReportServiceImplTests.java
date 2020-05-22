@@ -22,8 +22,6 @@ import dev.cuny.services.BugReportService;
 @Transactional
 @ContextConfiguration(classes = dev.cuny.app.BbsApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-
-
 class BugReportServiceImplTests {
 	
 	@Autowired
@@ -36,22 +34,22 @@ class BugReportServiceImplTests {
 	@Order(1)
 	void createBugReport() {
 		BugReport br1 = new BugReport();
-		a.setId(0);
-		
+
 		br1.setbId(0);
 		br1.setTitle("tessa");
-		 br1.setDescription("descTest");
-		 br1.setRepSteps("trying to help the backend");
-		 br1.setUsername("Nuria");
-		 br1.setSeverity("Normal");
-		 br1.setPriority("high");
-		 br1.setStatus("pending");
-	 br1.setLocation("backend");
-		 br1.setApprovedTime(0);
- br1.setResolvedTime(0);
-	 br1.setCreatedTime(0);
-		 br1.setPointValue(9000);
-		 br1.setApp(as.getApplicationById(1));
+		br1.setDescription("descTest");
+		br1.setRepSteps("trying to help the backend");
+		br1.setUsername("Nuria");
+		br1.setSeverity("Normal");
+		br1.setPriority("high");
+		br1.setStatus("pending");
+		br1.setLocation("backend");
+		br1.setApprovedTime(0);
+		br1.setResolvedTime(0);
+		br1.setCreatedTime(0);
+		br1.setPointValue(9000);
+		br1.setApp(as.getApplicationById(1));
+		
 		System.out.println(brs.createBugReport(br1));
 	}
 	
@@ -59,8 +57,6 @@ class BugReportServiceImplTests {
 	@Order(2)
 	void getBugReportById() {
 		int id = 1;
-		
-	
 		System.out.println(brs.getBugReportById(1));
 	}
 	

@@ -2,9 +2,12 @@ package dev.cuny.app;
 
 import java.util.List;
 
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,7 @@ import dev.cuny.services.SolutionService;
 @SpringBootTest
 @ContextConfiguration(classes = dev.cuny.app.BbsApplication.class)
 @Transactional
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SolutionServiceTests {
 	@Autowired
 	SolutionService ss;
@@ -29,6 +33,7 @@ public class SolutionServiceTests {
 	BugReportRepository br;
 	
 	@Test
+	@Order(1)
 	void getAllSolutionsTest(){
 		List<Solution>solutions = ss.getAllSolutions();
 		System.out.println("=======");
@@ -39,6 +44,7 @@ public class SolutionServiceTests {
 	}
 	
 	@Test
+	@Order(2)
 	void getSolutionByClient() {
 		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
 
@@ -50,6 +56,7 @@ public class SolutionServiceTests {
 	}	
 	
 	@Test
+	@Order(3)
 	void getSolutionByBugReport() {
 		List<Solution> bugSolutions = ss.getSolutionByBugReportId(1);
 		System.out.println("==========");
@@ -59,7 +66,8 @@ public class SolutionServiceTests {
 		System.out.println("==========");
 	}
 	
-	@Test 
+	@Test
+	@Order(4)
 	void getSolutionByStatus(){
 		
 		List<Solution> status = ss.getSolutionByStatus("approved");
