@@ -16,50 +16,28 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
-@Table(name = "bug_report")
 public class BugReport {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "bug_report_id")
+
 	private int bId;
-	@Column(name = "bug_report_title")
 	private String title;
-	@Column(name="bug_report_description")
 	private String description;
-	@Column(name="bug_report_reproduction_steps")
 	private String repSteps;
-	@Column(name="client_username")
 	private String username;
-	@Column(name="severity")
 	private String severity;
-	@Column(name="priority")
 	private String priority;
-	@Column(name="status")
 	private String status;
-	@Column(name="location")
 	private String location;
-	@Column(name="approved_time")
 	private long approvedTime;
-	@Column(name="resolved_time")
 	private long resolvedTime;
-	@Column(name="date_created")
 	private long dateCreated;
-	@Column(name="point_value")
 	private int pointValue;
-	@ManyToOne
-	@JoinColumn(name="application_id")
-	@JsonIgnore
 	private Application app;
 
-	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"client","br"})
 	private List<Solution> solutions;
-	
+
 	public BugReport() {
 		super();
 	}
-	
 
 	public BugReport(int bId, String title, String description, String repSteps, String username, String severity,
 			String priority, String status, String location, long approvedTime, long resolvedTime, long createdTime,
@@ -76,12 +54,10 @@ public class BugReport {
 		this.location = location;
 		this.approvedTime = approvedTime;
 		this.resolvedTime = resolvedTime;
-		this.dateCreated= createdTime;
+		this.dateCreated = createdTime;
 		this.pointValue = pointValue;
 		this.app = app;
 	}
-
-
 
 	public int getbId() {
 		return bId;
@@ -200,18 +176,16 @@ public class BugReport {
 		return solutions;
 	}
 
-
 	public void setSolutions(List<Solution> solutions) {
 		this.solutions = solutions;
 	}
 
-
 	@Override
 	public String toString() {
-		return "BugReport [bId=" + bId + ", title=" + title + ", description=" + description + ", repSteps="
-				+ repSteps + ", username=" + username + ", severity=" + severity + ", priority=" + priority
-				+ ", status=" + status + ", location=" + location + ", approvedTime=" + approvedTime + ", resolvedTime="
-				+ resolvedTime + ", createdDate=" + dateCreated + ", pointValue=" + pointValue + "]";	// app is removed from here
+		return "BugReport [bId=" + bId + ", title=" + title + ", description=" + description + ", repSteps=" + repSteps
+				+ ", username=" + username + ", severity=" + severity + ", priority=" + priority + ", status=" + status
+				+ ", location=" + location + ", approvedTime=" + approvedTime + ", resolvedTime=" + resolvedTime
+				+ ", createdDate=" + dateCreated + ", pointValue=" + pointValue + "]"; // app is removed from here
 
 	}
 }

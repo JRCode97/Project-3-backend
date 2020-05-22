@@ -13,27 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name = "client")
 public class Client {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "client_id")
 	private int cId;
-	@Column(name = "client_first_name")
 	private String fName;
-	@Column(name = "client_last_name")
 	private String lName;
-	@Column(name = "client_username")
 	private String username;
-	@Column(name = "client_email")
 	private String email;
-	@Column(name = "client_password")
 	private String password;
-	@Column(name = "client_role")
 	private int role;
-	@OneToMany(mappedBy="client", fetch=FetchType.LAZY)
 	private List<Solution> solutions;
 
 
