@@ -22,6 +22,8 @@ public interface ClientService {
 	List<Client> getAllClients();
 
 	int getClientPoints(int id);
+	
+	Client getClientByEmail(String email);
 
 	// Update
 	Client updateClient(Client client);

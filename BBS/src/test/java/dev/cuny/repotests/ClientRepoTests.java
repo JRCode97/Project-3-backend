@@ -26,4 +26,9 @@ class ClientRepoTests {
 		System.out.println(cr.getLeaderBoardPoints());
 	}
 
+	@Test
+	void getClientByEmail() {
+		String email = "jian@email.com";
+		System.out.print(cr.findByEmail(email));
+	}
 }
