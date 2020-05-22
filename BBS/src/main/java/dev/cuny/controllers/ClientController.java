@@ -100,5 +100,11 @@ public class ClientController {
 		return cs.leaderboardpoints();
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/clients/email", method = RequestMethod.GET)
+	public Client getClientByEmail(@RequestParam String email) {
+		return cs.getClientByEmail(email);
+	}
 
 }

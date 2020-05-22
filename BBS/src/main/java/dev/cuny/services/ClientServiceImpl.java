@@ -81,4 +81,9 @@ public class ClientServiceImpl implements ClientService {
 
 		return cr.getLeaderBoardPoints();
 	}
+
+	@Override
+	public Client getClientByEmail(String email) {
+		return cr.findByEmail(email);
+	}
 }
