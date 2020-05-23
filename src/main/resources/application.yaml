@@ -26,7 +26,7 @@ eureka:
     fetch-registry: true
     
     service-url:
-      defaultZone: ec2-3-19-68-149.us-east-2.compute.amazonaws.com
+      defaultZone: http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/
       
   instance:
     lease-expiration-duration-in-seconds: 2
