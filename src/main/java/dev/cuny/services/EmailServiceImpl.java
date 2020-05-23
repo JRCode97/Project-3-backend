@@ -8,6 +8,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import dev.cuny.app.BBSClient;
+
+import dev.cuny.entities.Client;
 import dev.cuny.entities.EmailUser;
 
 @Component
@@ -17,31 +20,28 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	JavaMailSender javamailsender;
 
-	@Override
-	public EmailUser createEmail(EmailUser user) {
-
-		SimpleMailMessage mail = new SimpleMailMessage();
-
-		mail.setTo("superslicepizzeria@gmail.com");
-
-		mail.setText("email sent.." + user.getEmailAddress());
-
-		mail.setSubject("HelloSubject");
-		javamailsender.send(mail);
-		return user;
-	}
+	@Autowired
+	BBSClient BBSclient;
 
 	@Override
-	public EmailUser ResetClientPassword(String email) {
-		
-		EmailUser u = new EmailUser();
+	public Client ResetClientPassword(String email) {
+
+		// Get a client by their email
+		Client c = BBSclient.getClientByEmail(email);
+		System.out.println(c);
+		System.out.println("hello");
+
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
+		String newpass = String.valueOf(getRandomPass(10));
 		mail.setSubject("[PassWord Reset]");
-		mail.setText("This is your temporary password:  " + String.valueOf(getRandomPass(10)));
+		mail.setText("This is your temporary password:  " + newpass);
 		javamailsender.send(mail);
 
-		return u;
+		c.setPassword(newpass);
+		BBSclient.updateClient(c);
+
+		return c;
 
 	}
 

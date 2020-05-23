@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dev.cuny.entities.Client;
 import dev.cuny.entities.EmailUser;
 import dev.cuny.services.EmailService;
 
@@ -21,19 +22,12 @@ public class EmailPasswordController {
 	@Autowired
 	EmailService emailserv;
 
-	@ResponseBody
-	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
-	public EmailUser createEmail(@RequestBody EmailUser euser) {
-
-		return emailserv.createEmail(euser);
-
-	}
 
 	@ResponseBody
 	@RequestMapping(value = "/resetpassword/{email}", method = RequestMethod.POST)
-	public EmailUser resetPasswordWithAnEmail(@PathVariable String email) {
+	public Client resetPasswordWithAnEmail(@PathVariable String email) {
 
-		return emailserv.ResetClientPassword(email);
+		return		emailserv.ResetClientPassword(email);
 	}
 
 }
