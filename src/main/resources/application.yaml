@@ -8,7 +8,7 @@ server:
  
 eureka:
   instance:
-    hostname: localhost
+    hostname: ec2-3-19-68-149.us-east-2.compute.amazonaws.com
   client:
     register-with-eureka: false
     fetch-registry: false
