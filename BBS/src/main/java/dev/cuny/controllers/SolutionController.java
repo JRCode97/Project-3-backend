@@ -28,48 +28,62 @@ public class SolutionController {
 	private static Logger logger = LoggerFactory.getLogger(SolutionController.class);
 	@Autowired
 	SolutionService ss;
+
 	@ResponseBody
-	@RequestMapping(value="/solutions",method=RequestMethod.POST)
+	@RequestMapping(value = "/solutions", method = RequestMethod.POST)
 	public Solution createSolution(@RequestBody Solution s) {
-		logger.info("Solution was created: "+s.toString());
+		logger.info("Solution was created: " + s.toString());
 		return ss.createSolution(s);
 	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="/solutions/{id}", method=RequestMethod.GET)
 
-	public Solution getSolutionById(@PathVariable int id) {
-	try {
-		return ss.getSolutionById(id);}
-	catch(NoSuchElementException e) {
-		logger.error("Unable to find a solution with id: "+id);
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find solution");
-	}
-	}
 	@ResponseBody
-	@RequestMapping(value="/solutions",method=RequestMethod.PUT)
+	@RequestMapping(value = "/solutions", method = RequestMethod.GET)
+	public <T> T getSolution(@RequestParam(required = false) String id, @RequestParam(required = false) String status,
+			@RequestParam(required = false) String cId, @RequestParam(required = false) String bId) {
+
+		if (bId != null) {
+			int b = Integer.parseInt(bId);
+			return (T) ss.getSolutionByBugReportId(b);
+		} else if (cId != null) {
+			int c = Integer.parseInt(cId);
+			return (T) ss.getSolutionsByClientId(c);
+		} else if (id != null) {
+			try {
+				int i = Integer.parseInt(id);
+				return (T) ss.getSolutionById(i);
+			} catch (NoSuchElementException e) {
+				logger.error("Unable to find a solution with id: " + id);
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
+			}
+		} else if (status != null) {
+			return (T) ss.getSolutionByStatus(status);
+		} else {
+			return (T) ss.getAllSolutions();
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/solutions", method = RequestMethod.PUT)
 	public Solution updateSolution(@RequestBody Solution s) {
-		logger.info("The solution was updated: "+s.toString());
+		logger.info("The solution was updated: " + s.toString());
 		return ss.updateSolution(s);
 	}
-	@ResponseBody
-	@RequestMapping(value="query/solutions/client",method=RequestMethod.GET)
-	public List<Solution> bySolver(@RequestParam int id){
-		return ss.getSolutionsByClientId(id);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/solutions/status/{status}", method = RequestMethod.GET)
-	public List<Solution> getSolutionByStatus(@PathVariable String status){
-		return ss.getSolutionByStatus(status);
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="query/solutions/bugreport",method=RequestMethod.GET)
-	public List<Solution> byBugReport(@RequestParam int id){
-		return ss.getSolutionByBugReportId(id);
-	}
-	
+
+//	@ResponseBody
+//	@RequestMapping(value = "/query/solutions", method = RequestMethod.GET)
+//	public List<Solution> bySolver(@RequestParam(required = false) String cId,
+//			@RequestParam(required = false) String bId) {
+//
+//		if (bId != null) {
+//			int b = Integer.parseInt(bId);
+//			return ss.getSolutionByBugReportId(b);
+//
+//		}
+//		if (cId != null) {
+//			int c = Integer.parseInt(cId);
+//			return ss.getSolutionsByClientId(c);
+//		}
+//		return null;
+//	}
+
 }
