@@ -28,40 +28,39 @@ public class ApplicationController {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	@Autowired
 	ApplicationService as;
-	
+
 	@ResponseBody
-	@RequestMapping(value="/applications",method=RequestMethod.POST)
+	@RequestMapping(value = "/applications", method = RequestMethod.POST)
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: "+a.toString());
+		logger.info("Application Created: " + a.toString());
 		return as.createApplication(a);
 	}
-	@RequestMapping(value="/applications",method=RequestMethod.GET)
+
 	@ResponseBody
-	public List<Application> getAllApplications(){
-		return as.getApplications();
-	}
-	@ResponseBody
-	@RequestMapping(value="/applications/{id}",method=RequestMethod.GET)
-	public Application getApplicationById(@PathVariable int id) {
-		try {
-			return as.getApplicationById(id);
-		}catch(NoSuchElementException e) {
-			logger.error("Unable to find the application with id: "+id);
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"could not find application");
+	@RequestMapping(value = "/applications", method = RequestMethod.GET)
+	public <T> T getApplication(@RequestParam(required = false) @PathVariable String id,
+			@RequestParam(required = false) @PathVariable String title) {
+		if (id != null) {
+			try {
+				int i = Integer.parseInt(id);
+				return (T) as.getApplicationById(i);
+			} catch (NoSuchElementException e) {
+				logger.error("Unable to find an Application with id: " + id);
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
+			}
+		} else if (title != null) {
+
+			return (T) as.getApplicationByTitle(title);
+		} else {
+			return (T) as.getApplications();
 		}
+
 	}
+
 	@ResponseBody
-	@RequestMapping(value="/applications",method=RequestMethod.PUT)
+	@RequestMapping(value = "/applications", method = RequestMethod.PUT)
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: "+application.toString());
+		logger.info("Application was updated: " + application.toString());
 		return as.updateApplication(application);
 	}
-	@ResponseBody
-	@RequestMapping(value="/query/applications",method=RequestMethod.GET)
-	public Application query(@RequestParam String title){
-		return as.getApplicationByTitle(title);
-		
-	}
 }
-	
-
