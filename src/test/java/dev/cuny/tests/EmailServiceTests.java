@@ -16,8 +16,8 @@ public class EmailServiceTests {
 	
 	@Test
 	void t1() {
-		System.out.println("hey 1");
-		eserv.ResetClientPassword("DylanGraham140@gmail.com");
-		System.out.println("hey");
+//		System.out.println("hey 1");
+//		eserv.ResetClientPassword("DylanGraham140@gmail.com");
+//		System.out.println("hey");
 	}
 }
