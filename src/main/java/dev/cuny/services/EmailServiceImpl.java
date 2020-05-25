@@ -30,6 +30,7 @@ public class EmailServiceImpl implements EmailService {
 		Client c = BBSclient.getClientByEmail(email);
 		System.out.println(c);
 		System.out.println("hello");
+		System.out.println(email);
 
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(email);
@@ -37,6 +38,7 @@ public class EmailServiceImpl implements EmailService {
 		mail.setSubject("[PassWord Reset]");
 		mail.setText("This is your temporary password:  " + newpass);
 		try {
+			//mail.setTo("raymond.50cal93@gmail.com");	// then this after
 			javamailsender.send(mail);
 
 			c.setPassword(newpass);
@@ -44,6 +46,7 @@ public class EmailServiceImpl implements EmailService {
 
 			return c;
 		}catch(Exception e){
+			System.out.println(mail.getTo());	// test this first
 			e.printStackTrace();
 			return null;
 		}
