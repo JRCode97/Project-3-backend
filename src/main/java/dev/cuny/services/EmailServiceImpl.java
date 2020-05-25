@@ -36,12 +36,19 @@ public class EmailServiceImpl implements EmailService {
 		String newpass = String.valueOf(getRandomPass(10));
 		mail.setSubject("[PassWord Reset]");
 		mail.setText("This is your temporary password:  " + newpass);
-		javamailsender.send(mail);
+		try {
+			javamailsender.send(mail);
 
-		c.setPassword(newpass);
-		BBSclient.updateClient(c);
+			c.setPassword(newpass);
+			BBSclient.updateClient(c);
 
-		return c;
+			return c;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
+		
 
 	}
 
