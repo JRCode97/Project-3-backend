@@ -28,12 +28,6 @@ eureka:
     #
     service-url:
       defaultZone: http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/eureka
-    
-    feign:
-      client:
-        config:
-          default:
-            readTimeout: 160000000
 
       
   instance:
