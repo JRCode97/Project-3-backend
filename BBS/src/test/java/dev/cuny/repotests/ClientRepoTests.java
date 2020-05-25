@@ -22,7 +22,8 @@ class ClientRepoTests {
 	@Test
 	@Order(1)
 	void getUsersPoints() {
-		System.out.println(cr.getClientPoints(1));
+		System.out.println("User points: ");
+		System.out.println(cr.getClientPoints(103));
 	}
 	@Test
 	@Order(2)
