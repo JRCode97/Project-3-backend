@@ -1,0 +1,38 @@
+spring:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: superslicepizzeria@gmail.com
+    password: ilikepizza
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+    
+  application:
+    name: Email-Service
+    
+  
+server:
+  port: 9222
+  
+eureka:
+  client:
+    fetch-registry: true
+    #  http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/
+    # http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/eureka
+    #
+    service-url:
+      defaultZone: http://localhost:9999/eureka
+      
+  instance:
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds: 1
+    
+    
+    
