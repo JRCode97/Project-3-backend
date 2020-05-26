@@ -1,8 +1,6 @@
 package dev.cuny.app;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -93,7 +91,7 @@ class BugReportServiceImplTests {
 		Application a = as.getApplicationById(1);
 		a.setId(1);
 		System.out.println(brs.deleteBugReport(br1));
-		Assert.assertTrue(brs.deleteBugReport(br1));
+		Assertions.assertTrue(brs.deleteBugReport(br1));
 	}
 	
 

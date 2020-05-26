@@ -40,7 +40,7 @@ class ApplicationServiceImplTests {
 		app1.setGitLink("github Link");
 		app1 = as.createApplication(app1);
 		Application app2 = as.getApplicationByTitle("Test");
-		Assertions.assertSame(app2.getTitle(),"Test");
+		Assertions.assertSame("Test",app2.getTitle());
 	}
 	
 	@Test
@@ -70,7 +70,7 @@ class ApplicationServiceImplTests {
 		as.createApplication(app1);
 		app1.setTitle("Updated Test Title");
 		app1 = as.updateApplication(app1);
-		Assertions.assertSame(app1.getTitle(),"Updated Test Title");
+		Assertions.assertSame("Updated Test Title",app1.getTitle());
 	}
 	
 	@Test
@@ -82,7 +82,7 @@ class ApplicationServiceImplTests {
 		
 		as.createApplication(app1);
 		
-		Assertions.assertSame(as.deleteApplication(app1),true);
+		Assertions.assertSame(true,as.deleteApplication(app1));
 		
 	}
 

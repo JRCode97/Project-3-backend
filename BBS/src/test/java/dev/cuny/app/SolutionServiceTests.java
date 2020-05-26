@@ -55,7 +55,7 @@ public class SolutionServiceTests {
 	@Test
 	@Order(4)
 	void getSolutionByStatus(){	
-		List<Solution> status = ss.getSolutionByStatus("approved");
+		List<Solution> status = ss.getSolutionByStatus("Accepted");
 		Assertions.assertTrue(status.size() > 0);
 	}
 	
