@@ -33,7 +33,7 @@ public class SolutionController {
 	@ResponseBody
 	@PostMapping(value = "/solutions")
 	public Solution createSolution(@RequestBody Solution s) {
-		logger.info("Solution was created: ", s.toString());
+		logger.info("Solution was created: ", s);
 		return ss.createSolution(s);
 	}
 
@@ -66,7 +66,7 @@ public class SolutionController {
 	@ResponseBody
 	@PutMapping(value = "/solutions")
 	public Solution updateSolution(@RequestBody Solution s) {
-		logger.info("The solution was updated: ", s.toString());
+		logger.info("The solution was updated: ", s);
 		return ss.updateSolution(s);
 	}
 
