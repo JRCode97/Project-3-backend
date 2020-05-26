@@ -112,17 +112,4 @@ public class ClientController {
 		return cs.leaderboardpoints();
 
 	}
-
-//	@ResponseBody
-//	@RequestMapping(value = "query/clients", method = RequestMethod.GET)
-//	public Client getClientByEmail(@RequestParam String email) {
-//		return cs.getClientByEmail(email);
-//	}
-
-//	@ResponseBody
-//	@GetMapping(value ="/clients", params = { "email" })
-//	public Client getClientByEmail(@RequestParam("email") String email) {
-//		return cs.getClientByEmail(email);
-//	}
-
 }
