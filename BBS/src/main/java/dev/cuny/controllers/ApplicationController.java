@@ -45,7 +45,6 @@ public class ApplicationController {
 				int i = Integer.parseInt(id);
 				return (T) as.getApplicationById(i);
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find an Application with id: ", id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
 			}
 		} else if (title != null) {
