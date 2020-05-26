@@ -1,4 +1,5 @@
 package dev.cuny.repotests;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -22,17 +23,17 @@ class ApplicationRepoTests {
 	void createApplicationTest() {
 		Application app = new Application(0, "Br app 23", "www.gitlink2.com");
 		app = ar.save(app);
-		Assertions.assertTrue(ar.findById(app.getId()).get() == app);
+		Assertions.assertSame(app, ar.findById(app.getId()).get());
 	}
 	@Test
 	@Order(2)
 	void getAllApplicationsTest() {
-		Assertions.assertTrue(ar.findAll() != null);
+		Assertions.assertNotNull(ar.findAll() != null);
 	}
 	@Test
 	@Order(3)
 	void getApplicationByIdTest() {
-		Assertions.assertTrue(ar.findById(1) != null);
+		Assertions.assertNotNull(ar.findById(1) != null);
 	}
 	@Test
 	@Order(4)
@@ -42,7 +43,7 @@ class ApplicationRepoTests {
 		app.setTitle("New Title");
 		app.setGitLink("www.newGitLink.com");
 		app = ar.save(app);
-		Assertions.assertTrue(ar.findById(app.getId()).get() == app);
+		Assertions.assertNotNull(ar.findById(app.getId()).get() == app);
 	}
 	
 }
