@@ -94,21 +94,18 @@ public class ClientController {
 	@ResponseBody
 	@GetMapping(value = "/clients/points")
 	public int getClientsPoints(@RequestParam int id) {
-		logger.info("Client with id: " , id , " has " , cs.getClientPoints(id) ," points");
 		return cs.getClientPoints(id);
 	}
 
 	@ResponseBody
 	@GetMapping(value = "/clients/leaderboard/username")
 	public List<String> getLeaderboardusernames() {
-		logger.info("Leaderboard usernames are: " + cs.leaderboardusername());
 		return cs.leaderboardusername();
 	}
 
 	@ResponseBody
 	@GetMapping(value = "/clients/leaderboard/points")
 	public List<Integer> getLeaderboardpoints() {
-		logger.info("Leaderboard points are: ", cs.leaderboardpoints());
 		return cs.leaderboardpoints();
 
 	}
