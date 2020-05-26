@@ -92,6 +92,7 @@ class BugReportServiceImplTests {
 		Application a = as.getApplicationById(1);
 		a.setId(1);
 		System.out.println(brs.deleteBugReport(br1));
+		Assert.assertTrue(brs.deleteBugReport(br1));
 	}
 	
 
