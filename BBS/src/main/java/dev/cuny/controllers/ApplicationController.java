@@ -60,7 +60,7 @@ public class ApplicationController {
 	@ResponseBody
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: ", application.toString());
+		logger.info("Application was updated: ", application);
 		return as.updateApplication(application);
 	}
 }
