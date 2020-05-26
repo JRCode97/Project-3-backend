@@ -33,7 +33,7 @@ public class BugReportController {
 	@ResponseBody
 	@PostMapping(value = "/bugreports")
 	public BugReport createBugReport(@RequestBody BugReport br) {
-		logger.info("Bug Report Created: " , br.toString());
+		logger.info("Bug Report Created: " , br);
 		return brs.createBugReport(br);
 	}
 
@@ -66,7 +66,7 @@ public class BugReportController {
 	@ResponseBody
 	@PutMapping(value = "/bugreports")
 	public BugReport updateBugReport(@RequestBody BugReport br) {
-		logger.info("BugReport was updated: " , br.toString());
+		logger.info("BugReport was updated: " , br);
 		return brs.updateBugReport(br);
 	}
 
