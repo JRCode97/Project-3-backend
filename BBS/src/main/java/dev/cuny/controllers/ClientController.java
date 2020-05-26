@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,9 +32,9 @@ public class ClientController {
 	private static Logger logger = LoggerFactory.getLogger(ClientController.class);
 	@Autowired
 	ClientService cs;
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/clients", method = RequestMethod.POST)
+	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
 			logger.info("Client was created: " + client.toString());
@@ -44,13 +46,13 @@ public class ClientController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/clients/login", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/login")
 	public Client login(@RequestParam String username, @RequestParam String password) {
 		return cs.getClientByUsernameAndPassword(username, password);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/clients", method = RequestMethod.PUT)
+	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
 		logger.info("Client was updated: " + client.toString());
 		return cs.updateClient(client);
@@ -83,28 +85,28 @@ public class ClientController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/clients", method = RequestMethod.GET)
+	@GetMapping(value = "/clients")
 	public List<Client> getAllClients() {
 		logger.info("A list of all clients was accessed.");
 		return cs.getAllClients();
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/clients/points", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/points")
 	public int getClientsPoints(@RequestParam int id) {
 		logger.info("Client with id: " + id + " has " + cs.getClientPoints(id) + " points");
 		return cs.getClientPoints(id);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/clients/leaderboard/username", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/leaderboard/username")
 	public List<String> getLeaderboardusernames() {
 		logger.info("Leaderboard usernames are: " + cs.leaderboardusername());
 		return cs.leaderboardusername();
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/clients/leaderboard/points", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/leaderboard/points")
 	public List<Integer> getLeaderboardpoints() {
 		logger.info("Leaderboard points are: " + cs.leaderboardpoints());
 		return cs.leaderboardpoints();
