@@ -1,5 +1,6 @@
 package dev.cuny.app;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -21,13 +22,14 @@ class BbsApplicationTests {
 	@Test
 	@Order(1)
 	void getClientbyId() {
-		System.out.println(cr.findById(1).get());
+		Assertions.assertTrue(cr.findById(1) != null);
 	}
 	
 	@Test
 	@Order(2)
 	void getClientByUsername() {
-		System.out.print(cr.findByUsername("theRaidMan"));
+		Assertions.assertTrue(cr.findByUsername("theRaidMan") != null);
+		
 	}
 	
 	@Test
@@ -35,8 +37,8 @@ class BbsApplicationTests {
 	void getClientByUsernameAndPassword() {
 		String username = "theRaidMan";
 		String password = "password";
-		
-		System.out.println(cr.findByUsernameAndPassword(username, password));
+
+		Assertions.assertTrue(cr.findByUsernameAndPassword(username, password) != null);
 	}
 
 }
