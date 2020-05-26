@@ -24,7 +24,10 @@ class bugReportTests {
 	@Test 
 	@Order(1)
 	void createBugReport() {
-		BugReport br = new BugReport(0,"Spring dialect issue4","Spring is giving a Dependency not found exception due to dialect not found.","try a test on repository","theRaidMan","super severe","high","pending","backend",0,0,020400,100,ar.findById(1).get());
+		BugReport br = new BugReport();
+		br.setApp(ar.findById(1).get());
+		br.setTitle("Test for sonar");
+		br.setDescription("Sonar is being difficult for no reason");
 		System.out.println(br);
 		System.out.println(br.getCreatedTime());
 		brr.save(br);

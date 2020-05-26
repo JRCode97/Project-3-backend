@@ -1,5 +1,9 @@
 package dev.cuny.app;
 
+<<<<<<< HEAD
+=======
+import org.junit.jupiter.api.Assertions;
+>>>>>>> ad270b76bdb3ee5921ce215aeae17e52bd6b28a2
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -36,59 +40,91 @@ class ClientServiceImplTests {
 		
 		try{
 			System.out.println(cs.createClient(c1));
+			Assertions.assertSame(cs.getClientById(c1.getcId()),c1);
 		}catch(ClientAlreadyExistedException e) {
 			System.out.println("Can not register since the username is already taken.");
 		}
 	}
-	
+
 	@Test
 	@Order(2)
 	void loginClient() {
-		String username = "test";
-		String password = "Password";
-		
-		System.out.println(cs.getClientByUsernameAndPassword(username, password));
+		Client c1 = new Client();
+		c1.setcId(1);
+		c1.setUsername("testUpdateClient");
+		c1.setPassword("Password_Updated");
+		c1.setfName("First");
+		c1.setlName("Last");
+		c1.setEmail("test@gmail.com");
+		c1.setRole(0);
+		cs.createClient(c1);
+		Client c2 = cs.getClientByUsernameAndPassword(c1.getUsername(), c1.getPassword());
+		Assertions.assertSame(c1,c2);
 	}
 
 	@Test
 	@Order(3)
 	void updateClient() {
 		Client c1 = new Client();
-		c1.setcId(99);
-		c1.setUsername("test");
+		c1.setcId(1);
+		c1.setUsername("testUpdateClient");
 		c1.setPassword("Password_Updated");
 		c1.setfName("First");
 		c1.setlName("Last");
 		c1.setEmail("test@gmail.com");
 		c1.setRole(0);
-		
-		System.out.println(cs.updateClient(c1));
+		cs.createClient(c1);
+		c1.setfName("updatedFirstName");
+		c1 = cs.updateClient(c1);
+		Assertions.assertSame(c1.getfName(),"updatedFirstName");		
+		System.out.println(c1);
+
 	}
 	
 	@Test
 	@Order(4)
 	void getAllClients() {
 		System.out.println(cs.getAllClients());
+		Assertions.assertNotNull(cs.getAllClients());
 	}
 	
 	@Test
 	@Order(5)
 	void getClientsByRole() {
 		System.out.println(cs.getClientsByRole(0));
+		Assertions.assertNotNull(cs.getClientsByRole(0));
 	}
 	
 	@Test
 	@Order(6)
 	void getClientByUsername() {
-		String username = "test";
-		System.out.println(cs.getClientByUsername(username));
+		Client c1 = new Client();
+		c1.setcId(1);
+		c1.setUsername("testUpdateClient");
+		c1.setPassword("Password_Updated");
+		c1.setfName("First");
+		c1.setlName("Last");
+		c1.setEmail("test@gmail.com");
+		c1.setRole(0);
+		cs.createClient(c1);
+		Client c2 = cs.getClientByUsername(c1.getUsername());
+		Assertions.assertSame(c2.getUsername(),c1.getUsername());
 	}
 	
 	@Test
 	@Order(7)
 	void getClientById() {
-		int id = 1;
-		System.out.println(cs.getClientById(id));
+		Client c1 = new Client();
+		c1.setcId(1);
+		c1.setUsername("testUpdateClient");
+		c1.setPassword("Password_Updated");
+		c1.setfName("First");
+		c1.setlName("Last");
+		c1.setEmail("test@gmail.com");
+		c1.setRole(0);
+		c1 = cs.createClient(c1);
+		Client c2 = cs.getClientById(c1.getcId());
+		Assertions.assertSame(c2,c1);	
 	}
 	
 	@Test
@@ -102,15 +138,17 @@ class ClientServiceImplTests {
 		c1.setlName("Last");
 		c1.setEmail("test@gmail.com");
 		c1.setRole(0);
-		
-		if(cs.deleteClient(c1)) {
-			System.out.println("Successfully delete client!");
-		}
+		cs.createClient(c1);
+		Assertions.assertSame(cs.deleteClient(c1),true);
+//		if(cs.deleteClient(c1)) {
+//			System.out.println("Successfully delete client!");
+//		}
 	}
 	
 	@Test
 	@Order(9)
 	void pointClient() {
-		System.out.println("This is the client points:" + cs.getClientPoints(103));
+		System.out.println("This is the client points:" + cs.getClientPoints(9999));
+		Assertions.assertSame(cs.getClientPoints(9999),0);
 	}
 }

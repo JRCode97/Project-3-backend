@@ -58,29 +58,6 @@ public class BugReport {
 	public BugReport() {
 		super();
 	}
-	
-
-	public BugReport(int bId, String title, String description, String repSteps, String username, String severity,
-			String priority, String status, String location, long approvedTime, long resolvedTime, long dateCreated,
-			int pointValue, Application app) {
-		super();
-		this.bId = bId;
-		this.title = title;
-		this.description = description;
-		this.repSteps = repSteps;
-		this.username = username;
-		this.severity = severity;
-		this.priority = priority;
-		this.status = status;
-		this.location = location;
-		this.approvedTime = approvedTime;
-		this.resolvedTime = resolvedTime;
-		this.dateCreated= dateCreated;
-		this.pointValue = pointValue;
-		this.app = app;
-	}
-
-
 
 	public int getbId() {
 		return bId;
@@ -207,8 +184,8 @@ public class BugReport {
 
 	@Override
 	public String toString() {
-		return "BugReport [bId=" + bId + ", title=" + title + ", description=" + description + ", repSteps="
-				+ repSteps + ", username=" + username + ", severity=" + severity + ", priority=" + priority
+		return "BugReport [bId= " + bId + ", title=" + title + ", description=" + description + ", repSteps="
+				+ repSteps + ", username= " + username + ", severity=" + severity + ", priority=" + priority
 				+ ", status=" + status + ", location=" + location + ", approvedTime=" + approvedTime + ", resolvedTime="
 				+ resolvedTime + ", createdDate=" + dateCreated + ", pointValue=" + pointValue + "]";	// app is removed from here
 

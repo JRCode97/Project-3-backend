@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import dev.cuny.entities.Solution;
 import dev.cuny.repositories.BugReportRepository;
@@ -33,7 +34,8 @@ public class SolutionRepoTests {
 	@Test
 	@Order(1)
 	void getByStatus() {
-		List<Solution> status = sr.findByStatus("approved");
+		List<Solution> status = sr.findByStatus("Accepted");
+		Assert.notEmpty(status);
 		System.out.println("==========");
 		for(Solution s : status) {
 			System.out.println(s);

@@ -9,10 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,14 +30,14 @@ public class ApplicationController {
 	ApplicationService as;
 
 	@ResponseBody
-	@RequestMapping(value = "/applications", method = RequestMethod.POST)
+	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: " + a.toString());
+		logger.info("Application Created: ", a);
 		return as.createApplication(a);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/applications", method = RequestMethod.GET)
+	@GetMapping(value = "/applications")
 	public <T> T getApplication(@RequestParam(required = false) @PathVariable String id,
 			@RequestParam(required = false) @PathVariable String title) {
 		if (id != null) {
@@ -44,7 +45,7 @@ public class ApplicationController {
 				int i = Integer.parseInt(id);
 				return (T) as.getApplicationById(i);
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find an Application with id: " + id);
+				logger.error("Unable to find an Application with id: ", id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
 			}
 		} else if (title != null) {
@@ -57,9 +58,9 @@ public class ApplicationController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/applications", method = RequestMethod.PUT)
+	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: " + application.toString());
+		logger.info("Application was updated: ", application.toString());
 		return as.updateApplication(application);
 	}
 }
