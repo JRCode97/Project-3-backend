@@ -34,7 +34,7 @@ public class SolutionRepoTests {
 	@Test
 	@Order(1)
 	void getByStatus() {
-		List<Solution> status = sr.findByStatus("approved");
+		List<Solution> status = sr.findByStatus("Accepted");
 		Assert.notEmpty(status);
 		System.out.println("==========");
 		for(Solution s : status) {

@@ -44,10 +44,5 @@ class ApplicationRepoTests {
 		app = ar.save(app);
 		Assertions.assertTrue(ar.findById(app.getId()).get() == app);
 	}
-	@Test
-	@Order(5)
-	void getApplicationByTitleTest() {
-		String title = "Bug Report App2";
-		Assertions.assertTrue(ar.findByTitle(title) != null);
-	}
+	
 }
