@@ -17,6 +17,10 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		 <sonar.projectKey>JRCode97_Project-3-backend</sonar.projectKey>
+  		 <sonar.organization>jrcode97</sonar.organization>
+  		 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  			<sonar.login>9f77b7cbbf3d8b724b3f5f62c5827e22d4116d34</sonar.login>
 	</properties>
 
 	<dependencies>

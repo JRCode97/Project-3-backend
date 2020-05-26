@@ -1,5 +1,6 @@
 package dev.cuny.app;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -28,16 +29,19 @@ class ApplicationServiceImplTests {
 		Application app1 = new Application();
 		app1.setTitle("Test");
 		app1.setGitLink("github Link");
-		
-		as.createApplication(app1);
-		
-		System.out.println(app1);
+		app1 = as.createApplication(app1);
+		Assertions.assertTrue(as.getApplicationById(app1.getId()) == app1);
 	}
 	
 	@Test
 	@Order(2)
 	void getAppByTitle() {
-		System.out.println(as.getApplicationByTitle("Test"));
+		Application app1 = new Application();
+		app1.setTitle("Test");
+		app1.setGitLink("github Link");
+		app1 = as.createApplication(app1);
+		Application app2 = as.getApplicationByTitle("Test");
+		Assertions.assertTrue(app2.getTitle()=="Test");
 	}
 	
 	@Test
@@ -47,14 +51,15 @@ class ApplicationServiceImplTests {
 		app1.setTitle("Test");
 		app1.setGitLink("github Link");
 		
-		as.createApplication(app1);
-		System.out.println(as.getApplicationById(1));
+		app1 = as.createApplication(app1);
+		
+		Assertions.assertTrue(app1==as.getApplicationById(app1.getId()));
 	}
 	
 	@Test
 	@Order(4)
 	void getAllApps() {
-		System.out.println(as.getApplications());
+		Assertions.assertTrue(as.getApplications() != null);
 	}
 	
 	@Test
@@ -67,8 +72,9 @@ class ApplicationServiceImplTests {
 		as.createApplication(app1);
 		
 		app1.setTitle("Updated Test Title");
-		as.updateApplication(app1);
-		System.out.println(app1);
+		app1 = as.updateApplication(app1);
+		
+		Assertions.assertTrue(app1.getTitle() == "Updated Test Title");
 	}
 	
 	@Test
@@ -79,11 +85,8 @@ class ApplicationServiceImplTests {
 		app1.setGitLink("github Link");
 		
 		as.createApplication(app1);
-		System.out.println(app1);
 		
-		as.deleteApplication(app1);
-		
-		System.out.println("Deleted");
+		Assertions.assertTrue(as.deleteApplication(app1) == true);
 		
 	}
 
