@@ -25,7 +25,6 @@ public class Application {
 	@Column(name="application_git_link")
 	private String gitLink;
 	@OneToMany(mappedBy="app", fetch=FetchType.LAZY)
-	@JsonIgnore
 	private List<BugReport> reports;
 	
 	public Application() {

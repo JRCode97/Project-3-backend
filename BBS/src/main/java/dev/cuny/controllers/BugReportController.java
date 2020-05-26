@@ -3,6 +3,8 @@ package dev.cuny.controllers;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -23,43 +25,62 @@ import dev.cuny.services.BugReportService;
 @Controller
 @CrossOrigin("*")
 public class BugReportController {
+	private static Logger logger = LoggerFactory.getLogger(BugReportController.class);
 	@Autowired
 	BugReportService brs;
+
 	@ResponseBody
-	@RequestMapping(value="/bugreports",method=RequestMethod.POST)
+	@RequestMapping(value = "/bugreports", method = RequestMethod.POST)
 	public BugReport createBugReport(@RequestBody BugReport br) {
+		logger.info("Bug Report Created: " + br.toString());
 		return brs.createBugReport(br);
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/bugreports/{id}", method=RequestMethod.GET)
-	public BugReport getBugReportById(@PathVariable int id) {
-	try {
-	return brs.getBugReportById(id);}
-	catch(NoSuchElementException e) {
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Could not find bug report");
+	@RequestMapping(value = "/bugreports", method = RequestMethod.GET)
+	public <T> T getBugReportById(@RequestParam(required = false) String id,
+			@RequestParam(required = false) String status) {
+		if (id != null) {
+			try {
+				int i = Integer.parseInt(id);
+				return (T) brs.getBugReportById(i);
+			} catch (NoSuchElementException e) {
+				logger.error("Unable to find a bugreport with id: " + id);
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
+			}
+		} else if (status != null) {
+			try {
+
+				return (T) brs.getByStatus(status);
+			} catch (NoSuchElementException e) {
+				logger.error("Unable to find a bugreport with id: " + id);
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
+			}
+		}else {
+			return (T) brs.getAllBugReports();
+		}
+
 	}
-	}
+
 	@ResponseBody
-	@RequestMapping(value="bugreports",method=RequestMethod.PUT)
+	@RequestMapping(value = "/bugreports", method = RequestMethod.PUT)
 	public BugReport updateBugReport(@RequestBody BugReport br) {
+		logger.info("BugReport was updated: " + br.toString());
 		return brs.updateBugReport(br);
 	}
+
 	@ResponseBody
-	@RequestMapping(value="query/bugreports/app",method=RequestMethod.GET)
-	public List<BugReport> query(@RequestParam int id){
-		return brs.getBugReportsByAppId(id);
+	@RequestMapping(value = "query/bugreports", method = RequestMethod.GET)
+	public List<BugReport> query(@RequestParam int aId) {
+		return brs.getBugReportsByAppId(aId);
 	}
-	
+
+
 	@ResponseBody
-	@RequestMapping(value="/bugreports", method=RequestMethod.GET)
-	public List<BugReport> queryAllBugReports(){
-		return brs.getAllBugReports();
-	}
-	@ResponseBody
-	@RequestMapping(value="/bugreports/client/{username}",method=RequestMethod.GET)
-	public List<BugReport>getClientBugReports(@PathVariable String username){
+	@RequestMapping(value = "/bugreports/client/{username}", method = RequestMethod.GET)
+	public List<BugReport> getClientBugReports(@PathVariable String username) {
 		return brs.getClientBugReports(username);
 	}
-	
+
+
 }

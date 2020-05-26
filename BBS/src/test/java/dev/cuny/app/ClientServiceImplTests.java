@@ -109,4 +109,10 @@ class ClientServiceImplTests {
 			System.out.println("Successfully delete client!");
 		}
 	}
+	
+	@Test
+	@Order(9)
+	void pointClient() {
+		System.out.println("This is the client points:" + cs.getClientPoints(103));
+	}
 }

@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "solution")
 public class Solution {
@@ -27,7 +28,7 @@ public class Solution {
 	private long timeSubmitted;
 	@ManyToOne
 	@JoinColumn(name="bug_report_id")
-	@JsonIgnore
+	@JsonIgnoreProperties({"solutions"})
 	private BugReport br;
 	@ManyToOne
 	@JoinColumn(name="solver_client_id")

@@ -53,4 +53,10 @@ public class BugReportServiceImpl implements BugReportService {
 		return brr.findByUsername(username);
 	}
 
+	@Override
+	public List<BugReport> getByStatus(String status) {
+		
+		return brr.findByStatus(status);
+	}
+
 }

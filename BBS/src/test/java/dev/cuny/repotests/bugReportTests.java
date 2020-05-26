@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.annotation.Rollback;
 
 import dev.cuny.entities.BugReport;
 import dev.cuny.repositories.ApplicationRepository;
@@ -17,6 +18,7 @@ import dev.cuny.repositories.BugReportRepository;
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Transactional
 class bugReportTests {
 	@Autowired 
 	BugReportRepository brr;
@@ -25,7 +27,9 @@ class bugReportTests {
 	@Test 
 	@Order(1)
 	void createBugReport() {
-		BugReport br = new BugReport(1,"Spring dialect issue","Spring is giving a Dependency not found exception due to dialect not found.","try a test on repository","theRaidMan","super severe","high","pending","backend",0,0,020400,100,ar.findById(1).get());
+		BugReport br = new BugReport(0,"Spring dialect issue4","Spring is giving a Dependency not found exception due to dialect not found.","try a test on repository","theRaidMan","super severe","high","pending","backend",0,0,020400,100,ar.findById(1).get());
+		System.out.println(br);
+		System.out.println(br.getCreatedTime());
 		brr.save(br);
 	}
 	@Test 

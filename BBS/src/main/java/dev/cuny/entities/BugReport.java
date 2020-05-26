@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "bug_report")
@@ -48,11 +49,11 @@ public class BugReport {
 	private int pointValue;
 	@ManyToOne
 	@JoinColumn(name="application_id")
-//	@JsonIgnore
+	@JsonIgnoreProperties({"reports"})
 	private Application app;
 
 	@OneToMany(mappedBy="br", fetch=FetchType.LAZY)
-	@JsonIgnore
+	@JsonIgnoreProperties({"client","br"})
 	private List<Solution> solutions;
 	
 	public BugReport() {
@@ -61,7 +62,7 @@ public class BugReport {
 	
 
 	public BugReport(int bId, String title, String description, String repSteps, String username, String severity,
-			String priority, String status, String location, long approvedTime, long resolvedTime, long createdTime,
+			String priority, String status, String location, long approvedTime, long resolvedTime, long dateCreated,
 			int pointValue, Application app) {
 		super();
 		this.bId = bId;
@@ -75,7 +76,7 @@ public class BugReport {
 		this.location = location;
 		this.approvedTime = approvedTime;
 		this.resolvedTime = resolvedTime;
-		this.dateCreated= createdTime;
+		this.dateCreated= dateCreated;
 		this.pointValue = pointValue;
 		this.app = app;
 	}
@@ -174,8 +175,8 @@ public class BugReport {
 		return dateCreated;
 	}
 
-	public void setCreatedTime(long createdTime) {
-		this.dateCreated = createdTime;
+	public void setCreatedTime(long dateCreated) {
+		this.dateCreated = dateCreated;
 
 	}
 
