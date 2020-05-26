@@ -1,5 +1,7 @@
+
 package dev.cuny.repotests;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,6 +28,7 @@ class bugReportTests {
 	void createBugReport() {
 		BugReport br = new BugReport();
 		br.setApp(ar.findById(1).get());
+		Assertions.assertNotNull(br);
 		br.setTitle("Test for sonar");
 		br.setDescription("Sonar is being difficult for no reason");
 		System.out.println(br);
@@ -35,17 +38,20 @@ class bugReportTests {
 	@Test 
 	@Order(2)
 	void getBugReportById() {
-		System.out.println(brr.findById(1).get());
+		System.out.println(brr.findById(1));
+		Assertions.assertNotNull(brr.findById(1));
 	}
 	@Test
 	@Order(3)
 	void getReportsBySubject() {
 		System.out.println(brr.findByTitle("Spring dialect issue"));
+		Assertions.assertNotNull(brr.findByTitle("Spring dialect issue"));
 	}
 	@Test
 	@Order(4)
 	void getByApp() {
 		System.out.println(brr.findByApp(ar.findById(1).get()));
+		Assertions.assertNotNull(brr.findByApp(ar.findById(1).get()));
 		
 	}
 }
