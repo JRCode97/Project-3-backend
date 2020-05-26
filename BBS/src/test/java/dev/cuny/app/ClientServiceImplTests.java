@@ -74,7 +74,7 @@ class ClientServiceImplTests {
 		cs.createClient(c1);
 		c1.setfName("updatedFirstName");
 		c1 = cs.updateClient(c1);
-		Assertions.assertSame(c1.getfName(), "updatedFirstName");
+		Assertions.assertSame("updatedFirstName", c1.getfName());
 		System.out.println(c1);
 
 	}
@@ -137,7 +137,7 @@ class ClientServiceImplTests {
 		c1.setEmail("test@gmail.com");
 		c1.setRole(0);
 		cs.createClient(c1);
-		Assertions.assertSame(cs.deleteClient(c1), true);
+		Assertions.assertSame(true, cs.deleteClient(c1));
 //		if(cs.deleteClient(c1)) {
 //			System.out.println("Successfully delete client!");
 //		}
@@ -147,6 +147,6 @@ class ClientServiceImplTests {
 	@Order(9)
 	void pointClient() {
 		System.out.println("This is the client points:" + cs.getClientPoints(9999));
-		Assertions.assertSame(cs.getClientPoints(9999), 0);
+		Assertions.assertSame(0, cs.getClientPoints(9999));
 	}
 }
