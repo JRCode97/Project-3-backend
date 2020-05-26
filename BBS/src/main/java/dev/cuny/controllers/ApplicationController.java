@@ -32,7 +32,7 @@ public class ApplicationController {
 	@ResponseBody
 	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: ", a,Logger.getName());
+		logger.info("Application Created: ", a,logger.getName());
 		return as.createApplication(a);
 	}
 
