@@ -87,7 +87,6 @@ public class ClientController {
 	@ResponseBody
 	@GetMapping(value = "/clients")
 	public List<Client> getAllClients() {
-		logger.info("A list of all clients was accessed.");
 		return cs.getAllClients();
 	}
 
