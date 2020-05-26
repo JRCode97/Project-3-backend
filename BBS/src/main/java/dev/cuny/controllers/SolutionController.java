@@ -1,6 +1,5 @@
 package dev.cuny.controllers;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
@@ -10,10 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,14 +29,14 @@ public class SolutionController {
 	SolutionService ss;
 
 	@ResponseBody
-	@RequestMapping(value = "/solutions", method = RequestMethod.POST)
+	@PostMapping(value = "/solutions")
 	public Solution createSolution(@RequestBody Solution s) {
 		logger.info("Solution was created: " + s.toString());
 		return ss.createSolution(s);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/solutions", method = RequestMethod.GET)
+	@GetMapping(value = "/solutions")
 	public <T> T getSolution(@RequestParam(required = false) String id, @RequestParam(required = false) String status,
 			@RequestParam(required = false) String cId, @RequestParam(required = false) String bId) {
 
@@ -63,7 +62,7 @@ public class SolutionController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/solutions", method = RequestMethod.PUT)
+	@PutMapping(value = "/solutions")
 	public Solution updateSolution(@RequestBody Solution s) {
 		logger.info("The solution was updated: " + s.toString());
 		return ss.updateSolution(s);
