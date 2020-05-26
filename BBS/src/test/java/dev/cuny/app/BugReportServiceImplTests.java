@@ -1,5 +1,8 @@
 package dev.cuny.app;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -45,7 +48,7 @@ class BugReportServiceImplTests {
 		br1.setCreatedTime(0);
 		br1.setPointValue(9000);
 		br1.setApp(as.getApplicationById(1));
-		
+		Assertions.assertNotNull(brs.createBugReport(br1));
 		System.out.println(brs.createBugReport(br1));
 	}
 	
@@ -53,12 +56,14 @@ class BugReportServiceImplTests {
 	@Order(2)
 	void getBugReportById() {
 		System.out.println(brs.getBugReportById(1));
+		Assertions.assertNotNull(brs.getBugReportById(1));
 	}
 	
 	@Test
 	@Order(3)
 	void getAllBugReports() {
 		System.out.println(brs.getAllBugReports());
+		Assertions.assertNotNull(brs.getAllBugReports());
 	}
 	
 	@Test
@@ -67,6 +72,7 @@ class BugReportServiceImplTests {
 		Application a = new Application();
 		a.setId(1);
 		System.out.println(brs.getBugReportsByAppId(1));
+		Assertions.assertNotNull(brs.getBugReportsByAppId(1));
 	}
 	
 	@Test
@@ -76,6 +82,7 @@ class BugReportServiceImplTests {
 		Application a = as.getApplicationById(1);
 		a.setId(0);
 		System.out.println(brs.updateBugReport(br1));
+		Assertions.assertNotNull(brs.updateBugReport(br1));
 	}
 	
 	@Test
