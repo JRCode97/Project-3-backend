@@ -37,10 +37,10 @@ public class ClientController {
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
-			logger.info("Client was created: ", client.toString());
+			logger.info("Client was created: ", client);
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
-			logger.info("Unable to create the client: ", client.toString());
+			logger.info("Unable to create the client: ", client);
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -54,7 +54,7 @@ public class ClientController {
 	@ResponseBody
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
-		logger.info("Client was updated: ", client.toString());
+		logger.info("Client was updated: ", client);
 		return cs.updateClient(client);
 	}
 
