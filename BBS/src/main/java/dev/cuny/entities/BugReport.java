@@ -208,8 +208,8 @@ public class BugReport {
 
 	@Override
 	public String toString() {
-		return "BugReport [bId=" + bId + ", title=" + title + ", description=" + description + ", repSteps="
-				+ repSteps + ", username=" + username + ", severity=" + severity + ", priority=" + priority
+		return "BugReport [bId= " + bId + ", title=" + title + ", description=" + description + ", repSteps="
+				+ repSteps + ", username= " + username + ", severity=" + severity + ", priority=" + priority
 				+ ", status=" + status + ", location=" + location + ", approvedTime=" + approvedTime + ", resolvedTime="
 				+ resolvedTime + ", createdDate=" + dateCreated + ", pointValue=" + pointValue + "]";	// app is removed from here
 
