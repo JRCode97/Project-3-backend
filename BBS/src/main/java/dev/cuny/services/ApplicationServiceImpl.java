@@ -22,7 +22,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
 	@Override
 	public Application getApplicationById(int id) {
-		return ar.findById(id).get();
+		return ar.findById(id).orElse(null);
 	}
 
 	@Override
