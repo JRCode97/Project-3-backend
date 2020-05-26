@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    shutdown:
+      enabled: true
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 9111
+  
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: Destinyaws
+    url: jdbc:mariadb://projectdb.cu1md7k1zskf.us-east-2.rds.amazonaws.com:3306/BBS
+    username: Nuria
+  application:
+    name: BBS-Service
+eureka:
+  client:
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9999/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds: 1

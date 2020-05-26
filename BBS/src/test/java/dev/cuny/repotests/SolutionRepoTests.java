@@ -2,6 +2,7 @@ package dev.cuny.repotests;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -35,7 +36,7 @@ public class SolutionRepoTests {
 	@Order(1)
 	void getByStatus() {
 		List<Solution> status = sr.findByStatus("Accepted");
-		Assert.notEmpty(status);
+		Assertions.assertTrue(status.size() > 0);
 		System.out.println("==========");
 		for(Solution s : status) {
 			System.out.println(s);
@@ -46,6 +47,7 @@ public class SolutionRepoTests {
 	@Order(2)
 	void getByClient() {
 		List<Solution> clientSolutions = sr.findByClient(cr.findById(1).get());
+		Assertions.assertTrue(clientSolutions.size() > 0);
 		System.out.println("==========");
 		for(Solution s : clientSolutions) {
 			System.out.println(s);
@@ -56,6 +58,7 @@ public class SolutionRepoTests {
 	@Order(3)
 	void getByBugReport() {
 		List<Solution> bugSolutions = sr.findByBr(br.findById(1).get());
+		Assertions.assertTrue(bugSolutions.size() > 0);
 		System.out.println("==========");
 		for(Solution s : bugSolutions) {
 			System.out.println(s);

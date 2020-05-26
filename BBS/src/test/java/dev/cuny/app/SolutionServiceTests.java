@@ -2,6 +2,7 @@ package dev.cuny.app;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -35,7 +36,7 @@ public class SolutionServiceTests {
 	@Order(1)
 	void getAllSolutionsTest(){
 		List<Solution>solutions = ss.getAllSolutions();
-		Assert.notEmpty(solutions);
+		Assertions.assertTrue(solutions.size() > 0);
 		System.out.println("=======");
 		for(Solution s : solutions) {
 			System.out.println(s);
@@ -47,7 +48,7 @@ public class SolutionServiceTests {
 	@Order(2)
 	void getSolutionByClient() {
 		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
-
+		Assertions.assertTrue(clientSolutions.size() > 0);
 		System.out.println("==========");
 		for(Solution s : clientSolutions) {
 			System.out.println(s);
@@ -59,6 +60,7 @@ public class SolutionServiceTests {
 	@Order(3)
 	void getSolutionByBugReport() {
 		List<Solution> bugSolutions = ss.getSolutionByBugReportId(1);
+		Assertions.assertTrue(bugSolutions.size() > 0);
 		System.out.println("==========");
 		for(Solution s : bugSolutions) {
 			System.out.println(s);
@@ -71,6 +73,7 @@ public class SolutionServiceTests {
 	void getSolutionByStatus(){
 		
 		List<Solution> status = ss.getSolutionByStatus("approved");
+		Assertions.assertTrue(status.size() > 0);
 		System.out.println("==========");
 		for(Solution s : status) {
 			System.out.println(s);
