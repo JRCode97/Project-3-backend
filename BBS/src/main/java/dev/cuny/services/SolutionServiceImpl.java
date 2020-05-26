@@ -24,7 +24,7 @@ public class SolutionServiceImpl implements SolutionService {
 
 	@Override
 	public Solution getSolutionById(int id) {
-		return sr.findById(id).get();
+		return sr.findById(id).orElse(null);
 	}
 
 	@Override
@@ -35,12 +35,12 @@ public class SolutionServiceImpl implements SolutionService {
 	@Override
 	public List<Solution> getSolutionsByClientId(int id) {
 		
-		return sr.findByClient(cr.findById(id).get());
+		return sr.findByClient(cr.findById(id).orElse(null));
 	}
 
 	@Override
 	public List<Solution> getSolutionByBugReportId(int id) {
-		return sr.findByBr(brr.findById(id).get());
+		return sr.findByBr(brr.findById(id).orElse(null));
 	}
 	
 	@Override
