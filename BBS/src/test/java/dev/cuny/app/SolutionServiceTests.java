@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import dev.cuny.entities.BugReport;
 import dev.cuny.entities.Client;
@@ -36,6 +37,7 @@ public class SolutionServiceTests {
 	@Order(1)
 	void getAllSolutionsTest(){
 		List<Solution>solutions = ss.getAllSolutions();
+		Assert.notEmpty(solutions);
 		System.out.println("=======");
 		for(Solution s : solutions) {
 			System.out.println(s);
