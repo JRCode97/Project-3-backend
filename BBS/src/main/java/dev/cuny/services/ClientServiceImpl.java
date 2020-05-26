@@ -19,8 +19,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Client createClient(Client client) throws ClientAlreadyExistedException {
-		Client existedClient = new Client();
-		existedClient = cr.findByUsername(client.getfName());
+		Client existedClient = cr.findByUsername(client.getfName());
 		if (existedClient != null) {
 			throw new ClientAlreadyExistedException();
 		} else {
@@ -62,18 +61,16 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Client getClientById(int id) {
-		return cr.findById(id).get();
+		return cr.findById(id).orElse(null);
 	}
 
 	@Override
 	public int getClientPoints(int id) {
 		if(cr.getClientPoints(id) == null || cr.getClientPoints(id) == 0) {
-			System.out.println("It was NULL! -------------");
 			int points = 0;
 			return points;
 		}
 		else {
-			System.out.println("--------------- ELSE! -------------");
 			return cr.getClientPoints(id);
 		}
 	}
