@@ -2,6 +2,7 @@ package dev.cuny.repotests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -22,24 +23,27 @@ class ClientRepoTests {
 	@Test
 	@Order(1)
 	void getUsersPoints() {
-		System.out.println("User points: ");
-		System.out.println(cr.getClientPoints(103));
+		
+		Assertions.assertTrue(cr.getClientPoints(1) != null);
+	
 	}
 	@Test
 	@Order(2)
 	void getLeaderBoardByUsernames() {
-		System.out.println(cr.getLeaderBoardUsernames());
+
+		
+		Assertions.assertTrue(cr.getLeaderBoardUsernames() != null);
 	}
 	@Test
 	@Order(3)
 	void getLeaderBoardByPoints() {
-		System.out.println(cr.getLeaderBoardPoints());
+		Assertions.assertTrue(cr.getLeaderBoardPoints() != null);
 	}
 
 	@Test
 	@Order(4)
 	void getClientByEmail() {
 		String email = "jian@email.com";
-		System.out.print(cr.findByEmail(email));
+		Assertions.assertTrue(cr.findByEmail(email) != null);
 	}
 }
