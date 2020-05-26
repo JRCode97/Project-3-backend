@@ -7,7 +7,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +29,7 @@ class ApplicationServiceImplTests {
 		app1.setTitle("Test");
 		app1.setGitLink("github Link");
 		app1 = as.createApplication(app1);
-		Assertions.assertTrue(as.getApplicationById(app1.getId()) == app1);
+		Assertions.assertSame(as.getApplicationById(app1.getId()),app1);
 	}
 	
 	@Test
@@ -41,7 +40,7 @@ class ApplicationServiceImplTests {
 		app1.setGitLink("github Link");
 		app1 = as.createApplication(app1);
 		Application app2 = as.getApplicationByTitle("Test");
-		Assertions.assertTrue(app2.getTitle()=="Test");
+		Assertions.assertSame(app2.getTitle(),"Test");
 	}
 	
 	@Test
@@ -53,13 +52,13 @@ class ApplicationServiceImplTests {
 		
 		app1 = as.createApplication(app1);
 		
-		Assertions.assertTrue(app1==as.getApplicationById(app1.getId()));
+		Assertions.assertSame(app1,as.getApplicationById(app1.getId()));
 	}
 	
 	@Test
 	@Order(4)
 	void getAllApps() {
-		Assertions.assertTrue(as.getApplications() != null);
+		Assertions.assertNotNull(as.getApplications());
 	}
 	
 	@Test
@@ -68,13 +67,10 @@ class ApplicationServiceImplTests {
 		Application app1 = new Application();
 		app1.setTitle("Test");
 		app1.setGitLink("github Link");
-		
 		as.createApplication(app1);
-		
 		app1.setTitle("Updated Test Title");
 		app1 = as.updateApplication(app1);
-		
-		Assertions.assertTrue(app1.getTitle() == "Updated Test Title");
+		Assertions.assertSame(app1.getTitle(),"Updated Test Title");
 	}
 	
 	@Test
@@ -86,7 +82,7 @@ class ApplicationServiceImplTests {
 		
 		as.createApplication(app1);
 		
-		Assertions.assertTrue(as.deleteApplication(app1) == true);
+		Assertions.assertSame(as.deleteApplication(app1),true);
 		
 	}
 
