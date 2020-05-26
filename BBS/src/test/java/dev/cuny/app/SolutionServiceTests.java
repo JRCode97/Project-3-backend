@@ -2,6 +2,7 @@ package dev.cuny.app;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -10,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import dev.cuny.entities.Solution;
 import dev.cuny.repositories.BugReportRepository;
@@ -35,47 +35,28 @@ public class SolutionServiceTests {
 	@Order(1)
 	void getAllSolutionsTest(){
 		List<Solution>solutions = ss.getAllSolutions();
-		Assert.notEmpty(solutions);
-		System.out.println("=======");
-		for(Solution s : solutions) {
-			System.out.println(s);
-		}
-		System.out.println("=======");
+		Assertions.assertTrue(solutions.size() > 0);
 	}
 	
 	@Test
 	@Order(2)
 	void getSolutionByClient() {
 		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
-
-		System.out.println("==========");
-		for(Solution s : clientSolutions) {
-			System.out.println(s);
-		}
-		System.out.println("==========");
+		Assertions.assertTrue(clientSolutions.size() > 0);
 	}	
 	
 	@Test
 	@Order(3)
 	void getSolutionByBugReport() {
 		List<Solution> bugSolutions = ss.getSolutionByBugReportId(1);
-		System.out.println("==========");
-		for(Solution s : bugSolutions) {
-			System.out.println(s);
-		}
-		System.out.println("==========");
+		Assertions.assertTrue(bugSolutions.size() > 0);	
 	}
 	
 	@Test
 	@Order(4)
-	void getSolutionByStatus(){
-		
+	void getSolutionByStatus(){	
 		List<Solution> status = ss.getSolutionByStatus("approved");
-		System.out.println("==========");
-		for(Solution s : status) {
-			System.out.println(s);
-		}
-		System.out.println("==========");
+		Assertions.assertTrue(status.size() > 0);
 	}
 	
 	
