@@ -11,8 +11,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.cuny.entities.BugReport;
-import dev.cuny.entities.Client;
 import dev.cuny.entities.Solution;
 import dev.cuny.repositories.BugReportRepository;
 import dev.cuny.repositories.ClientRepository;

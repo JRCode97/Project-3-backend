@@ -1,20 +1,16 @@
 package dev.cuny.app;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
-import dev.cuny.repositories.ApplicationRepository;
 import dev.cuny.services.ApplicationService;
 import dev.cuny.services.BugReportService;
 
@@ -56,7 +52,6 @@ class BugReportServiceImplTests {
 	@Test
 	@Order(2)
 	void getBugReportById() {
-		int id = 1;
 		System.out.println(brs.getBugReportById(1));
 	}
 	

@@ -1,7 +1,5 @@
 package dev.cuny.repotests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -10,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.test.annotation.Rollback;
 
 import dev.cuny.entities.BugReport;
 import dev.cuny.repositories.ApplicationRepository;
