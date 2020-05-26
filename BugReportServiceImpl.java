@@ -22,7 +22,7 @@ public class BugReportServiceImpl implements BugReportService {
 
 	@Override
 	public BugReport getBugReportById(int id) {
-		return brr.findById(id).get();
+		return brr.findById(id).orElse(null);
 		
 	}
 
@@ -34,7 +34,7 @@ public class BugReportServiceImpl implements BugReportService {
 	@Override
 	public List<BugReport> getBugReportsByAppId(int id) {
 		
-		return brr.findByApp(ar.findById(id).get());
+		return brr.findByApp(ar.findById(id).orElse(null));
 	}
 
 	@Override
@@ -46,6 +46,17 @@ public class BugReportServiceImpl implements BugReportService {
 	public boolean deleteBugReport(BugReport br) {
 		brr.delete(br);
 		return true;
+	}
+
+	@Override
+	public List<BugReport> getClientBugReports(String username) {
+		return brr.findByUsername(username);
+	}
+
+	@Override
+	public List<BugReport> getByStatus(String status) {
+		
+		return brr.findByStatus(status);
 	}
 
 }
