@@ -33,7 +33,7 @@ public class BugReportController {
 	@ResponseBody
 	@PostMapping(value = "/bugreports")
 	public BugReport createBugReport(@RequestBody BugReport br) {
-		logger.info("Bug Report Created: " + br.toString());
+		logger.info("Bug Report Created: " , br.toString());
 		return brs.createBugReport(br);
 	}
 
@@ -46,7 +46,7 @@ public class BugReportController {
 				int i = Integer.parseInt(id);
 				return (T) brs.getBugReportById(i);
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a bugreport with id: " + id);
+				logger.error("Unable to find a bugreport with id: " , id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
 			}
 		} else if (status != null) {
@@ -54,7 +54,7 @@ public class BugReportController {
 
 				return (T) brs.getByStatus(status);
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a bugreport with id: " + id);
+				logger.error("Unable to find a bugreport with id: " , id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
 			}
 		}else {
@@ -66,7 +66,7 @@ public class BugReportController {
 	@ResponseBody
 	@PutMapping(value = "/bugreports")
 	public BugReport updateBugReport(@RequestBody BugReport br) {
-		logger.info("BugReport was updated: " + br.toString());
+		logger.info("BugReport was updated: " , br.toString());
 		return brs.updateBugReport(br);
 	}
 

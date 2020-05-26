@@ -37,10 +37,10 @@ public class ClientController {
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
-			logger.info("Client was created: " + client.toString());
+			logger.info("Client was created: ", client.toString());
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
-			logger.info("Unable to create the client: " + client.toString());
+			logger.info("Unable to create the client: ", client.toString());
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -54,7 +54,7 @@ public class ClientController {
 	@ResponseBody
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
-		logger.info("Client was updated: " + client.toString());
+		logger.info("Client was updated: ", client.toString());
 		return cs.updateClient(client);
 	}
 
@@ -79,7 +79,7 @@ public class ClientController {
 		try {
 			return cs.getClientById(id);
 		} catch (NoSuchElementException e) {
-			logger.error("Unable to find a client with id: " + id);
+			logger.error("Unable to find a client with id: ", id);
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -94,7 +94,7 @@ public class ClientController {
 	@ResponseBody
 	@GetMapping(value = "/clients/points")
 	public int getClientsPoints(@RequestParam int id) {
-		logger.info("Client with id: " + id + " has " + cs.getClientPoints(id) + " points");
+		logger.info("Client with id: " , id , " has " , cs.getClientPoints(id) ," points");
 		return cs.getClientPoints(id);
 	}
 
@@ -108,7 +108,7 @@ public class ClientController {
 	@ResponseBody
 	@GetMapping(value = "/clients/leaderboard/points")
 	public List<Integer> getLeaderboardpoints() {
-		logger.info("Leaderboard points are: " + cs.leaderboardpoints());
+		logger.info("Leaderboard points are: ", cs.leaderboardpoints());
 		return cs.leaderboardpoints();
 
 	}
