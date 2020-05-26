@@ -20,7 +20,7 @@ eureka:
   client:
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:9999/eureka
+      defaultZone: http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/eureka
   instance:
     lease-expiration-duration-in-seconds: 2
     lease-renewal-interval-in-seconds: 1
