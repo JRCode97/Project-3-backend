@@ -1,13 +1,12 @@
 package dev.cuny.controllers;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,52 +14,49 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Application;
 import dev.cuny.services.ApplicationService;
 
-@Component
-@Controller
+@RestController
 @CrossOrigin("*")
 public class ApplicationController {
+
 	private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	@Autowired
 	ApplicationService as;
 
-	@ResponseBody
 	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: ", a,logger.getName());
+		logger.info(String.format("Application Created: %s", a.getTitle()));
 		return as.createApplication(a);
 	}
 
-	@ResponseBody
-	@GetMapping(value = "/applications")
-	public <T> T getApplication(@RequestParam(required = false) @PathVariable String id,
-			@RequestParam(required = false) @PathVariable String title) {
-		if (id != null) {
-			try {
-				int i = Integer.parseInt(id);
-				return (T) as.getApplicationById(i);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find an Application with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
-			}
-		} else if (title != null) {
-
-			return (T) as.getApplicationByTitle(title);
-		} else {
-			return (T) as.getApplications();
-		}
-
+	@GetMapping("/applications")
+	public List<Application> getApplications() {
+		return as.getApplications();
 	}
-
-	@ResponseBody
+	
+	@GetMapping("/applications/{id}")
+	public Application getApplicationById(@PathVariable("id") int id) {
+		try {
+			return as.getApplicationById(id);
+		} catch (NoSuchElementException e) {
+			logger.error(String.format("Unable to find an Application with id: %d", id));
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
+		}
+	}
+	
+	@GetMapping(value = "/applications", params = { "title" })
+	public Application getApplicationsByTitle(@RequestParam("title") String title) {
+		return as.getApplicationByTitle(title);
+	}
+	
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: ", application);
+		logger.info(String.format("Application was updated: %s", application.toString()));
 		return as.updateApplication(application);
 	}
 }

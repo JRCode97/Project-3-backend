@@ -22,9 +22,7 @@ class ClientRepoTests {
 	@Test
 	@Order(1)
 	void getUsersPoints() {
-		
-		Assertions.assertNotNull(cr.getClientPoints(1));
-	
+		Assertions.assertNotNull(cr.getClientPoints(2));
 	}
 	@Test
 	@Order(2)

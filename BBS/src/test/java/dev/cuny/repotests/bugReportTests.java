@@ -40,8 +40,8 @@ class bugReportTests {
 	}
 	@Test
 	@Order(3)
-	void getReportsBySubject() {
-		Assertions.assertNotNull(brr.findByTitle("Bug report - Is there an endpoint from where we can retrieve Oauth2 certificates from Facebook to validate a Mario cart token"));
+	void getReportsByTitle() {
+		Assertions.assertNotNull(brr.findByTitle("The java class keeps change the name"));
 	}
 	@Test
 	@Order(4)
