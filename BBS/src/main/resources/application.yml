@@ -13,7 +13,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     password: 1Revature!
     #Destinyaws
-    url: jdbc:mariadb://projectdb.cu1md7k1zskf.us-east-2.rds.amazonaws.com:3306/BBS
+    url: jdbc:mariadb://database-2.cgiil9kpuno0.us-east-2.rds.amazonaws.com:3306/BBS
     username: admin
     #Nuria
   application:
