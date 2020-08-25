@@ -11,16 +11,18 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    password: Destinyaws
+    password: 1Revature!
+    #Destinyaws
     url: jdbc:mariadb://projectdb.cu1md7k1zskf.us-east-2.rds.amazonaws.com:3306/BBS
-    username: Nuria
+    username: admin
+    #Nuria
   application:
     name: BBS-Service
-eureka:
-  client:
-    fetch-registry: true
-    service-url:
-      defaultZone: http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/eureka
-  instance:
-    lease-expiration-duration-in-seconds: 2
-    lease-renewal-interval-in-seconds: 1
+#eureka:
+#  client:
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/eureka
+#  instance:
+#    lease-expiration-duration-in-seconds: 2
+#    lease-renewal-interval-in-seconds: 1
