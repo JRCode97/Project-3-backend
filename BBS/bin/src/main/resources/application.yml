@@ -1,0 +1,45 @@
+management:
+  endpoints:
+    shutdown:
+      enabled: true
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 9111
+spring:
+  datasource:
+    username: SA
+    password:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    platform: h2
+  application:
+    name: BBS-Service
+  h2:
+    console:
+      enabled: true
+      path: /console
+    
+#spring.datasource.url:jdbc:mariadb://database-2.cgiil9kpuno0.us-east-2.rds.amazonaws.com:3306/BBS
+#spring.datasource.username:admin
+#spring.datasource.password:1Revature!
+#spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+
+#spring.datasource.url=jdbc:h2:mem:testdb
+#spring.datasource.driverClassName=org.h2.Driver
+#spring.datasource.username=sa
+#spring.datasource.password=password
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+#Destinyaws
+#Nuria
+#spring.application.name=BBS-Service
+#eureka:
+#  client:
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://ec2-3-19-68-149.us-east-2.compute.amazonaws.com:9999/eureka
+#  instance:
+#    lease-expiration-duration-in-seconds: 2
+#    lease-renewal-interval-in-seconds: 1

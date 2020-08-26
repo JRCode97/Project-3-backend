@@ -25,6 +25,7 @@ import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
 import dev.cuny.services.ApplicationService;
 import dev.cuny.services.BugReportService;
+import dev.cuny.services.SolutionService;
 
 @Component
 @Controller
@@ -36,6 +37,9 @@ public class ApplicationController {
 	
 	@Autowired
 	BugReportService brs;
+	
+	@Autowired
+	SolutionService ss;
 
 	@ResponseBody
 	@PostMapping(value = "/applications")
@@ -66,8 +70,14 @@ public class ApplicationController {
 	}
 
 	@ResponseBody
+	@GetMapping(value="/applications/{id}/solutions")
+	public int getSolutionCountByAid(@PathVariable Integer id) {
+		return ss.getCountByAid(id);
+	}
+	
+	@ResponseBody
 	@GetMapping(value="/applications/{id}/bugreports")
-	public List<BugReport> getBugReportsByAppId(@PathVariable int id) {
+	public List<BugReport> getBugReportsByAppId(@PathVariable Integer id) {
 		return brs.getBugReportsByAppId(id);
 	}
 	
