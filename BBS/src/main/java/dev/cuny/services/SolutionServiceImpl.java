@@ -60,6 +60,11 @@ public class SolutionServiceImpl implements SolutionService {
 		return true;
 	}
 
+	@Override
+	public int getCountByAid(int aId) {
+		return sr.getCountByAid(aId);
+	}
+
 	
 
 }

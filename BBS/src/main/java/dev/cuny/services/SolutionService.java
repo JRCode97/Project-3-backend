@@ -13,6 +13,7 @@ public interface SolutionService {
 	List<Solution> getSolutionsByClientId(int id);
 	List<Solution>getSolutionByBugReportId(int id);
 	List<Solution> getSolutionByStatus(String status);
+	int getCountByAid(int aId);
 	//UPDATE
 	Solution updateSolution(Solution s);
 	//DELETE

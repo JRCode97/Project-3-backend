@@ -49,5 +49,11 @@ public class SolutionRepoTests {
 		List<Solution> bugSolutions = sr.findByBr(br.findById(1).get());
 		Assertions.assertTrue(bugSolutions.size() > 0);
 	}
+	
+	@Test
+	@Order(4)
+	void getSolutionCountByAid() {
+		Assertions.assertNotEquals(0, sr.getCountByAid(1));
+	}
 
 }
