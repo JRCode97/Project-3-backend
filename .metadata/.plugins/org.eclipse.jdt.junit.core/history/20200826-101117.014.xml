@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ApplicationRepoTests" project="BBS" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="dev.cuny.repotests.ApplicationRepoTests" time="0.893" displayname="ApplicationRepoTests" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ApplicationRepoTests]">
+    <testcase name="createApplicationTest" classname="dev.cuny.repotests.ApplicationRepoTests" time="0.67" displayname="createApplicationTest()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ApplicationRepoTests]/[method:createApplicationTest()]"/>
+    <testcase name="getApplicationByIdTest" classname="dev.cuny.repotests.ApplicationRepoTests" time="0.043" displayname="getApplicationByIdTest()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ApplicationRepoTests]/[method:getApplicationByIdTest()]"/>
+    <testcase name="getAllApplicationsTest" classname="dev.cuny.repotests.ApplicationRepoTests" time="0.127" displayname="getAllApplicationsTest()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ApplicationRepoTests]/[method:getAllApplicationsTest()]"/>
+    <testcase name="updateApplicaionTest" classname="dev.cuny.repotests.ApplicationRepoTests" time="0.053" displayname="updateApplicaionTest()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ApplicationRepoTests]/[method:updateApplicaionTest()]"/>
+  </testsuite>
+</testrun>
