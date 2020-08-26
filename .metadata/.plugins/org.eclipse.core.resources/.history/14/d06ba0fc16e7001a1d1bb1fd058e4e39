@@ -1,0 +1,4 @@
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://projectdb.cu1md7k1zskf.us-east-2.rds.amazonaws.com:3306/BBS
+spring.datasource.username=Nuria
+spring.datasource.password=Destinyaws
