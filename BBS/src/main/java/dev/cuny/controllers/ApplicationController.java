@@ -1,6 +1,9 @@
 package dev.cuny.controllers;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+
+import javax.websocket.server.PathParam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Application;
+import dev.cuny.entities.BugReport;
 import dev.cuny.services.ApplicationService;
+import dev.cuny.services.BugReportService;
 
 @Component
 @Controller
@@ -28,6 +33,9 @@ public class ApplicationController {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	@Autowired
 	ApplicationService as;
+	
+	@Autowired
+	BugReportService brs;
 
 	@ResponseBody
 	@PostMapping(value = "/applications")
@@ -57,6 +65,12 @@ public class ApplicationController {
 
 	}
 
+	@ResponseBody
+	@GetMapping(value="/applications/{id}/bugreports")
+	public List<BugReport> getBugReportsByAppId(@PathVariable int id) {
+		return brs.getBugReportsByAppId(id);
+	}
+	
 	@ResponseBody
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
