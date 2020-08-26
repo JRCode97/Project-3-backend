@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun ClientRepoTests" project="BBS" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="dev.cuny.repotests.ClientRepoTests" time="0.622" displayname="ClientRepoTests" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ClientRepoTests]">
-    <testcase name="getLeaderBoardByPoints" classname="dev.cuny.repotests.ClientRepoTests" time="0.466" displayname="getLeaderBoardByPoints()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ClientRepoTests]/[method:getLeaderBoardByPoints()]"/>
-    <testcase name="getUsersPoints" classname="dev.cuny.repotests.ClientRepoTests" time="0.029" displayname="getUsersPoints()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ClientRepoTests]/[method:getUsersPoints()]"/>
-    <testcase name="getClientByEmail" classname="dev.cuny.repotests.ClientRepoTests" time="0.102" displayname="getClientByEmail()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ClientRepoTests]/[method:getClientByEmail()]"/>
-    <testcase name="getLeaderBoardByUsernames" classname="dev.cuny.repotests.ClientRepoTests" time="0.025" displayname="getLeaderBoardByUsernames()" uniqueid="[engine:junit-jupiter]/[class:dev.cuny.repotests.ClientRepoTests]/[method:getLeaderBoardByUsernames()]"/>
-  </testsuite>
-</testrun>
