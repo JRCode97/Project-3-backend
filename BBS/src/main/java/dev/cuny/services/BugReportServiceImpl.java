@@ -59,4 +59,29 @@ public class BugReportServiceImpl implements BugReportService {
 		return brr.findByStatus(status);
 	}
 
+	@Override
+	public List<BugReport> getBySeverity(String severity) {
+		return brr.findBySeverity(severity);
+	}
+
+	@Override
+	public List<BugReport> getByPriority(String priority) {
+		return brr.findByPriority(priority);
+	}
+
+	@Override
+	public int getCountByStatus(String status) {
+		return brr.countByStatus(status);
+	}
+
+	@Override
+	public int getCountBySeverity(String severity) {
+		return brr.countBySeverity(severity);
+	}
+
+	@Override
+	public int getCountByPriority(String priority) {
+		return brr.countByPriority(priority);
+	}
+
 }

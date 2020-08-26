@@ -13,6 +13,11 @@ public interface BugReportService {
 	public List<BugReport> getBugReportsByAppId(int id);
 	public List<BugReport> getClientBugReports(String username);
 	public List<BugReport> getByStatus(String status);
+	public List<BugReport> getBySeverity(String severity);
+	public List<BugReport> getByPriority(String priority);
+	public int getCountByStatus(String status);
+	public int getCountBySeverity(String severity);
+	public int getCountByPriority(String priority);
 	//UPDATE
 	public BugReport updateBugReport(BugReport br);
 	//DELETE

@@ -12,26 +12,19 @@ public interface ClientService {
 
 	// Read
 	Client getClientById(int id);
-
 	Client getClientByUsernameAndPassword(String username, String password);
-
 	Client getClientByUsername(String username);
-
 	List<Client> getClientsByRole(int role);
-
 	List<Client> getAllClients();
-
 	int getClientPoints(int id);
-	
 	Client getClientByEmail(String email);
-
+	int getClientCount();
+	
 	// Update
 	Client updateClient(Client client);
 
 	// Delete
 	boolean deleteClient(Client client);
-
 	List<String> leaderboardusername();
-
 	List<Integer>  leaderboardpoints();
 }

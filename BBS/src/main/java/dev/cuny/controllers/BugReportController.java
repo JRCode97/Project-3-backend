@@ -40,7 +40,12 @@ public class BugReportController {
 	@ResponseBody
 	@GetMapping(value = "/bugreports")
 	public <T> T getBugReportById(@RequestParam(required = false) String id,
-			@RequestParam(required = false) String status) {
+			@RequestParam(required = false) String status, 
+			@RequestParam(required = false) Boolean count, 
+			@RequestParam(required = false) String priority,
+			@RequestParam(required = false) String severity){
+		if(count == null)
+			count = false;
 		if (id != null) {
 			try {
 				int i = Integer.parseInt(id);
@@ -49,15 +54,47 @@ public class BugReportController {
 				logger.error("Unable to find a bugreport with id: " , id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
 			}
-		} else if (status != null) {
+		} 
+		else if(status != null) {
+			if(count == true) {
+				try {
+					Integer c = brs.getCountByStatus(status);
+					return (T) c;
+				} catch (NoSuchElementException e) {
+					logger.error("Unable to find a bugreport with id: " , id);
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
+				}
+			}else {
+				try {
+					return (T) brs.getByStatus(status);
+				} catch (NoSuchElementException e) {
+					logger.error("Unable to find a bugreport with id: " , id);
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
+				}
+			}
+			
+		}
+		else if(severity != null && count == true)  {
 			try {
-
-				return (T) brs.getByStatus(status);
+				Integer c = brs.getCountBySeverity(severity);
+				return (T) c;
 			} catch (NoSuchElementException e) {
 				logger.error("Unable to find a bugreport with id: " , id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
 			}
-		}else {
+		}
+		
+		else if(priority != null && count == true) {
+			try {
+				Integer c = brs.getCountByPriority(priority);
+				return (T) c;
+			} catch (NoSuchElementException e) {
+				logger.error("Unable to find a bugreport with id: " , id);
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
+			}
+		}
+		
+		else {
 			return (T) brs.getAllBugReports();
 		}
 

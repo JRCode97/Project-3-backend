@@ -1,6 +1,8 @@
 package dev.cuny.app;
 
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -94,5 +96,82 @@ class BugReportServiceImplTests {
 		Assertions.assertTrue(brs.deleteBugReport(br1));
 	}
 	
+	@Test
+	@Order(7)
+	void getByStatus() {
+		List<BugReport> br = brs.getByStatus("Requested"); 
+		Assertions.assertNotEquals(0,br.size());
+		
+		br = brs.getByStatus("Resolved");
+		Assertions.assertNotEquals(0, br.size());
+		
+		br = brs.getByStatus("Unresolved");
+		Assertions.assertNotEquals(0, br.size());
+	}
+	
+	@Test
+	@Order(8)
+	void getByPriority() {
+		List<BugReport> br = brs.getByPriority("Low"); 
+		Assertions.assertNotEquals(0,br.size());
+		
+		br = brs.getByPriority("Medium");
+		Assertions.assertNotEquals(0, br.size());
+		
+		br = brs.getByPriority("High");
+		Assertions.assertNotEquals(0, br.size());
+	}
+	
+	@Test
+	@Order(9)
+	void getBySeverity() {
+		List<BugReport> br = brs.getBySeverity("Low"); 
+		Assertions.assertNotEquals(0,br.size());
+		
+		br = brs.getBySeverity("Medium");
+		Assertions.assertNotEquals(0, br.size());
+		
+		br = brs.getBySeverity("High");
+		Assertions.assertNotEquals(0, br.size());
+	}
+	
 
+	@Test
+	@Order(10)
+	void countStatus() {
+		int br = brs.getCountByStatus("Requested");
+		Assertions.assertNotEquals(0, br);
+		
+		br = brs.getCountByStatus("Resolved");
+		Assertions.assertNotEquals(0, br);
+		
+		br = brs.getCountByStatus("Unresolved");
+		Assertions.assertNotEquals(0, br);
+	}
+	@Test
+	@Order(11)
+	void countPriority() {
+		int br = brs.getCountByPriority("Low"); 
+		Assertions.assertNotEquals(0,br);
+		
+		br = brs.getCountByPriority("Medium");
+		Assertions.assertNotEquals(0, br);
+		
+		br = brs.getCountByPriority("High");
+		Assertions.assertNotEquals(0, br);
+	}
+	@Test
+	@Order(12)
+	void countSeverity() {
+		int br = brs.getCountBySeverity("Low"); 
+		Assertions.assertNotEquals(0,br);
+		
+		br = brs.getCountBySeverity("Medium");
+		Assertions.assertNotEquals(0, br);
+		
+		br = brs.getCountBySeverity("High");
+		Assertions.assertNotEquals(0, br);
+	}
+	
+	
 }

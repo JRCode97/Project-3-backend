@@ -149,4 +149,11 @@ class ClientServiceImplTests {
 		System.out.println("This is the client points:" + cs.getClientPoints(9999));
 		Assertions.assertSame(0, cs.getClientPoints(9999));
 	}
+	
+	@Test
+	@Order(10)
+	void getClientCount() {
+		int result = cs.getClientCount();
+		Assertions.assertNotEquals(0, result);
+	}
 }

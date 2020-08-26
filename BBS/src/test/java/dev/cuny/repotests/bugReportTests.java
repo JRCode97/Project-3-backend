@@ -47,6 +47,51 @@ class bugReportTests {
 	@Order(4)
 	void getByApp() {
 		Assertions.assertNotNull(brr.findByApp(ar.findById(1).get()));
-		
 	}
+	@Test
+	@Order(5)
+	void getPriorityCounts() {
+		Assertions.assertNotEquals( 0 , brr.countByPriority("Low"));
+		Assertions.assertNotEquals( 0 , brr.countByPriority("Medium"));
+		Assertions.assertNotEquals( 0 , brr.countByPriority("High"));
+	}
+	@Test
+	@Order(6)
+	void getSeverityCounts() {
+		Assertions.assertNotEquals( 0 , brr.countBySeverity("Low"));
+		Assertions.assertNotEquals( 0 , brr.countBySeverity("Medium"));
+		Assertions.assertNotEquals( 0 , brr.countBySeverity("High"));
+	}
+	@Test
+	@Order(7)
+	void getStatusCounts() {
+		Assertions.assertNotEquals( 0 , brr.countByStatus("Resolved"));
+		Assertions.assertNotEquals( 0 , brr.countByStatus("Requested"));
+		Assertions.assertNotEquals( 0 , brr.countByStatus("Unresolved"));
+	}
+	
+	@Test
+	@Order(8)
+	void getByStatus() {
+		Assertions.assertNotEquals( 0, brr.findByStatus("Resolved"));
+		Assertions.assertNotEquals( 0,  brr.findByStatus("Requested"));
+		Assertions.assertNotEquals( 0 , brr.findByStatus("Unresolved"));
+	}
+	
+	@Test
+	@Order(9)
+	void getBySeverity() {
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("Low"));
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("Medium"));
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("High"));
+	}
+	@Test
+	@Order(10)
+	void getByPriority() {
+		Assertions.assertNotEquals( 0 , brr.findByPriority("Low"));
+		Assertions.assertNotEquals( 0 , brr.findByPriority("Medium"));
+		Assertions.assertNotEquals( 0 , brr.findByPriority("High"));
+	}
+
+
 }

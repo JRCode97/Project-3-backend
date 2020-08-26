@@ -18,5 +18,11 @@ public interface BugReportRepository extends JpaRepository<BugReport,Integer>{
 	List<BugReport> findByUsername(String username);
 	List<BugReport> findByStatus(String status);
 	
+	List<BugReport> findBySeverity(String severity);
+	List<BugReport> findByPriority(String priority);
+
+	int countByStatus(String status);
+	int countByPriority(String priority);
+	int countBySeverity(String severity);
 
 }

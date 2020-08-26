@@ -86,8 +86,15 @@ public class ClientController {
 
 	@ResponseBody
 	@GetMapping(value = "/clients")
-	public List<Client> getAllClients() {
-		return cs.getAllClients();
+	public <T> T getAllClients(@RequestParam (required = false) Boolean count) {
+		
+		if(count != null) {
+			Integer c = cs.getClientCount();
+			return (T) c;
+		}
+		else {
+			return (T) cs.getAllClients();
+		}
 	}
 
 	@ResponseBody
