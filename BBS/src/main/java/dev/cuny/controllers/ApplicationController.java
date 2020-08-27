@@ -94,13 +94,16 @@ public class ApplicationController {
 					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
 				}
 			}else if(!resolvedtime.equals("")){
+				int i = Integer.parseInt(id);
 				if(resolvedtime.equalsIgnoreCase("average")) {
-					Long avg = brs.getAverageResolveTimeByAid(Integer.parseInt(id));
+					Long avg = brs.getAverageResolveTimeByAid(i);
 					return (T) avg;
 				} else if(resolvedtime.equalsIgnoreCase("longest")) {
-					return null;
+					Long longest = brs.getLongestResolveTimeByAid(i);
+					return (T) longest;
 				} else if(resolvedtime.equalsIgnoreCase("shortest")){
-					return null;
+					Long shortest = brs.getShortestResolveTimeByAid(i);
+					return (T) shortest;
 				}
 			}
 		} else if (!title.equals("")) {

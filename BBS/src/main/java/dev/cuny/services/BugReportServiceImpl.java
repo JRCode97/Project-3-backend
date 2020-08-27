@@ -89,4 +89,14 @@ public class BugReportServiceImpl implements BugReportService {
 		return brr.getAverageResolveTimeByAid(id);
 	}
 
+	@Override
+	public long getLongestResolveTimeByAid(int id) {
+		return brr.getLongestResolveTimeByAid(id);
+	}
+
+	@Override
+	public long getShortestResolveTimeByAid(int id) {
+		return brr.getShortestResolveTimeByAid(1);
+	}
+
 }

@@ -28,4 +28,10 @@ public interface BugReportRepository extends JpaRepository<BugReport,Integer>{
 
 	@Query(value="SELECT AVG(cast(resolvedTime as long)-cast(approvedTime as long)) FROM BugReport br WHERE status='Resolved' AND br.app.id=?1")
 	long getAverageResolveTimeByAid(int Aid);
+
+	@Query(value="SELECT MAX(cast(resolvedTime as long)-cast(approvedTime as long)) FROM BugReport br WHERE status='Resolved' AND br.app.id=?1")
+	long getLongestResolveTimeByAid(int Aid);
+	
+	@Query(value="SELECT MIN(cast(resolvedTime as long)-cast(approvedTime as long)) FROM BugReport br WHERE status='Resolved' AND br.app.id=?1")
+	long getShortestResolveTimeByAid(int Aid);
 }
