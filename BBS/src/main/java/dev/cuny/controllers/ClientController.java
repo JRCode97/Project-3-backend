@@ -85,6 +85,17 @@ public class ClientController {
 	}
 
 	@ResponseBody
+	@RequestMapping(value = "/clients/{id}/solutions", method = RequestMethod.GET)
+	public Integer getSolutionCountByClientId(@PathVariable int id) {
+		try {
+			return cs.getSolutionCountByClient(id);
+		} catch (NoSuchElementException e) {
+			logger.error("Unable to find a client with id: ", id);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@ResponseBody
 	@GetMapping(value = "/clients")
 	public <T> T getAllClients(@RequestParam (required = false) Boolean count) {
 		

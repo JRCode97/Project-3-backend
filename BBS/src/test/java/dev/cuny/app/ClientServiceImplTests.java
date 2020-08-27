@@ -156,4 +156,11 @@ class ClientServiceImplTests {
 		int result = cs.getClientCount();
 		Assertions.assertNotEquals(0, result);
 	}
+	
+	@Test
+	@Order(11)
+	void getSolutionOfClient() {
+		Integer result = cs.getSolutionCountByClient(1);
+		Assertions.assertNotEquals(1, result);
+	}
 }
