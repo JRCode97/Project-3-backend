@@ -127,6 +127,12 @@ public class ApplicationController {
 	}
 	
 	@ResponseBody
+	@GetMapping(value="/applications/{id}/clients")
+	public Integer countClientByApplication(@PathVariable Integer id){
+		return as.getClientsPerApplicationCount(id);
+	}
+	
+	@ResponseBody
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
 		logger.info("Application was updated: ", application);

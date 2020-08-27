@@ -46,4 +46,9 @@ public class ApplicationServiceImpl implements ApplicationService{
 		return ar.findByTitle(title);
 	}
 
+	@Override
+	public Integer getClientsPerApplicationCount(int id) {
+		return ar.getCountOfClientsByApplication(id);
+	}
+
 }

@@ -56,6 +56,10 @@ public class BugReportController {
 			}
 		} 
 		else if(status != null) {
+			
+			status = status.toLowerCase();
+			status = status.substring(0,1).toUpperCase() + status.substring(1);
+			
 			if(count == true) {
 				try {
 					Integer c = brs.getCountByStatus(status);
@@ -75,6 +79,10 @@ public class BugReportController {
 			
 		}
 		else if(severity != null && count == true)  {
+			
+			severity = severity.toLowerCase();
+			severity = severity.substring(0,1).toUpperCase() + severity.substring(1);
+			
 			try {
 				Integer c = brs.getCountBySeverity(severity);
 				return (T) c;
@@ -85,6 +93,10 @@ public class BugReportController {
 		}
 		
 		else if(priority != null && count == true) {
+			
+			priority = priority.toLowerCase();
+			priority = priority.substring(0,1).toUpperCase() + priority.substring(1);
+			
 			try {
 				Integer c = brs.getCountByPriority(priority);
 				return (T) c;
