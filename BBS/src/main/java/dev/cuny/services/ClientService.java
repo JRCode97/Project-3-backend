@@ -19,6 +19,7 @@ public interface ClientService {
 	int getClientPoints(int id);
 	Client getClientByEmail(String email);
 	int getClientCount();
+	Integer getSolutionCountByClient(int id);
 	
 	// Update
 	Client updateClient(Client client);
