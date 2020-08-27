@@ -84,4 +84,9 @@ public class BugReportServiceImpl implements BugReportService {
 		return brr.countByPriority(priority);
 	}
 
+	@Override
+	public long getAverageResolveTimeByAid(int id) {
+		return brr.getAverageResolveTimeByAid(id);
+	}
+
 }

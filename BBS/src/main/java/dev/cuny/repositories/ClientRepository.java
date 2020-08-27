@@ -27,5 +27,6 @@ public interface ClientRepository extends JpaRepository<Client,Integer>
 	@Query(value ="SELECT sum(br.pointValue) from Client c, BugReport br, Solution s where br.bId = s.br and c.cId = s.client and s.status ='Accepted' group by c.cId order by sum(br.pointValue) desc")
 	List<Integer> getLeaderBoardPoints();
 
+			
 	
 }
