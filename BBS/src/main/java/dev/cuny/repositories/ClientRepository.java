@@ -31,7 +31,9 @@ public interface ClientRepository extends JpaRepository<Client,Integer>
 
 	//SELECT COUNT(SOLUTION_ID) FROM SOLUTION s, CLIENT c WHERE s.SOLVER_CLIENT_ID=c.CLIENT_ID AND CLIENT_ID=2 GROUP BY CLIENT_ID
 
+
 	@Query(value="SELECT COUNT(s.id) from Solution s, Client c WHERE s.client.cId=c.cId AND c.cId=?1 GROUP BY c.cId")
 	Integer getSolutionCount(int id);
+
 	
 }

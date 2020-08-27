@@ -93,5 +93,11 @@ class bugReportTests {
 		Assertions.assertNotEquals( 0 , brr.findByPriority("High"));
 	}
 
+	@Test
+	@Order(11)
+	void getAverageResolveTimeByAid() {
+		System.out.println(brr.getAverageResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brr.getAverageResolveTimeByAid(1));
+	}
 
 }

@@ -18,6 +18,7 @@ public interface BugReportService {
 	public int getCountByStatus(String status);
 	public int getCountBySeverity(String severity);
 	public int getCountByPriority(String priority);
+	public long getAverageResolveTimeByAid(int id);
 	//UPDATE
 	public BugReport updateBugReport(BugReport br);
 	//DELETE

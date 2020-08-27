@@ -51,24 +51,66 @@ public class ApplicationController {
 	@ResponseBody
 	@GetMapping(value = "/applications")
 	public <T> T getApplication(@RequestParam(required = false) @PathVariable String id,
-			@RequestParam(required = false) @PathVariable String title) {
-		if (id != null) {
-			try {
-				int i = Integer.parseInt(id);
-				return (T) as.getApplicationById(i);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find an Application with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
-			}
-		} else if (title != null) {
+			@RequestParam(required = false) @PathVariable String title,
+			@RequestParam(required = false) String resolvedtime) {
+		if(id == null) {
+			id = "0";
+		}
+		if(title == null) {
+			title="";
+		}
+		if (resolvedtime ==null) {
+			resolvedtime = "";
+		}
+		return getApplicationImpl(id, title, resolvedtime);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "/applications/{id}")
+	public <T> T getApplication2(@PathVariable String id,
+			@RequestParam(required = false) @PathVariable String title,
+			@RequestParam(required = false) String resolvedtime) {
+		if(id == null) {
+			id = "0";
+		}
+		if(title == null) {
+			title="";
+		}
+		if (resolvedtime ==null) {
+			resolvedtime = "";
+		}
+		return getApplicationImpl(id, title, resolvedtime);
+	}
+	
 
+	private <T> T getApplicationImpl(String id, String title, String resolvedtime) {
+		if (!id.equals("0")) {
+			if(resolvedtime.equals("")){
+				try {
+					int i = Integer.parseInt(id);
+					return (T) as.getApplicationById(i);
+				} catch (NoSuchElementException e) {
+					logger.error("Unable to find an Application with id: ", id);
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
+				}
+			}else if(!resolvedtime.equals("")){
+				if(resolvedtime.equalsIgnoreCase("average")) {
+					Long avg = brs.getAverageResolveTimeByAid(Integer.parseInt(id));
+					return (T) avg;
+				} else if(resolvedtime.equalsIgnoreCase("longest")) {
+					return null;
+				} else if(resolvedtime.equalsIgnoreCase("shortest")){
+					return null;
+				}
+			}
+		} else if (!title.equals("")) {
 			return (T) as.getApplicationByTitle(title);
 		} else {
 			return (T) as.getApplications();
 		}
-
+		return null;
 	}
-
+	
 	@ResponseBody
 	@GetMapping(value="/applications/{id}/solutions")
 	public int getSolutionCountByAid(@PathVariable Integer id) {
