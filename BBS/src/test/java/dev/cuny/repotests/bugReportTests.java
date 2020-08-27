@@ -98,6 +98,8 @@ class bugReportTests {
 	void getAverageResolveTimeByAid() {
 		System.out.println(brr.getAverageResolveTimeByAid(1));
 		Assertions.assertNotEquals(0, brr.getAverageResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brr.getLongestResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brr.getShortestResolveTimeByAid(1));
 	}
 
 }

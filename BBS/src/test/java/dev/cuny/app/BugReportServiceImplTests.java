@@ -175,7 +175,9 @@ class BugReportServiceImplTests {
 	
 	@Test
 	@Order(13)
-	void getAverageResolveTimeByAid() {
+	void getResolveTimeByAid() {
 		Assertions.assertNotEquals(0, brs.getAverageResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brs.getLongestResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brs.getShortestResolveTimeByAid(1));
 	}
 }
