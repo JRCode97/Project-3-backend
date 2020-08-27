@@ -56,4 +56,11 @@ class ClientRepoTests {
 		int num = client.size();
 		Assertions.assertNotEquals(0, num);
 	}
+	
+	@Test
+	@Order(6)
+	void getClientSolutionCount(){
+		Integer count = cr.getSolutionCount(1);
+		Assertions.assertNotEquals(0, count);
+	}
 }

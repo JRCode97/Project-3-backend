@@ -97,4 +97,9 @@ public class ClientServiceImpl implements ClientService {
 		List<Client> client = cr.findAll();
 		return client.size();
 	}
+
+	@Override
+	public Integer getSolutionCountByClient(int id) {
+		return cr.getSolutionCount(id);
+	}
 }
