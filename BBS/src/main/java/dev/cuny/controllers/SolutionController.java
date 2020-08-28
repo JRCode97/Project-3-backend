@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Solution;
@@ -25,19 +27,23 @@ import dev.cuny.services.SolutionService;
 @Component
 @Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
 public class SolutionController {
 	private static Logger logger = LoggerFactory.getLogger(SolutionController.class);
 	@Autowired
 	SolutionService ss;
 
-	@ResponseBody
 	@PostMapping(value = "/solutions")
 	public Solution createSolution(@RequestBody Solution s) {
 		logger.info("Solution was created: ", s);
 		return ss.createSolution(s);
 	}
 
-	@ResponseBody
+	@GetMapping(value="/solutions/{id}")
+	public Solution getSolutionById(@PathVariable Integer id) {
+		return ss.getSolutionById(id);
+	}
+	
 	@GetMapping(value = "/solutions")
 	public <T> T getSolution(@RequestParam(required = false) String id, @RequestParam(required = false) String status,
 			@RequestParam(required = false) String cId, @RequestParam(required = false) String bId) {
@@ -63,7 +69,6 @@ public class SolutionController {
 		}
 	}
 
-	@ResponseBody
 	@PutMapping(value = "/solutions")
 	public Solution updateSolution(@RequestBody Solution s) {
 		logger.info("The solution was updated: ", s);
