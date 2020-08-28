@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Client;
@@ -28,12 +29,12 @@ import dev.cuny.services.ClientService;
 @Component
 @Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
 public class ClientController {
 	private static Logger logger = LoggerFactory.getLogger(ClientController.class);
 	@Autowired
 	ClientService cs;
 	
-	@ResponseBody
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
@@ -45,7 +46,6 @@ public class ClientController {
 		}
 	}
 
-	@ResponseBody
 	@GetMapping(value = "/clients/login")
 	public Client login(@RequestParam String username, @RequestParam String password) {
 		return cs.getClientByUsernameAndPassword(username, password);
@@ -58,22 +58,21 @@ public class ClientController {
 		return cs.updateClient(client);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/query/clients", method = RequestMethod.GET)
-	public Client query(@RequestParam(required = false) String username, @RequestParam(required = false) String email) {
-
-		
-		if (username != null) {
-			return cs.getClientByUsername(username);
-		}
-
-		if (email != null) {
-			return cs.getClientByEmail(email);
-		}
-		return null;
-	}
-
-	@ResponseBody
+//	@ResponseBody
+//	@RequestMapping(value = "/query/clients", method = RequestMethod.GET)
+//	public Client query(@RequestParam(required = false) String username, @RequestParam(required = false) String email) {
+//
+//		
+//		if (username != null) {
+//			return cs.getClientByUsername(username);
+//		}
+//
+//		if (email != null) {
+//			return cs.getClientByEmail(email);
+//		}
+//		return null;
+//	}
+	
 	@RequestMapping(value = "/clients/{id}", method = RequestMethod.GET)
 	public Client getClientById(@PathVariable int id) {
 		try {
@@ -95,10 +94,20 @@ public class ClientController {
 		}
 	}
 	
-	@ResponseBody
 	@GetMapping(value = "/clients")
-	public <T> T getAllClients(@RequestParam (required = false) Boolean count) {
+	public <T> T getAllClients(
+			@RequestParam (required = false) Boolean count,
+			@RequestParam(required = false) String username, 
+			@RequestParam(required = false) String email) {
 		
+		if (username != null) {
+			return (T) cs.getClientByUsername(username);
+		}
+
+		if (email != null) {
+			return (T) cs.getClientByEmail(email);
+		}
+
 		if(count != null) {
 			Integer c = cs.getClientCount();
 			return (T) c;
@@ -108,19 +117,16 @@ public class ClientController {
 		}
 	}
 
-	@ResponseBody
 	@GetMapping(value = "/clients/points")
 	public int getClientsPoints(@RequestParam int id) {
 		return cs.getClientPoints(id);
 	}
-
-	@ResponseBody
+	
 	@GetMapping(value = "/clients/leaderboard/username")
 	public List<String> getLeaderboardusernames() {
 		return cs.leaderboardusername();
 	}
 
-	@ResponseBody
 	@GetMapping(value = "/clients/leaderboard/points")
 	public List<Integer> getLeaderboardpoints() {
 		return cs.leaderboardpoints();

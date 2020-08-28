@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Application;
@@ -30,6 +31,7 @@ import dev.cuny.services.SolutionService;
 @Component
 @Controller
 @CrossOrigin("*")
+@RestController
 public class ApplicationController {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	@Autowired
@@ -41,14 +43,12 @@ public class ApplicationController {
 	@Autowired
 	SolutionService ss;
 
-	@ResponseBody
 	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
 		logger.info("Application Created: ", a,logger.getName());
 		return as.createApplication(a);
 	}
 
-	@ResponseBody
 	@GetMapping(value = "/applications")
 	public <T> T getApplication(@RequestParam(required = false) @PathVariable String id,
 			@RequestParam(required = false) @PathVariable String title,
@@ -65,9 +65,8 @@ public class ApplicationController {
 		return getApplicationImpl(id, title, resolvedtime);
 	}
 	
-	@ResponseBody
 	@GetMapping(value = "/applications/{id}")
-	public <T> T getApplication2(@PathVariable String id,
+	public <T> T getApplicationByTheRightWay(@PathVariable String id,
 			@RequestParam(required = false) @PathVariable String title,
 			@RequestParam(required = false) String resolvedtime) {
 		if(id == null) {
@@ -82,7 +81,6 @@ public class ApplicationController {
 		return getApplicationImpl(id, title, resolvedtime);
 	}
 	
-
 	private <T> T getApplicationImpl(String id, String title, String resolvedtime) {
 		if (!id.equals("0")) {
 			if(resolvedtime.equals("")){
@@ -114,25 +112,21 @@ public class ApplicationController {
 		return null;
 	}
 	
-	@ResponseBody
 	@GetMapping(value="/applications/{id}/solutions")
 	public int getSolutionCountByAid(@PathVariable Integer id) {
 		return ss.getCountByAid(id);
 	}
 	
-	@ResponseBody
 	@GetMapping(value="/applications/{id}/bugreports")
 	public List<BugReport> getBugReportsByAppId(@PathVariable Integer id) {
 		return brs.getBugReportsByAppId(id);
 	}
 	
-	@ResponseBody
 	@GetMapping(value="/applications/{id}/clients")
 	public Integer countClientByApplication(@PathVariable Integer id){
 		return as.getClientsPerApplicationCount(id);
 	}
 	
-	@ResponseBody
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
 		logger.info("Application was updated: ", application);

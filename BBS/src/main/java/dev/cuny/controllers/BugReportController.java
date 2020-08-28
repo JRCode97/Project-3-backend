@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.BugReport;
@@ -26,19 +26,23 @@ import dev.cuny.services.BugReportService;
 @Component
 @Controller
 @CrossOrigin("*")
+@RestController
 public class BugReportController {
 	private static Logger logger = LoggerFactory.getLogger(BugReportController.class);
 	@Autowired
 	BugReportService brs;
 
-	@ResponseBody
 	@PostMapping(value = "/bugreports")
 	public BugReport createBugReport(@RequestBody BugReport br) {
 		logger.info("Bug Report Created: " , br);
 		return brs.createBugReport(br);
 	}
 
-	@ResponseBody
+	@GetMapping(value="/bugreports/{id}")
+	public BugReport getBugReportsTheRightWay(@PathVariable Integer id) {
+		return brs.getBugReportById(id);
+	}
+	
 	@GetMapping(value = "/bugreports")
 	public <T> T getBugReportById(@RequestParam(required = false) String id,
 			@RequestParam(required = false) String status, 
@@ -46,9 +50,35 @@ public class BugReportController {
 			@RequestParam(required = false) String priority,
 			@RequestParam(required = false) String severity,
 			@RequestParam(required = false) String sort){
-		if(count == null)
+
+		if(id == null) {
+			id = "0";
+		}
+		
+		if(status == null) {
+			status = "";
+		}
+		
+		if(count == null) {
 			count = false;
-		if (id != null) {
+		}
+		
+		if(priority == null) {
+			priority = "";
+		}
+		
+		if(severity == null) {
+			severity = "";
+		}
+		
+		if(sort == null) {
+			sort = "";
+		}
+		return getBugReportImpl(id, status, count, priority, severity, sort);
+	}
+	
+	private <T> T getBugReportImpl(String id, String status, Boolean count, String priority,String severity, String sort) {
+		if (!id.equals("0")) {
 			try {
 				int i = Integer.parseInt(id);
 				return (T) brs.getBugReportById(i);
@@ -57,12 +87,12 @@ public class BugReportController {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
 			}
 		} 
-		else if(status != null) {
+		else if(!status.equals("")) {
 			
 			status = status.toLowerCase();
 			status = status.substring(0,1).toUpperCase() + status.substring(1);
 			
-			if(count == true) {
+			if(count.equals(true)) {
 				try {
 					Integer c = brs.getCountByStatus(status);
 					return (T) c;
@@ -80,7 +110,7 @@ public class BugReportController {
 			}
 			
 		}
-		else if(severity != null && count == true)  {
+		else if(!severity.equals("") && count.equals(true))  {
 			
 			severity = severity.toLowerCase();
 			severity = severity.substring(0,1).toUpperCase() + severity.substring(1);
@@ -94,7 +124,7 @@ public class BugReportController {
 			}
 		}
 		
-		else if(priority != null && count == true) {
+		else if(!priority.equals("") && count.equals(true)) {
 			
 			priority = priority.toLowerCase();
 			priority = priority.substring(0,1).toUpperCase() + priority.substring(1);
@@ -109,7 +139,7 @@ public class BugReportController {
 		}
 		
 		else {
-			if(sort != null) {
+			if(!sort.equals("")) {
 				if (sort.equals("asc")) {
 				System.out.println(sort);
 					Sort sortAsc = Sort.by(Sort.Direction.ASC, "dateCreated");
@@ -123,24 +153,21 @@ public class BugReportController {
 			}
 			return (T) brs.getAllBugReports();
 		}
-
 	}
-
-	@ResponseBody
+	
 	@PutMapping(value = "/bugreports")
 	public BugReport updateBugReport(@RequestBody BugReport br) {
 		logger.info("BugReport was updated: " , br);
 		return brs.updateBugReport(br);
 	}
 
-	@ResponseBody
-	@GetMapping(value = "query/bugreports")
-	public List<BugReport> query(@RequestParam int aId) {
-		return brs.getBugReportsByAppId(aId);
-	}
+//	@ResponseBody
+//	@GetMapping(value = "query/bugreports")
+//	public List<BugReport> query(@RequestParam int aId) {
+//		return brs.getBugReportsByAppId(aId);
+//	}
 
 
-	@ResponseBody
 	@GetMapping(value = "/bugreports/client/{username}")
 	public List<BugReport> getClientBugReports(@PathVariable String username) {
 		return brs.getClientBugReports(username);
