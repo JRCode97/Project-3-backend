@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -43,7 +44,8 @@ public class BugReportController {
 			@RequestParam(required = false) String status, 
 			@RequestParam(required = false) Boolean count, 
 			@RequestParam(required = false) String priority,
-			@RequestParam(required = false) String severity){
+			@RequestParam(required = false) String severity,
+			@RequestParam(required = false) String sort){
 		if(count == null)
 			count = false;
 		if (id != null) {
@@ -107,6 +109,18 @@ public class BugReportController {
 		}
 		
 		else {
+			if(sort != null) {
+				if (sort.equals("asc")) {
+				System.out.println(sort);
+					Sort sortAsc = Sort.by(Sort.Direction.ASC, "dateCreated");
+					return (T) brs.getAllBugReports(sortAsc);
+				}
+				else if(sort.equals("desc")) {
+				System.out.println(sort);
+					Sort sortDesc = Sort.by(Sort.Direction.DESC, "dateCreated");
+					return (T) brs.getAllBugReports(sortDesc);
+				}
+			}
 			return (T) brs.getAllBugReports();
 		}
 

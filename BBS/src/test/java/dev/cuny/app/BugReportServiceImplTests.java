@@ -10,6 +10,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -179,5 +180,13 @@ class BugReportServiceImplTests {
 		Assertions.assertNotEquals(0, brs.getAverageResolveTimeByAid(1));
 		Assertions.assertNotEquals(0, brs.getLongestResolveTimeByAid(1));
 		Assertions.assertNotEquals(0, brs.getShortestResolveTimeByAid(1));
+	}
+
+	@Test
+	@Order(14)
+	void getAllBugReportsSortedbyCreationDate() {
+		Sort sortAsc = Sort.by(Sort.Direction.ASC, "dateCreated");
+		List<BugReport> b_rs = brs.getAllBugReports(sortAsc);
+		Assertions.assertEquals(5, b_rs.get(1).getbId());
 	}
 }
