@@ -2,6 +2,8 @@ package dev.cuny.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+
 import dev.cuny.entities.BugReport;
 
 public interface BugReportService {
@@ -21,6 +23,7 @@ public interface BugReportService {
 	public long getAverageResolveTimeByAid(int id);
 	public long getLongestResolveTimeByAid(int id);
 	public long getShortestResolveTimeByAid(int id);
+	List<BugReport> getAllBugReports(Sort sort);
 	//UPDATE
 	public BugReport updateBugReport(BugReport br);
 	//DELETE

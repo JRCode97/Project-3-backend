@@ -3,6 +3,7 @@ package dev.cuny.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +98,11 @@ public class BugReportServiceImpl implements BugReportService {
 	@Override
 	public long getShortestResolveTimeByAid(int id) {
 		return brr.getShortestResolveTimeByAid(1);
+	}
+	
+	@Override
+	public List<BugReport> getAllBugReports(Sort sort) {
+		return brr.findAll(sort);
 	}
 
 }
