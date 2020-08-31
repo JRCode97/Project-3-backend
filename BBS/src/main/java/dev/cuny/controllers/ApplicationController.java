@@ -29,7 +29,6 @@ import dev.cuny.services.BugReportService;
 import dev.cuny.services.SolutionService;
 
 @Component
-@Controller
 @CrossOrigin("*")
 @RestController
 public class ApplicationController {

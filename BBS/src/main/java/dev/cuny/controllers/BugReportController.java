@@ -24,7 +24,6 @@ import dev.cuny.entities.BugReport;
 import dev.cuny.services.BugReportService;
 
 @Component
-@Controller
 @CrossOrigin("*")
 @RestController
 public class BugReportController {
@@ -160,12 +159,6 @@ public class BugReportController {
 		logger.info("BugReport was updated: " , br.getbId());
 		return brs.updateBugReport(br);
 	}
-
-//	@ResponseBody
-//	@GetMapping(value = "query/bugreports")
-//	public List<BugReport> query(@RequestParam int aId) {
-//		return brs.getBugReportsByAppId(aId);
-//	}
 
 
 	@GetMapping(value = "/bugreports/client/{username}")

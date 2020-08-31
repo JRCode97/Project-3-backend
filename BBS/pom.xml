@@ -17,10 +17,12 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<sonar.projectKey>JRCode97_Project-3-backend</sonar.projectKey>
-		<sonar.organization>jrcode97</sonar.organization>
+		<sonar.projectKey>2007wvu_Project-3-backend</sonar.projectKey>
+		<sonar.sources>src/main/java</sonar.sources>
+		<sonar.organization>2007wvu</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.login>9f77b7cbbf3d8b724b3f5f62c5827e22d4116d34</sonar.login>
+		<sonar.login>cc01aa61d4e947ea3d3a544e2a900bca9f79ec79</sonar.login>
+		<sonar.java.binaries>**/target/**/*, *.class</sonar.java.binaries>
 	</properties>
 
 	<dependencies>
