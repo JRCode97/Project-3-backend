@@ -21,6 +21,5 @@ jobs:
         fetch-depth: 0
     - name: Build with Maven
       run: >
-          ./mvnw clean verify
+          ./mvn clean verify
           sonar:sonar
-          -Pcoverage
