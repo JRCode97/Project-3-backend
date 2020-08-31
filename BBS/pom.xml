@@ -14,7 +14,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BBS</name>
 	<description>Bug bounty system</description>
-
+	<!-- TO RUN SONAR CLOUD REPORT mvn verify sonar:sonar -->
 	<properties>
 		<java.version>1.8</java.version>
 		<sonar.projectKey>2007wvu_Project-3-backend</sonar.projectKey>
