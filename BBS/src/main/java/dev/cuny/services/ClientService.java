@@ -3,6 +3,7 @@ package dev.cuny.services;
 import java.util.List;
 
 import dev.cuny.entities.Client;
+import dev.cuny.entities.Solution;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
 
 public interface ClientService {
@@ -20,6 +21,7 @@ public interface ClientService {
 	Client getClientByEmail(String email);
 	int getClientCount();
 	Integer getSolutionCountByClient(int id);
+	List<Solution> getSolutionsByClient(int id);
 	
 	// Update
 	Client updateClient(Client client);

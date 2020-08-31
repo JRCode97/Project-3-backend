@@ -1,5 +1,7 @@
 package dev.cuny.app;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -12,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.cuny.entities.Client;
+import dev.cuny.entities.Solution;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.services.ClientService;
 
@@ -159,8 +162,15 @@ class ClientServiceImplTests {
 	
 	@Test
 	@Order(11)
-	void getSolutionOfClient() {
+	void getSolutionCountOfClient() {
 		Integer result = cs.getSolutionCountByClient(1);
-		Assertions.assertNotEquals(1, result);
+		Assertions.assertNotEquals(0, result);
+	}
+	
+	@Test
+	@Order(12)
+	void getSolutionsOfClient() {
+		List<Solution> s = cs.getSolutionsByClient(1);
+		Assertions.assertNotEquals(0, s);
 	}
 }
