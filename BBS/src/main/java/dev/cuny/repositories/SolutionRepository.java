@@ -18,5 +18,5 @@ public interface SolutionRepository extends JpaRepository<Solution,Integer>{
 	List<Solution> findByStatus(String status);
 
 	@Query(value="SELECT COUNT(a.id) from Application a, Solution s, BugReport b WHERE b.id=a.id AND b.bId=s.br.bId AND a.id=?1 GROUP BY a.id")
-	int getCountByAid(int aId);
+	Integer getCountByAid(int aId);
 }

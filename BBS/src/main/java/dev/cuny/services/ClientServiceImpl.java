@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import dev.cuny.entities.Client;
+import dev.cuny.entities.Solution;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.repositories.ClientRepository;
 
@@ -101,5 +102,10 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Integer getSolutionCountByClient(int id) {
 		return cr.getSolutionCount(id);
+	}
+
+	@Override
+	public List<Solution> getSolutionsByClient(int id) {
+		return cr.getClientSolutions(id);
 	}
 }

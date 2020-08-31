@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.cuny.entities.Client;
+import dev.cuny.entities.Solution;
 import dev.cuny.repositories.ClientRepository;
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
@@ -62,5 +63,12 @@ class ClientRepoTests {
 	void getClientSolutionCount(){
 		Integer count = cr.getSolutionCount(1);
 		Assertions.assertNotEquals(0, count);
+	}
+	
+	@Test
+	@Order(7)
+	void getClientSolutions() {
+		List<Solution> solutions = cr.getClientSolutions(1);
+		Assertions.assertNotEquals(0, solutions.size());
 	}
 }
