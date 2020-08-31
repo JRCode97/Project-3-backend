@@ -85,5 +85,12 @@ class ApplicationServiceImplTests {
 		Assertions.assertSame(true,as.deleteApplication(app1));
 		
 	}
+	
+	@Test
+	@Order(7)
+	void getClientsPerAppplicationCount() {
+		Integer result = as.getClientsPerApplicationCount(1);
+		Assertions.assertNotEquals(0, result);
+	}
 
 }

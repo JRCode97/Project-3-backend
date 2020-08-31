@@ -46,4 +46,11 @@ class ApplicationRepoTests {
 		Assertions.assertNotNull(ar.findById(app.getId()).get() == app);
 	}
 	
+	@Test
+	@Order(5)
+	void getClientCountByApplication() {
+		Integer result = ar.getCountOfClientsByApplication(1);
+		Assertions.assertNotEquals(0, result);
+	}
+	
 }

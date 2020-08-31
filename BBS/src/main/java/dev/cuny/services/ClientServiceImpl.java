@@ -91,4 +91,15 @@ public class ClientServiceImpl implements ClientService {
 	public Client getClientByEmail(String email) {
 		return cr.findByEmail(email);
 	}
+
+	@Override
+	public int getClientCount() {
+		List<Client> client = cr.findAll();
+		return client.size();
+	}
+
+	@Override
+	public Integer getSolutionCountByClient(int id) {
+		return cr.getSolutionCount(id);
+	}
 }

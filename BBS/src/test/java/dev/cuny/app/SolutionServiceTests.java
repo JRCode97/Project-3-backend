@@ -31,6 +31,7 @@ public class SolutionServiceTests {
 	@Autowired
 	BugReportRepository br;
 	
+	
 	@Test
 	@Order(1)
 	void getAllSolutionsTest(){
@@ -59,5 +60,10 @@ public class SolutionServiceTests {
 		Assertions.assertTrue(status.size() > 0);
 	}
 	
+	@Test
+	@Order(5)
+	void getCountByAid() {
+		Assertions.assertNotEquals(0, ss.getCountByAid(1));
+	}
 	
 }

@@ -11,6 +11,7 @@ public interface ApplicationService {
 	public Application getApplicationById(int id);
 	public Application  getApplicationByTitle(String title);
 	public List<Application> getApplications();
+	public Integer getClientsPerApplicationCount(int id);
 	//UPDATE
 	public Application updateApplication(Application a);
 	//DELETE

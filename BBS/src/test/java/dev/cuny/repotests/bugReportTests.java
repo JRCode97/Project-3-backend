@@ -41,12 +41,65 @@ class bugReportTests {
 	@Test
 	@Order(3)
 	void getReportsBySubject() {
-		Assertions.assertNotNull(brr.findByTitle("Bug report - Is there an endpoint from where we can retrieve Oauth2 certificates from Facebook to validate a Mario cart token"));
+		Assertions.assertNotNull(brr.findByTitle("Cool Title"));
 	}
 	@Test
 	@Order(4)
 	void getByApp() {
 		Assertions.assertNotNull(brr.findByApp(ar.findById(1).get()));
-		
 	}
+	@Test
+	@Order(5)
+	void getPriorityCounts() {
+		Assertions.assertNotEquals( 0 , brr.countByPriority("Low"));
+		Assertions.assertNotEquals( 0 , brr.countByPriority("Medium"));
+		Assertions.assertNotEquals( 0 , brr.countByPriority("High"));
+	}
+	@Test
+	@Order(6)
+	void getSeverityCounts() {
+		Assertions.assertNotEquals( 0 , brr.countBySeverity("Low"));
+		Assertions.assertNotEquals( 0 , brr.countBySeverity("Medium"));
+		Assertions.assertNotEquals( 0 , brr.countBySeverity("High"));
+	}
+	@Test
+	@Order(7)
+	void getStatusCounts() {
+		Assertions.assertNotEquals( 0 , brr.countByStatus("Resolved"));
+		Assertions.assertNotEquals( 0 , brr.countByStatus("Requested"));
+		Assertions.assertNotEquals( 0 , brr.countByStatus("Unresolved"));
+	}
+	
+	@Test
+	@Order(8)
+	void getByStatus() {
+		Assertions.assertNotEquals( 0, brr.findByStatus("Resolved"));
+		Assertions.assertNotEquals( 0,  brr.findByStatus("Requested"));
+		Assertions.assertNotEquals( 0 , brr.findByStatus("Unresolved"));
+	}
+	
+	@Test
+	@Order(9)
+	void getBySeverity() {
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("Low"));
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("Medium"));
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("High"));
+	}
+	@Test
+	@Order(10)
+	void getByPriority() {
+		Assertions.assertNotEquals( 0 , brr.findByPriority("Low"));
+		Assertions.assertNotEquals( 0 , brr.findByPriority("Medium"));
+		Assertions.assertNotEquals( 0 , brr.findByPriority("High"));
+	}
+
+	@Test
+	@Order(11)
+	void getAverageResolveTimeByAid() {
+		System.out.println(brr.getAverageResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brr.getAverageResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brr.getLongestResolveTimeByAid(1));
+		Assertions.assertNotEquals(0, brr.getShortestResolveTimeByAid(1));
+	}
+
 }

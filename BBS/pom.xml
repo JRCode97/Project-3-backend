@@ -14,13 +14,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BBS</name>
 	<description>Bug bounty system</description>
-
+	<!-- TO RUN SONAR CLOUD REPORT mvn verify sonar:sonar -->
 	<properties>
 		<java.version>1.8</java.version>
-		 <sonar.projectKey>JRCode97_Project-3-backend</sonar.projectKey>
-  		 <sonar.organization>jrcode97</sonar.organization>
-  		 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-  			<sonar.login>9f77b7cbbf3d8b724b3f5f62c5827e22d4116d34</sonar.login>
+		<sonar.projectKey>2007wvu_Project-3-backend</sonar.projectKey>
+		<sonar.organization>2007wvu</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>cc01aa61d4e947ea3d3a544e2a900bca9f79ec79</sonar.login>
 	</properties>
 
 	<dependencies>
@@ -32,12 +32,8 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-			<version>2.2.2.RELEASE</version>
-		</dependency>
-
+		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId> 
+			<version>2.2.2.RELEASE</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -87,6 +83,7 @@
 			<version>3.0.0-M4</version>
 		</dependency>
 
+
 	</dependencies>
 
 	<build>
@@ -96,8 +93,12 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.1</version>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

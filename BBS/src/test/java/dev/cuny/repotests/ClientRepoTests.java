@@ -1,6 +1,8 @@
 package dev.cuny.repotests;
 
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import dev.cuny.entities.Client;
 import dev.cuny.repositories.ClientRepository;
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
@@ -23,7 +26,7 @@ class ClientRepoTests {
 	@Order(1)
 	void getUsersPoints() {
 		
-		Assertions.assertNotNull(cr.getClientPoints(1));
+		Assertions.assertNotNull(cr.getClientPoints(2));
 	
 	}
 	@Test
@@ -44,5 +47,20 @@ class ClientRepoTests {
 	void getClientByEmail() {
 		String email = "jian@email.com";
 		Assertions.assertNotNull(cr.findByEmail(email));
+	}
+	
+	@Test
+	@Order(5)
+	void countClient() {
+		List<Client> client = cr.findAll();
+		int num = client.size();
+		Assertions.assertNotEquals(0, num);
+	}
+	
+	@Test
+	@Order(6)
+	void getClientSolutionCount(){
+		Integer count = cr.getSolutionCount(1);
+		Assertions.assertNotEquals(0, count);
 	}
 }

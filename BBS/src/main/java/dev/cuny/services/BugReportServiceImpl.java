@@ -3,6 +3,7 @@ package dev.cuny.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,51 @@ public class BugReportServiceImpl implements BugReportService {
 	public List<BugReport> getByStatus(String status) {
 		
 		return brr.findByStatus(status);
+	}
+
+	@Override
+	public List<BugReport> getBySeverity(String severity) {
+		return brr.findBySeverity(severity);
+	}
+
+	@Override
+	public List<BugReport> getByPriority(String priority) {
+		return brr.findByPriority(priority);
+	}
+
+	@Override
+	public int getCountByStatus(String status) {
+		return brr.countByStatus(status);
+	}
+
+	@Override
+	public int getCountBySeverity(String severity) {
+		return brr.countBySeverity(severity);
+	}
+
+	@Override
+	public int getCountByPriority(String priority) {
+		return brr.countByPriority(priority);
+	}
+
+	@Override
+	public long getAverageResolveTimeByAid(int id) {
+		return brr.getAverageResolveTimeByAid(id);
+	}
+
+	@Override
+	public long getLongestResolveTimeByAid(int id) {
+		return brr.getLongestResolveTimeByAid(id);
+	}
+
+	@Override
+	public long getShortestResolveTimeByAid(int id) {
+		return brr.getShortestResolveTimeByAid(1);
+	}
+	
+	@Override
+	public List<BugReport> getAllBugReports(Sort sort) {
+		return brr.findAll(sort);
 	}
 
 }
