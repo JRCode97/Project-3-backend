@@ -45,7 +45,7 @@ public class ApplicationController {
 
 	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: ", a,logger.getName());
+		logger.info("Application Created: ", a.getId(),logger.getName());
 		return as.createApplication(a);
 	}
 
@@ -129,7 +129,7 @@ public class ApplicationController {
 	
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: ", application);
+		logger.info("Application was updated: ", application.getId());
 		return as.updateApplication(application);
 	}
 }

@@ -35,7 +35,7 @@ public class SolutionController {
 
 	@PostMapping(value = "/solutions")
 	public Solution createSolution(@RequestBody Solution s) {
-		logger.info("Solution was created: ", s);
+		logger.info("Solution was created: ", s.getId());
 		return ss.createSolution(s);
 	}
 
@@ -71,7 +71,7 @@ public class SolutionController {
 
 	@PutMapping(value = "/solutions")
 	public Solution updateSolution(@RequestBody Solution s) {
-		logger.info("The solution was updated: ", s);
+		logger.info("The solution was updated: ", s.getId());
 		return ss.updateSolution(s);
 	}
 

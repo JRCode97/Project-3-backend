@@ -24,7 +24,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Client;
 import dev.cuny.exceptions.ClientAlreadyExistedException;
-import dev.cuny.services.BugReportService;
 import dev.cuny.services.ClientService;
 
 @Component
@@ -36,16 +35,13 @@ public class ClientController {
 	@Autowired
 	ClientService cs;
 	
-	@Autowired
-	BugReportService brs;
-	
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
-			logger.info("Client was created: ", client);
+			logger.info("Client was created: ", client.getcId());
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
-			logger.info("Unable to create the client: ", client);
+			logger.info("Unable to create the client: ", client.getcId());
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -58,7 +54,7 @@ public class ClientController {
 	@ResponseBody
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
-		logger.info("Client was updated: ", client);
+		logger.info("Client was updated: ", client.getcId());
 		return cs.updateClient(client);
 	}
 
@@ -89,50 +85,12 @@ public class ClientController {
 
 	@ResponseBody
 	@RequestMapping(value = "/clients/{id}/solutions", method = RequestMethod.GET)
-	public <T> T getSolutionsByClientId(@PathVariable Integer id, @RequestParam(required = false) Boolean count) {	
-		if(count == null)
-			count = false;
-		if(count == true) {
-			try {
-				return (T) cs.getSolutionCountByClient(id);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
-		}
-		else {
-			try {
-				return (T) cs.getSolutionsByClient(id);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
-		}
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/clients/{id}/bugreports", method = RequestMethod.GET)
-	public <T> T getBugReportsByClientId(@PathVariable Integer id, @RequestParam(required = false) Boolean count) {	
-		if(count == null)
-			count = false;
-		if(count == true) {
-			try {
-				Client c = cs.getClientById(id);
-				Integer result = brs.getClientBugReports(c.getUsername()).size();
-				return (T) result;
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
-		}
-		else {
-			try {
-				Client c = cs.getClientById(id);
-				return (T) brs.getClientBugReports(c.getUsername());
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
+	public Integer getSolutionCountByClientId(@PathVariable int id) {
+		try {
+			return cs.getSolutionCountByClient(id);
+		} catch (NoSuchElementException e) {
+			logger.error("Unable to find a client with id: ", id);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 	
