@@ -25,7 +25,6 @@ import dev.cuny.entities.Solution;
 import dev.cuny.services.SolutionService;
 
 @Component
-@Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class SolutionController {

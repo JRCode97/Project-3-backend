@@ -28,7 +28,6 @@ import dev.cuny.services.BugReportService;
 import dev.cuny.services.ClientService;
 
 @Component
-@Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ClientController {
@@ -55,14 +54,13 @@ public class ClientController {
 		return cs.getClientByUsernameAndPassword(username, password);
 	}
 
-	@ResponseBody
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
 		logger.info("Client was updated: ", client.getcId());
 		return cs.updateClient(client);
 	}
 	
-	@RequestMapping(value = "/clients/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/{id}")
 	public Client getClientById(@PathVariable int id) {
 		try {
 			return cs.getClientById(id);
@@ -72,8 +70,7 @@ public class ClientController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/clients/{id}/solutions", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/{id}/solutions")
 	public <T> T getSolutionsByClientId(@PathVariable Integer id, @RequestParam(required = false) Boolean count) {	
 		if(count == null)
 			count = false;
@@ -95,8 +92,7 @@ public class ClientController {
 		}
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/clients/{id}/bugreports", method = RequestMethod.GET)
+	@GetMapping(value = "/clients/{id}/bugreports")
 	public <T> T getBugReportsByClientId(@PathVariable Integer id, @RequestParam(required = false) Boolean count) {	
 		if(count == null)
 			count = false;
