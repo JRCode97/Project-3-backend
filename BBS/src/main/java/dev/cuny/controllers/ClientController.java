@@ -42,10 +42,10 @@ public class ClientController {
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
-			logger.info("Client was created: ", client);
+			logger.info("Client was created: ", client.getcId());
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
-			logger.info("Unable to create the client: ", client);
+			logger.info("Unable to create the client: ", client.getcId());
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -58,24 +58,9 @@ public class ClientController {
 	@ResponseBody
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
-		logger.info("Client was updated: ", client);
+		logger.info("Client was updated: ", client.getcId());
 		return cs.updateClient(client);
 	}
-
-//	@ResponseBody
-//	@RequestMapping(value = "/query/clients", method = RequestMethod.GET)
-//	public Client query(@RequestParam(required = false) String username, @RequestParam(required = false) String email) {
-//
-//		
-//		if (username != null) {
-//			return cs.getClientByUsername(username);
-//		}
-//
-//		if (email != null) {
-//			return cs.getClientByEmail(email);
-//		}
-//		return null;
-//	}
 	
 	@RequestMapping(value = "/clients/{id}", method = RequestMethod.GET)
 	public Client getClientById(@PathVariable int id) {

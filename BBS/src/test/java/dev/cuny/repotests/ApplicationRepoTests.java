@@ -28,12 +28,12 @@ class ApplicationRepoTests {
 	@Test
 	@Order(2)
 	void getAllApplicationsTest() {
-		Assertions.assertNotNull(ar.findAll() != null);
+		Assertions.assertNotNull(ar.findAll());
 	}
 	@Test
 	@Order(3)
 	void getApplicationByIdTest() {
-		Assertions.assertNotNull(ar.findById(1) != null);
+		Assertions.assertNotNull(ar.findById(1));
 	}
 	@Test
 	@Order(4)
@@ -43,7 +43,7 @@ class ApplicationRepoTests {
 		app.setTitle("New Title");
 		app.setGitLink("www.newGitLink.com");
 		app = ar.save(app);
-		Assertions.assertNotNull(ar.findById(app.getId()).get() == app);
+		Assertions.assertNotNull(ar.findById(app.getId()).get());
 	}
 	
 	@Test

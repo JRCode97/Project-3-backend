@@ -22,13 +22,13 @@ class BbsApplicationTests {
 	@Test
 	@Order(1)
 	void getClientbyId() {
-		Assertions.assertNotNull(cr.findById(1) != null);
+		Assertions.assertNotNull(cr.findById(1));
 	}
 	
 	@Test
 	@Order(2)
 	void getClientByUsername() {
-		Assertions.assertNotNull(cr.findByUsername("theRaidMan") != null);
+		Assertions.assertNotNull(cr.findByUsername("theRaidMan"));
 		
 	}
 	
@@ -38,7 +38,7 @@ class BbsApplicationTests {
 		String username = "theRaidMan";
 		String password = "password";
 
-		Assertions.assertNotNull(cr.findByUsernameAndPassword(username, password) != null);
+		Assertions.assertNotNull(cr.findByUsernameAndPassword(username, password));
 	}
 
 }

@@ -73,30 +73,32 @@ class bugReportTests {
 	@Test
 	@Order(8)
 	void getByStatus() {
-		Assertions.assertNotEquals( 0, brr.findByStatus("Resolved"));
-		Assertions.assertNotEquals( 0,  brr.findByStatus("Requested"));
-		Assertions.assertNotEquals( 0 , brr.findByStatus("Unresolved"));
+		
+		
+		
+		Assertions.assertNotEquals( 0 , brr.findByStatus("Resolved").size());
+		Assertions.assertNotEquals( 0 , brr.findByStatus("Requested").size());
+		Assertions.assertNotEquals( 0 , brr.findByStatus("Unresolved").size());
 	}
 	
 	@Test
 	@Order(9)
 	void getBySeverity() {
-		Assertions.assertNotEquals( 0 , brr.findBySeverity("Low"));
-		Assertions.assertNotEquals( 0 , brr.findBySeverity("Medium"));
-		Assertions.assertNotEquals( 0 , brr.findBySeverity("High"));
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("Low").size());
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("Medium").size());
+		Assertions.assertNotEquals( 0 , brr.findBySeverity("High").size());
 	}
 	@Test
 	@Order(10)
 	void getByPriority() {
-		Assertions.assertNotEquals( 0 , brr.findByPriority("Low"));
-		Assertions.assertNotEquals( 0 , brr.findByPriority("Medium"));
-		Assertions.assertNotEquals( 0 , brr.findByPriority("High"));
+		Assertions.assertNotEquals( 0 , brr.findByPriority("Low").size());
+		Assertions.assertNotEquals( 0 , brr.findByPriority("Medium").size());
+		Assertions.assertNotEquals( 0 , brr.findByPriority("High").size());
 	}
 
 	@Test
 	@Order(11)
 	void getAverageResolveTimeByAid() {
-		System.out.println(brr.getAverageResolveTimeByAid(1));
 		Assertions.assertNotEquals(0, brr.getAverageResolveTimeByAid(1));
 		Assertions.assertNotEquals(0, brr.getLongestResolveTimeByAid(1));
 		Assertions.assertNotEquals(0, brr.getShortestResolveTimeByAid(1));
