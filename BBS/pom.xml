@@ -21,7 +21,7 @@
 		<sonar.organization>2007wvu</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.login>cc01aa61d4e947ea3d3a544e2a900bca9f79ec79</sonar.login>
-		<sonar.exclusions>**/target/**/*, *.class</sonar.exclusions>
+		<sonar.java.binaries>**/target/**/*, *.class</sonar.java.binaries>
 	</properties>
 
 	<dependencies>
