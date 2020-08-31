@@ -62,6 +62,9 @@ public class SolutionServiceImpl implements SolutionService {
 
 	@Override
 	public int getCountByAid(int aId) {
+		if(sr.getCountByAid(aId) == null) {
+			return 0;
+		}
 		return sr.getCountByAid(aId);
 	}
 
