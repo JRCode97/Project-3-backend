@@ -91,9 +91,11 @@ public class ApplicationController {
 					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
 				}
 			}else if(!resolvedtime.equals("")){
-				int i = Integer.parseInt(id);
+				Integer i = Integer.parseInt(id);
 				if(resolvedtime.equalsIgnoreCase("average")) {
-					Long avg = brs.getAverageResolveTimeByAid(i);
+					
+					Long iL = Long.parseLong(id);
+					Long avg = brs.getAverageResolveTimeByAid(iL);
 					return (T) avg;
 				} else if(resolvedtime.equalsIgnoreCase("longest")) {
 					Long longest = brs.getLongestResolveTimeByAid(i);
