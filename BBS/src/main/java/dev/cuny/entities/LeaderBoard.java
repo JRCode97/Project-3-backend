@@ -2,34 +2,34 @@ package dev.cuny.entities;
 
 public class LeaderBoard {
 	
-	private int solver_client_id;
-	private String client_username;
-	private int point_value_sum;
+	private int solverClientId;
+	private String clientUsername;
+	private int pointValueSum;
 	public LeaderBoard() {
 		super();
 	}
-	public int getSolver_client_id() {
-		return solver_client_id;
+	public int getsolverClientId() {
+		return solverClientId;
 	}
-	public void setSolver_client_id(int solver_client_id) {
-		this.solver_client_id = solver_client_id;
+	public void setsolverClientId(int solverClientId) {
+		this.solverClientId = solverClientId;
 	}
-	public String getClient_username() {
-		return client_username;
+	public String getclientUsername() {
+		return clientUsername;
 	}
-	public void setClient_username(String client_username) {
-		this.client_username = client_username;
+	public void setclientUsername(String clientUsername) {
+		this.clientUsername = clientUsername;
 	}
-	public int getPoint_value_sum() {
-		return point_value_sum;
+	public int getpointValueSum() {
+		return pointValueSum;
 	}
-	public void setPoint_value_sum(int point_value_sum) {
-		this.point_value_sum = point_value_sum;
+	public void setpointValueSum(int pointValueSum) {
+		this.pointValueSum = pointValueSum;
 	}
 	@Override
 	public String toString() {
-		return "LeaderBoard [solver_client_id=" + solver_client_id + ", client_username=" + client_username
-				+ ", point_value_sum=" + point_value_sum + "]";
+		return "LeaderBoard [solverClientId=" + solverClientId + ", clientUsername=" + clientUsername
+				+ ", pointValueSum=" + pointValueSum + "]";
 	}
 }
 

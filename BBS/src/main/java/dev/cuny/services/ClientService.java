@@ -9,7 +9,7 @@ import dev.cuny.exceptions.ClientAlreadyExistedException;
 public interface ClientService {
 
 	// Create
-	Client createClient(Client client) throws ClientAlreadyExistedException;
+	Client createClient(Client client);
 
 	// Read
 	Client getClientById(int id);

@@ -21,7 +21,7 @@ import dev.cuny.repositories.SolutionRepository;
 @ContextConfiguration(classes = dev.cuny.app.BbsApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Transactional
-public class SolutionRepoTests {
+class SolutionRepoTests {
 	@Autowired
 	SolutionRepository sr;
 	
