@@ -4,7 +4,6 @@ import java.util.List;
 
 import dev.cuny.entities.Client;
 import dev.cuny.entities.Solution;
-import dev.cuny.exceptions.ClientAlreadyExistedException;
 
 public interface ClientService {
 

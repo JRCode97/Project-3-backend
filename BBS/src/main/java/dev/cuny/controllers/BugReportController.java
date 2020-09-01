@@ -1,15 +1,12 @@
 package dev.cuny.controllers;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.BugReport;
 import dev.cuny.services.BugReportService;
@@ -33,7 +29,8 @@ public class BugReportController {
 
 	@PostMapping(value = "/bugreports")
 	public BugReport createBugReport(@RequestBody BugReport br) {
-		logger.info("Bug Report Created: " + br.getbId());
+		String str = "Bug Report Created: " + br.getbId();
+		logger.info(str);
 		return brs.createBugReport(br);
 	}
 
@@ -81,17 +78,12 @@ public class BugReportController {
 		if (!id.equals("0")) {
 			int i = Integer.parseInt(id);
 			return (T) brs.getBugReportById(i);
-		} 
+			}
 		else if(!status.equals("")) {
 			status = status.toLowerCase();
 			status = status.substring(0,1).toUpperCase() + status.substring(1);
-			
-			if(count.equals(true)) {
-				Integer c = brs.getCountByStatus(status);
-				return (T) c;
-			}else {
-				return (T) brs.getByStatus(status);
-			}
+		
+			return (count.equals(true)) ? (T) (Integer) brs.getCountByStatus(status) : (T) brs.getByStatus(status);
 			
 		}
 		else if(!severity.equals("") && count.equals(true))  {
@@ -109,14 +101,9 @@ public class BugReportController {
 		}
 		else {
 			if(!sort.equals("")) {
-				if (sort.equals("asc")) {
-					Sort sortAsc = Sort.by(Sort.Direction.ASC, "dateCreated");
-					return (T) brs.getAllBugReports(sortAsc);
-				}
-				else if(sort.equals("desc")) {
-					Sort sortDesc = Sort.by(Sort.Direction.DESC, "dateCreated");
-					return (T) brs.getAllBugReports(sortDesc);
-				}
+				String param = "dateCreated";
+				Sort order = sort.equals("asc") ? Sort.by(Sort.Direction.ASC, param):Sort.by(Sort.Direction.DESC, param);
+				return (T) brs.getAllBugReports(order);
 			}
 			return (T) brs.getAllBugReports();
 		}
@@ -124,7 +111,8 @@ public class BugReportController {
 
 	@PutMapping(value = "/bugreports")
 	public BugReport updateBugReport(@RequestBody BugReport br) {
-		logger.info("BugReport was updated: " + br.getbId());
+		String str = "BugReport was updated: " + br.getbId();
+		logger.info(str);
 		return brs.updateBugReport(br);
 	}
 

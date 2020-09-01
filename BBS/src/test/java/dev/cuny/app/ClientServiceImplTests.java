@@ -171,6 +171,6 @@ class ClientServiceImplTests {
 	@Order(12)
 	void getSolutionsOfClient() {
 		List<Solution> s = cs.getSolutionsByClient(1);
-		Assertions.assertNotEquals(0, s);
+		Assertions.assertNotEquals(0, s.size());
 	}
 }
