@@ -41,7 +41,7 @@ class bugReportTests {
 	@Test
 	@Order(3)
 	void getReportsBySubject() {
-		Assertions.assertNotNull(brr.findByTitle("Cool Title"));
+		Assertions.assertNotNull(brr.findByTitle("Test br"));
 	}
 	@Test
 	@Order(4)

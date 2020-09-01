@@ -1,13 +1,10 @@
 package dev.cuny.controllers;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Application;
 import dev.cuny.entities.BugReport;
@@ -41,7 +37,8 @@ public class ApplicationController {
 
 	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: " + a.getId() + logger.getName());
+		String str = "Application Created: " + a.getId() + " " + logger.getName();
+		logger.info(str);
 		return as.createApplication(a);
 	}
 
@@ -109,7 +106,8 @@ public class ApplicationController {
 	
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: " + application.getId());
+		String str = "Application was updated: " + application.getId();
+		logger.info(str);
 		return as.updateApplication(application);
 	}
 }

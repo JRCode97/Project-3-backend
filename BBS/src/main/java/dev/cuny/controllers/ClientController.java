@@ -8,17 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -41,10 +37,12 @@ public class ClientController {
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
-			logger.info("Client was created: " + client.getcId());
+			String str = "Client was created: "+ client.getcId();
+			logger.info(str);
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
-			logger.info("Unable to create the client: " + client.getcId());
+			String str = "Unable to create the client: " + client.getcId();
+			logger.info(str);
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -56,7 +54,8 @@ public class ClientController {
 
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
-		logger.info("Client was updated: " + client.getcId());
+		String str = "Client was updated: " + client.getcId();
+		logger.info(str);
 		return cs.updateClient(client);
 	}
 	
@@ -69,7 +68,7 @@ public class ClientController {
 	public <T> T getSolutionsByClientId(@PathVariable Integer id, @RequestParam(required = false) Boolean count) {	
 		if(count == null)
 			count = false;
-		if(count == true) {
+		if(count.booleanValue()) {
 			T res = (T) cs.getSolutionCountByClient(id);
 			return (res != null)? res : (T) (Integer) 0;
 		}
@@ -82,13 +81,14 @@ public class ClientController {
 	public <T> T getBugReportsByClientId(@PathVariable Integer id, @RequestParam(required = false) Boolean count) {	
 		if(count == null)
 			count = false;
-		if(count == true) {
+		if(count.booleanValue()) {
 			try {
 				Client c = cs.getClientById(id);
 				Integer result = brs.getClientBugReports(c.getUsername()).size();
 				return (T) result;
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: " + id);
+				String str = "Unable to find a client with id: " + id;
+				logger.error(str);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 			}
 		}
@@ -97,7 +97,8 @@ public class ClientController {
 				Client c = cs.getClientById(id);
 				return (T) brs.getClientBugReports(c.getUsername());
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: " + id);
+				String str = "Unable to find a client with id: " + id;
+				logger.error(str);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 			}
 		}

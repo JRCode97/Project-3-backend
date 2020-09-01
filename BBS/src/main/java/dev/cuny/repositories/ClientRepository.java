@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import dev.cuny.entities.BugReport;
 import dev.cuny.entities.Client;
 import dev.cuny.entities.Solution;
 @Repository

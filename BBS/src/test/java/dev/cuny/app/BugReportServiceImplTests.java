@@ -187,6 +187,6 @@ class BugReportServiceImplTests {
 	void getAllBugReportsSortedbyCreationDate() {
 		Sort sortAsc = Sort.by(Sort.Direction.ASC, "dateCreated");
 		List<BugReport> b_rs = brs.getAllBugReports(sortAsc);
-		Assertions.assertEquals(5, b_rs.get(1).getbId());
+		Assertions.assertEquals(2, b_rs.get(1).getbId());
 	}
 }
