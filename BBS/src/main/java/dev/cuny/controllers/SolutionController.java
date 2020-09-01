@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,7 +32,7 @@ public class SolutionController {
 
 	@PostMapping(value = "/solutions")
 	public Solution createSolution(@RequestBody Solution s) {
-		logger.info("Solution was created: ", s.getId());
+		logger.info("Solution was created: " + s.getId());
 		return ss.createSolution(s);
 	}
 
@@ -58,7 +56,7 @@ public class SolutionController {
 				int i = Integer.parseInt(id);
 				return (T) ss.getSolutionById(i);
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a solution with id: ", id);
+				logger.error("Unable to find a solution with id: " + id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
 			}
 		} else if (status != null) {
@@ -70,7 +68,7 @@ public class SolutionController {
 
 	@PutMapping(value = "/solutions")
 	public Solution updateSolution(@RequestBody Solution s) {
-		logger.info("The solution was updated: ", s.getId());
+		logger.info("The solution was updated: " + s.getId());
 		return ss.updateSolution(s);
 	}
 

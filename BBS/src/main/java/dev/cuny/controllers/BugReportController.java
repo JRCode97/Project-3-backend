@@ -33,7 +33,7 @@ public class BugReportController {
 
 	@PostMapping(value = "/bugreports")
 	public BugReport createBugReport(@RequestBody BugReport br) {
-		logger.info("Bug Report Created: " , br.getbId());
+		logger.info("Bug Report Created: " + br.getbId());
 		return brs.createBugReport(br);
 	}
 
@@ -76,76 +76,44 @@ public class BugReportController {
 		return getBugReportImpl(id, status, count, priority, severity, sort);
 	}
 	
+	
 	private <T> T getBugReportImpl(String id, String status, Boolean count, String priority,String severity, String sort) {
 		if (!id.equals("0")) {
-			try {
-				int i = Integer.parseInt(id);
-				return (T) brs.getBugReportById(i);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a bugreport with id: " , id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
-			}
+			int i = Integer.parseInt(id);
+			return (T) brs.getBugReportById(i);
 		} 
 		else if(!status.equals("")) {
-			
 			status = status.toLowerCase();
 			status = status.substring(0,1).toUpperCase() + status.substring(1);
 			
 			if(count.equals(true)) {
-				try {
-					Integer c = brs.getCountByStatus(status);
-					return (T) c;
-				} catch (NoSuchElementException e) {
-					logger.error("Unable to find a bugreport with id: " , id);
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
-				}
+				Integer c = brs.getCountByStatus(status);
+				return (T) c;
 			}else {
-				try {
-					return (T) brs.getByStatus(status);
-				} catch (NoSuchElementException e) {
-					logger.error("Unable to find a bugreport with id: " , id);
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
-				}
+				return (T) brs.getByStatus(status);
 			}
 			
 		}
 		else if(!severity.equals("") && count.equals(true))  {
-			
 			severity = severity.toLowerCase();
 			severity = severity.substring(0,1).toUpperCase() + severity.substring(1);
-			
-			try {
-				Integer c = brs.getCountBySeverity(severity);
-				return (T) c;
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a bugreport with id: " , id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
-			}
+			Integer c = brs.getCountBySeverity(severity);
+			return (T) c;
 		}
 		
 		else if(!priority.equals("") && count.equals(true)) {
-			
 			priority = priority.toLowerCase();
 			priority = priority.substring(0,1).toUpperCase() + priority.substring(1);
-			
-			try {
-				Integer c = brs.getCountByPriority(priority);
-				return (T) c;
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a bugreport with id: " , id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find bug report");
-			}
+			Integer c = brs.getCountByPriority(priority);
+			return (T) c;
 		}
-		
 		else {
 			if(!sort.equals("")) {
 				if (sort.equals("asc")) {
-				System.out.println(sort);
 					Sort sortAsc = Sort.by(Sort.Direction.ASC, "dateCreated");
 					return (T) brs.getAllBugReports(sortAsc);
 				}
 				else if(sort.equals("desc")) {
-				System.out.println(sort);
 					Sort sortDesc = Sort.by(Sort.Direction.DESC, "dateCreated");
 					return (T) brs.getAllBugReports(sortDesc);
 				}
@@ -153,10 +121,10 @@ public class BugReportController {
 			return (T) brs.getAllBugReports();
 		}
 	}
-	
+
 	@PutMapping(value = "/bugreports")
 	public BugReport updateBugReport(@RequestBody BugReport br) {
-		logger.info("BugReport was updated: " , br.getbId());
+		logger.info("BugReport was updated: " + br.getbId());
 		return brs.updateBugReport(br);
 	}
 

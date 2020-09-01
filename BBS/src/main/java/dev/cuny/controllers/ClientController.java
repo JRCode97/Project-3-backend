@@ -41,10 +41,10 @@ public class ClientController {
 	@PostMapping(value = "/clients")
 	public Client signup(@RequestBody Client client) {
 		try {
-			logger.info("Client was created: ", client.getcId());
+			logger.info("Client was created: " + client.getcId());
 			return cs.createClient(client);
 		} catch (ClientAlreadyExistedException e) {
-			logger.info("Unable to create the client: ", client.getcId());
+			logger.info("Unable to create the client: " + client.getcId());
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
@@ -56,18 +56,13 @@ public class ClientController {
 
 	@PutMapping(value = "/clients")
 	public Client updateClient(@RequestBody Client client) {
-		logger.info("Client was updated: ", client.getcId());
+		logger.info("Client was updated: " + client.getcId());
 		return cs.updateClient(client);
 	}
 	
 	@GetMapping(value = "/clients/{id}")
 	public Client getClientById(@PathVariable int id) {
-		try {
 			return cs.getClientById(id);
-		} catch (NoSuchElementException e) {
-			logger.error("Unable to find a client with id: ", id);
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		}
 	}
 
 	@GetMapping(value = "/clients/{id}/solutions")
@@ -75,20 +70,11 @@ public class ClientController {
 		if(count == null)
 			count = false;
 		if(count == true) {
-			try {
-				return (T) cs.getSolutionCountByClient(id);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
+			T res = (T) cs.getSolutionCountByClient(id);
+			return (res != null)? res : (T) (Integer) 0;
 		}
 		else {
-			try {
-				return (T) cs.getSolutionsByClient(id);
-			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
+			return (T) cs.getSolutionsByClient(id);
 		}
 	}
 	
@@ -102,7 +88,7 @@ public class ClientController {
 				Integer result = brs.getClientBugReports(c.getUsername()).size();
 				return (T) result;
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
+				logger.error("Unable to find a client with id: " + id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 			}
 		}
@@ -111,7 +97,7 @@ public class ClientController {
 				Client c = cs.getClientById(id);
 				return (T) brs.getClientBugReports(c.getUsername());
 			} catch (NoSuchElementException e) {
-				logger.error("Unable to find a client with id: ", id);
+				logger.error("Unable to find a client with id: " + id);
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 			}
 		}

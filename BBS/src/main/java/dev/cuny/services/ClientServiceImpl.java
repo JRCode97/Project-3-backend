@@ -19,7 +19,7 @@ public class ClientServiceImpl implements ClientService {
 	ClientRepository cr;
 
 	@Override
-	public Client createClient(Client client) throws ClientAlreadyExistedException {
+	public Client createClient(Client client){
 		Client existedClient = cr.findByUsername(client.getfName());
 		if (existedClient != null) {
 			throw new ClientAlreadyExistedException();
@@ -46,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public List<Client> getAllClients() {
-		return (List<Client>) cr.findAll();
+		return cr.findAll();
 	}
 
 	@Override
@@ -68,8 +68,7 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public int getClientPoints(int id) {
 		if(cr.getClientPoints(id) == null || cr.getClientPoints(id) == 0) {
-			int points = 0;
-			return points;
+			return 0;
 		}
 		else {
 			return cr.getClientPoints(id);

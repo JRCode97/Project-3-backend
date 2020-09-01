@@ -21,7 +21,7 @@ import dev.cuny.services.SolutionService;
 @ContextConfiguration(classes = dev.cuny.app.BbsApplication.class)
 @Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SolutionServiceTests {
+class SolutionServiceTests {
 	@Autowired
 	SolutionService ss;
 	

@@ -3,14 +3,12 @@ package dev.cuny.controllers;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import javax.websocket.server.PathParam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -44,7 +41,7 @@ public class ApplicationController {
 
 	@PostMapping(value = "/applications")
 	public Application createApplication(@RequestBody Application a) {
-		logger.info("Application Created: ", a.getId(),logger.getName());
+		logger.info("Application Created: " + a.getId() + logger.getName());
 		return as.createApplication(a);
 	}
 
@@ -65,36 +62,18 @@ public class ApplicationController {
 	}
 	
 	@GetMapping(value = "/applications/{id}")
-	public <T> T getApplicationByTheRightWay(@PathVariable String id,
-			@RequestParam(required = false) @PathVariable String title,
-			@RequestParam(required = false) String resolvedtime) {
-		if(id == null) {
-			id = "0";
-		}
-		if(title == null) {
-			title="";
-		}
-		if (resolvedtime ==null) {
-			resolvedtime = "";
-		}
-		return getApplicationImpl(id, title, resolvedtime);
+	public <T> T getApplicationByTheRightWay(@PathVariable Integer id) {
+		return (T) as.getApplicationById(id);
 	}
 	
 	private <T> T getApplicationImpl(String id, String title, String resolvedtime) {
 		if (!id.equals("0")) {
 			if(resolvedtime.equals("")){
-				try {
-					int i = Integer.parseInt(id);
-					return (T) as.getApplicationById(i);
-				} catch (NoSuchElementException e) {
-					logger.error("Unable to find an Application with id: ", id);
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
-				}
+				int i = Integer.parseInt(id);
+				return (T) as.getApplicationById(i);
 			}else if(!resolvedtime.equals("")){
 				Integer i = Integer.parseInt(id);
 				if(resolvedtime.equalsIgnoreCase("average")) {
-					
-					Long iL = Long.parseLong(id);
 					Long avg = brs.getAverageResolveTimeByAid(i);
 					return (T) avg;
 				} else if(resolvedtime.equalsIgnoreCase("longest")) {
@@ -130,7 +109,7 @@ public class ApplicationController {
 	
 	@PutMapping(value = "/applications")
 	public Application updateApplication(@RequestBody Application application) {
-		logger.info("Application was updated: ", application.getId());
+		logger.info("Application was updated: " + application.getId());
 		return as.updateApplication(application);
 	}
 }
