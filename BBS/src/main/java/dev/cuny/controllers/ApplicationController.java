@@ -95,7 +95,7 @@ public class ApplicationController {
 				if(resolvedtime.equalsIgnoreCase("average")) {
 					
 					Long iL = Long.parseLong(id);
-					Long avg = brs.getAverageResolveTimeByAid(iL);
+					Long avg = brs.getAverageResolveTimeByAid(i);
 					return (T) avg;
 				} else if(resolvedtime.equalsIgnoreCase("longest")) {
 					Long longest = brs.getLongestResolveTimeByAid(i);
