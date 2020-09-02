@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import dev.cuny.entities.Client;
 import dev.cuny.entities.Solution;
-import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.repositories.ClientRepository;
 
 @Component
@@ -22,7 +21,7 @@ public class ClientServiceImpl implements ClientService {
 	public Client createClient(Client client){
 		Client existedClient = cr.findByUsername(client.getfName());
 		if (existedClient != null) {
-			throw new ClientAlreadyExistedException();
+			throw new IllegalArgumentException();
 		} else {
 			client.setcId(0);
 			return cr.save(client);

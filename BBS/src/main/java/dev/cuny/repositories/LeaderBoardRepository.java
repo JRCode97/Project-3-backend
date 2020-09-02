@@ -8,7 +8,7 @@ import dev.cuny.entities.Client;
 
 @Component
 @Repository
-public interface LeaderBoardRepository extends JpaRepository<Client, Integer> {
+public interface LeaderBoardRepository /*extends JpaRepository<Client, Integer>*/ {
 
 
 }

@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.cuny.entities.Client;
 import dev.cuny.entities.Solution;
-import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.services.ClientService;
 
 @SpringBootTest
@@ -42,8 +41,8 @@ class ClientServiceImplTests {
 		try {
 			System.out.println(cs.createClient(c1));
 			Assertions.assertSame(cs.getClientById(c1.getcId()), c1);
-		} catch (ClientAlreadyExistedException e) {
-			System.out.println("Can not register since the username is already taken.");
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 		}
 	}
 
