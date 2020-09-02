@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.cuny.entities.Client;
-import dev.cuny.exceptions.ClientAlreadyExistedException;
 import dev.cuny.services.BugReportService;
 import dev.cuny.services.ClientService;
 
@@ -40,7 +39,7 @@ public class ClientController {
 			String str = "Client was created: "+ client.getcId();
 			logger.info(str);
 			return cs.createClient(client);
-		} catch (ClientAlreadyExistedException e) {
+		} catch (IllegalArgumentException e) {
 			String str = "Unable to create the client: " + client.getcId();
 			logger.info(str);
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);

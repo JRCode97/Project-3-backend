@@ -59,8 +59,14 @@ public class ApplicationController {
 	}
 	
 	@GetMapping(value = "/applications/{id}")
-	public <T> T getApplicationByTheRightWay(@PathVariable Integer id) {
-		return (T) as.getApplicationById(id);
+	public <T> T getApplicationByTheRightWay(@PathVariable Integer id,
+			@RequestParam(required=false) String resolvedtime) {
+		if (resolvedtime ==null) {
+			resolvedtime = "";
+		}
+		return getApplicationImpl(id.toString(), "", resolvedtime);
+
+		//return (T) as.getApplicationById(id);
 	}
 	
 	private <T> T getApplicationImpl(String id, String title, String resolvedtime) {
