@@ -1,5 +1,6 @@
 package dev.cuny.controllers;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
@@ -43,29 +44,17 @@ public class SolutionController {
 	}
 	
 	@GetMapping(value = "/solutions")
-	public <T> T getSolution(@RequestParam(required = false) String id, @RequestParam(required = false) String status,
-			@RequestParam(required = false) String cId, @RequestParam(required = false) String bId) {
-
-		if (bId != null) {
-			int b = Integer.parseInt(bId);
-			return (T) ss.getSolutionByBugReportId(b);
-		} else if (cId != null) {
-			int c = Integer.parseInt(cId);
-			return (T) ss.getSolutionsByClientId(c);
-		} else if (id != null) {
-			try {
-				int i = Integer.parseInt(id);
-				return (T) ss.getSolutionById(i);
-			} catch (NoSuchElementException e) {
-				String str = "Unable to find a solution with id: " + id;
-				logger.error(str);
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find solution");
-			}
-		} else if (status != null) {
+	public <T> T getSolution( @RequestParam(required = false) String status) {
+		if (status != null) {
 			return (T) ss.getSolutionByStatus(status);
 		} else {
 			return (T) ss.getAllSolutions();
 		}
+	}
+	
+	@GetMapping(value="/bugreports/{id}/solutions")
+	public List<Solution> getSolutionsByBugReportId(@PathVariable Integer id){
+		return ss.getSolutionByBugReportId(id);
 	}
 
 	@PutMapping(value = "/solutions")
