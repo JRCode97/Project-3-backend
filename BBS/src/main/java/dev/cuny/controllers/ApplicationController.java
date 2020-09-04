@@ -43,19 +43,17 @@ public class ApplicationController {
 	}
 
 	@GetMapping(value = "/applications")
-	public <T> T getApplication(@RequestParam(required = false) @PathVariable String id,
-			@RequestParam(required = false) @PathVariable String title,
+	public <T> T getApplication(
+			@RequestParam(required = false) String title,
 			@RequestParam(required = false) String resolvedtime) {
-		if(id == null) {
-			id = "0";
-		}
+		
 		if(title == null) {
 			title="";
 		}
-		if (resolvedtime ==null) {
+		if (resolvedtime == null) {
 			resolvedtime = "";
 		}
-		return getApplicationImpl(id, title, resolvedtime);
+		return getApplicationImpl("0", title, resolvedtime);
 	}
 	
 	@GetMapping(value = "/applications/{id}")
@@ -95,7 +93,7 @@ public class ApplicationController {
 		return null;
 	}
 	
-	@GetMapping(value="/applications/{id}/solutions")
+	@GetMapping(value="/applications/{id}/solutions_count")
 	public int getSolutionCountByAid(@PathVariable Integer id) {
 		return ss.getCountByAid(id);
 	}
@@ -105,7 +103,7 @@ public class ApplicationController {
 		return brs.getBugReportsByAppId(id);
 	}
 	
-	@GetMapping(value="/applications/{id}/clients")
+	@GetMapping(value="/applications/{id}/clients_count")
 	public Integer countClientByApplication(@PathVariable Integer id){
 		return as.getClientsPerApplicationCount(id);
 	}

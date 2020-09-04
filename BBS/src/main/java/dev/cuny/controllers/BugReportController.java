@@ -30,7 +30,7 @@ public class BugReportController {
 	@PostMapping(value = "/bugreports")
 	public BugReport createBugReport(@RequestBody BugReport br) {
 		String str = "Bug Report Created: " + br.getbId();
-		logger.info(str);
+		logger.info(str); 
 		return brs.createBugReport(br);
 	}
 
@@ -38,17 +38,17 @@ public class BugReportController {
 	public BugReport getBugReportsTheRightWay(@PathVariable Integer id) {
 		return brs.getBugReportById(id);
 	}
-	
+	 
 	@GetMapping(value = "/bugreports")
-	public <T> T getBugReportById(@RequestParam(required = false) String id,
+	public <T> T getBugReportById(@RequestParam(required = false) String username,
 			@RequestParam(required = false) String status, 
 			@RequestParam(required = false) Boolean count, 
 			@RequestParam(required = false) String priority,
 			@RequestParam(required = false) String severity,
 			@RequestParam(required = false) String sort){
 
-		if(id == null) {
-			id = "0";
+		if(username == null) {
+			username = "";
 		}
 		
 		if(status == null) {
@@ -70,14 +70,13 @@ public class BugReportController {
 		if(sort == null) {
 			sort = "";
 		}
-		return getBugReportImpl(id, status, count, priority, severity, sort);
+		return getBugReportImpl(username, status, count, priority, severity, sort);
 	}
 	
 	
-	private <T> T getBugReportImpl(String id, String status, Boolean count, String priority,String severity, String sort) {
-		if (!id.equals("0")) {
-			int i = Integer.parseInt(id);
-			return (T) brs.getBugReportById(i);
+	private <T> T getBugReportImpl(String username, String status, Boolean count, String priority,String severity, String sort) {
+		if (!username.equals("")) {
+			return (T) brs.getClientBugReports(username);
 			}
 		else if(!status.equals("")) {
 			status = status.toLowerCase();

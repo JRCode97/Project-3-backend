@@ -126,17 +126,17 @@ public class ClientController {
 		}
 	}
 
-	@GetMapping(value = "/clients/points")
-	public int getClientsPoints(@RequestParam int id) {
+	@GetMapping(value = "/clients/{id}/points")
+	public int getClientsPoints(@PathVariable int id) {
 		return cs.getClientPoints(id);
 	}
 	
-	@GetMapping(value = "/clients/leaderboard/username")
+	@GetMapping(value = "/leaderboard/usernames")
 	public List<String> getLeaderboardusernames() {
 		return cs.leaderboardusername();
 	}
 
-	@GetMapping(value = "/clients/leaderboard/points")
+	@GetMapping(value = "/leaderboard/points")
 	public List<Integer> getLeaderboardpoints() {
 		return cs.leaderboardpoints();
 
