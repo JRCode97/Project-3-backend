@@ -53,4 +53,13 @@ class ApplicationRepoTests {
 		Assertions.assertNotEquals(0, result);
 	}
 	
+	@Test
+	@Order(6)
+	void testToString() {
+		Application a = ar.findById(1).get();
+		String str = "Application [id=1, title=Bug Bounty System, gitLink=git.com]";		
+		Assertions.assertEquals(str, a.toString()); 
+		
+	}
+	
 }
