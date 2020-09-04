@@ -114,12 +114,4 @@ public class BugReportController {
 		logger.info(str);
 		return brs.updateBugReport(br);
 	}
-
-
-	@GetMapping(value = "/bugreports/client/{username}")
-	public List<BugReport> getClientBugReports(@PathVariable String username) {
-		return brs.getClientBugReports(username);
-	}
-
-
 }
