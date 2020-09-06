@@ -44,20 +44,22 @@ class ClientServiceImplTests {
 		cs.createClient(c1);
 		Assertions.assertNotEquals(0, c1.getcId());
 		
-		
-		Exception e = assertThrows(IllegalArgumentException.class, ()-> {
-			Client c2 = new Client();
-			c2.setcId(0);
-			c2.setUsername("Nuria");
-			c2.setPassword("Password");
-			c2.setfName("First");
-			c2.setlName("Last");
-			c2.setEmail("test@gmail.com");
-			c2.setRole(0);
+		Client c2 = new Client();
+		c2.setcId(0);
+		c2.setUsername("Nuria");
+		c2.setPassword("Password");
+		c2.setfName("First");
+		c2.setlName("Last");
+		c2.setEmail("test@gmail.com");
+		c2.setRole(0);
+		try { 
+			cs.createClient(c2);
+		} catch(IllegalArgumentException e) {
+			Assertions.assertEquals("java.lang.IllegalArgumentException", e.toString());
+			Assertions.assertEquals(0, c2.getcId());
+		}
 
-			cs.createClient(c1);
-		});
-		Assertions.assertEquals("java.lang.IllegalArgumentException", e.toString());
+
 
 	}
 
@@ -193,6 +195,10 @@ class ClientServiceImplTests {
 	void getClientPointsActual() {
 		int points = cs.getClientPoints(20);
 		Assertions.assertNotEquals(0, points);
+		
+		int points2 = cs.getClientPoints(1);
+		Assertions.assertEquals(0, points2);
+
 	}
 	
 	@Test

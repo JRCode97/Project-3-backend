@@ -66,7 +66,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public int getClientPoints(int id) {
-		if (cr.getClientPoints(id) == null || cr.getClientPoints(id) == 0) {
+		if (cr.getClientPoints(id) == null) {
 			return 0;
 		} else {
 			return cr.getClientPoints(id);
