@@ -13,7 +13,7 @@ public interface BugReportService {
 	public BugReport getBugReportById(int id);
 	public List<BugReport> getAllBugReports();
 	public List<BugReport> getBugReportsByAppId(int id);
-	public List<BugReport> getClientBugReports(String username);
+	public List<BugReport> getClientBugReportsByClientUsername(String username);
 	public List<BugReport> getByStatus(String status);
 	public List<BugReport> getBySeverity(String severity);
 	public List<BugReport> getByPriority(String priority);

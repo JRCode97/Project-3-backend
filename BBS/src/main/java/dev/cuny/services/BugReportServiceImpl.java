@@ -50,7 +50,7 @@ public class BugReportServiceImpl implements BugReportService {
 	}
 
 	@Override
-	public List<BugReport> getClientBugReports(String username) {
+	public List<BugReport> getClientBugReportsByClientUsername(String username) {
 		return brr.findByUsername(username);
 	}
 

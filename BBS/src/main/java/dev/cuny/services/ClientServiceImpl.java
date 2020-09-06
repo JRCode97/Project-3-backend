@@ -18,8 +18,8 @@ public class ClientServiceImpl implements ClientService {
 	ClientRepository cr;
 
 	@Override
-	public Client createClient(Client client){
-		Client existedClient = cr.findByUsername(client.getfName());
+	public Client createClient(Client client) {
+		Client existedClient = cr.findByUsername(client.getUsername());
 		if (existedClient != null) {
 			throw new IllegalArgumentException();
 		} else {
@@ -66,10 +66,9 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public int getClientPoints(int id) {
-		if(cr.getClientPoints(id) == null || cr.getClientPoints(id) == 0) {
+		if (cr.getClientPoints(id) == null || cr.getClientPoints(id) == 0) {
 			return 0;
-		}
-		else {
+		} else {
 			return cr.getClientPoints(id);
 		}
 	}

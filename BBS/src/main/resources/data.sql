@@ -268,11 +268,11 @@ INSERT INTO client(client_id,client_first_name,client_last_name,client_username,
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (287,'user1vv','user1vv','user1','user1@gmail.com','123',1);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (294,'Nia','Nuri','jumba','juice@fake.com','jian',1);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (295,'jesse','rivera','Jrivera','jr@gmail.com','pword',1);
-INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (304,'jesse','rivera','jr','jr@gmail.com','password',0);
-INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (305,'Dylan','Graham','2','Dylangraham140@gmail.com','password',1);
+INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (304,'jesse','rivera','jr','jr2@gmail.com','password',0);
+INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (305,'Dylan','Graham','2','Dylangraham1402@gmail.com','password',1);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (309,'Kenneth','Davis','KD','kenneth.client@revature.com','password',0);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (310,'Kenneth','Davis','user','user@fake.com','password',0);
-INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (317,'Kenneth','Davis','kenny.davis','kenneth.davis@revature.com','password',0);
+INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (317,'Kenneth','Davis','kenny.davis','kenneth.davis2@revature.com','password',0);
 
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (1,'project 3 bug fix 2','change version of Spring to 2.6.6 from 3.1.0','Pending',1590541476321,1,1);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (2,'Import world.doom.','package org.odata4j.tomcat ;','Accepted',1590541476321,22,3);

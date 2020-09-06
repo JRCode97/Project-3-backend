@@ -189,4 +189,10 @@ class BugReportServiceImplTests {
 		List<BugReport> b_rs = brs.getAllBugReports(sortAsc);
 		Assertions.assertEquals(2, b_rs.get(1).getbId());
 	}
+	
+	@Test
+	@Order(15)
+	void getClientBugReports() {
+		Assertions.assertNotEquals(0, brs.getClientBugReportsByClientUsername("Nuria"));
+	}
 }
