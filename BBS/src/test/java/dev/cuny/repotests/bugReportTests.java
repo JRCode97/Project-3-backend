@@ -131,7 +131,7 @@ class bugReportTests {
 		Assertions.assertEquals("Hello I Would like to know how to make somthing that looks like \"Glass\" the example would be in the game called Pikmin.", br.getRepSteps());
 		Assertions.assertEquals(1588492948000L, br.getResolvedTime());
 		Assertions.assertEquals("High", br.getSeverity());
-		Assertions.assertNotEquals(0, br.getSolutions());
+		Assertions.assertNotEquals(0, br.getSolutions().size());
 		Assertions.assertEquals("The java class keeps change the name", br.getTitle());
 		Assertions.assertEquals("Nuria", br.getUsername());
 		Assertions.assertEquals("Resolved", br.getStatus());

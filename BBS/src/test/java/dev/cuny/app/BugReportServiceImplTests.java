@@ -193,6 +193,6 @@ class BugReportServiceImplTests {
 	@Test
 	@Order(15)
 	void getClientBugReports() {
-		Assertions.assertNotEquals(0, brs.getClientBugReportsByClientUsername("Nuria"));
+		Assertions.assertNotEquals(0, brs.getClientBugReportsByClientUsername("Nuria").size());
 	}
 }
