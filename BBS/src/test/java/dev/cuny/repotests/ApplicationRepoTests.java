@@ -1,5 +1,8 @@
 package dev.cuny.repotests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -10,7 +13,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import dev.cuny.entities.Application;
+import dev.cuny.entities.BugReport;
 import dev.cuny.repositories.ApplicationRepository;
+import dev.cuny.repositories.BugReportRepository;
 @SpringBootTest
 @ContextConfiguration(classes=dev.cuny.app.BbsApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -18,6 +23,10 @@ import dev.cuny.repositories.ApplicationRepository;
 class ApplicationRepoTests {
 	@Autowired
 	ApplicationRepository ar;
+	
+	@Autowired
+	BugReportRepository bre;
+	
 	@Test
 	@Order(1)
 	void createApplicationTest() {
@@ -60,6 +69,38 @@ class ApplicationRepoTests {
 		String str = "Application [id=1, title=Bug Bounty System, gitLink=git.com]";		
 		Assertions.assertEquals(str, a.toString()); 
 		
+	}
+	
+	@Test
+	@Order(7)
+	void getApplictionGitLink() {
+		Application a = ar.findById(1).get();
+		Assertions.assertEquals("git.com", a.getGitLink());
+	}
+	
+	@Test
+	@Order(7)
+	void getApplicationReports() {
+		Application a = ar.findById(1).get();
+		Assertions.assertNotEquals(0, a.getReports().size());
+	}
+	
+	@Test
+	@Order(8)
+	void setApplicationReports() {
+		Application a = ar.findById(1).get();
+		BugReport br = bre.findById(1).get();
+		BugReport br2 = bre.findById(2).get();
+		
+		List<BugReport> brs = new ArrayList<>();
+		
+		brs.add(br);
+		brs.add(br2);
+		
+		a.setReports(brs);
+		ar.save(a);
+		
+		Assertions.assertNotEquals(0, a.getReports().size());
 	}
 	
 }

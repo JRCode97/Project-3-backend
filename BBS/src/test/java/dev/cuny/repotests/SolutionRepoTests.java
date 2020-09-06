@@ -36,20 +36,20 @@ class SolutionRepoTests {
 	@Test
 	@Order(1)
 	void getByStatus() {
-		List<Solution> status = sr.findByStatus("Accepted");
-		Assertions.assertTrue(status.size() > 0);
+		List<Solution> AcceptedSols = sr.findByStatus("Accepted");
+		Assertions.assertNotEquals(0, AcceptedSols.size());
 	}
 	@Test
 	@Order(2)
 	void getByClient() {
 		List<Solution> clientSolutions = sr.findByClient(cr.findById(1).get());
-		Assertions.assertTrue(clientSolutions.size() > 0);
+		Assertions.assertNotEquals(0, clientSolutions.size());
 	}
 	@Test
 	@Order(3)
 	void getByBugReport() {
 		List<Solution> bugSolutions = sr.findByBr(br.findById(1).get());
-		Assertions.assertTrue(bugSolutions.size() > 0);
+		Assertions.assertNotEquals(0, bugSolutions.size());
 	}
 	
 	@Test

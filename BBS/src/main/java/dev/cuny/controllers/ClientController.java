@@ -83,7 +83,7 @@ public class ClientController {
 		if(count.booleanValue()) {
 			try {
 				Client c = cs.getClientById(id);
-				Integer result = brs.getClientBugReports(c.getUsername()).size();
+				Integer result = brs.getClientBugReportsByClientUsername(c.getUsername()).size();
 				return (T) result;
 			} catch (NoSuchElementException e) {
 				String str = "Unable to find a client with id: " + id;
@@ -94,7 +94,7 @@ public class ClientController {
 		else {
 			try {
 				Client c = cs.getClientById(id);
-				return (T) brs.getClientBugReports(c.getUsername());
+				return (T) brs.getClientBugReportsByClientUsername(c.getUsername());
 			} catch (NoSuchElementException e) {
 				String str = "Unable to find a client with id: " + id;
 				logger.error(str);

@@ -71,4 +71,22 @@ class ClientRepoTests {
 		List<Solution> solutions = cr.getClientSolutions(1);
 		Assertions.assertNotEquals(0, solutions.size());
 	}
+	
+	@Test
+	@Order(8)
+	void testClientToString() {
+		Client c = cr.findById(20).get();
+		String clientStr = "Client [clientId=20, clientFirstName=Dylan, clientLastName=Graham, clientUsername=Nuria, clientEmail=Dylangraham140@gmail.com, clientPassword=Password, clientRole=1]";
+		Assertions.assertEquals(clientStr, c.toString());
+	}
+	
+	@Test
+	@Order(9)
+	void getVariousClientEntityAttributes() {
+		Client c = cr.findById(20).get();
+		Assertions.assertEquals("Dylangraham140@gmail.com", c.getEmail());
+		Assertions.assertEquals("Graham", c.getlName());
+		Assertions.assertEquals(1, c.getRole());
+
+	}
 }

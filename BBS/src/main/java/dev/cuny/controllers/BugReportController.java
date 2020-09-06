@@ -76,7 +76,7 @@ public class BugReportController {
 	
 	private <T> T getBugReportImpl(String username, String status, Boolean count, String priority,String severity, String sort) {
 		if (!username.equals("")) {
-			return (T) brs.getClientBugReports(username);
+			return (T) brs.getClientBugReportsByClientUsername(username);
 			}
 		else if(!status.equals("")) {
 			status = status.toLowerCase();

@@ -38,28 +38,28 @@ class SolutionServiceTests {
 	@Order(1)
 	void getAllSolutionsTest(){
 		List<Solution>solutions = ss.getAllSolutions();
-		Assertions.assertTrue(solutions.size() > 0);
+		Assertions.assertNotEquals(0, solutions.size());
 	}
 	
 	@Test
 	@Order(2)
 	void getSolutionByClient() {
 		List<Solution> clientSolutions = ss.getSolutionsByClientId(1);
-		Assertions.assertTrue(clientSolutions.size() > 0);
+		Assertions.assertNotEquals(0, clientSolutions.size());
 	}	
 	
 	@Test
 	@Order(3)
 	void getSolutionByBugReport() {
 		List<Solution> bugSolutions = ss.getSolutionByBugReportId(1);
-		Assertions.assertTrue(bugSolutions.size() > 0);	
+		Assertions.assertNotEquals(0, bugSolutions.size());	
 	}
 	
 	@Test
 	@Order(4)
 	void getSolutionByStatus(){	
 		List<Solution> status = ss.getSolutionByStatus("Accepted");
-		Assertions.assertTrue(status.size() > 0);
+		Assertions.assertNotEquals(0, status.size());
 	}
 	
 	@Test
