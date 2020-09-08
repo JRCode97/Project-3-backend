@@ -1,0 +1,1859 @@
+{
+	"info": {
+		"_postman_id": "e2a603ea-64a8-4fb5-b516-4606693cbe15",
+		"name": "BugBountySystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Application",
+			"item": [
+				{
+					"name": "Get Application By Title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1f23ad70-db4a-4e1c-bd5c-9d35427bea6a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Returned correct application\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications?title=Bug%20Bounty%20System",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Bug%20Bounty%20System"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Applications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "32043b92-9a9d-4fc2-b523-cc9012d76b8f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Get correct count of applications\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(5);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new Application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "65381c1f-8e9d-4df4-a4c4-42f648d145f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert new Id is created and not a zero value\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(425);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":0, \"title\":\"yeah123\", \"gitLink\":\"test123\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/applications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Average Resolved Time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2622d22f-c8db-4011-904d-c8ac949df2af",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"639255861175\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications/1?resolvedtime=average",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications",
+								"1"
+							],
+							"query": [
+								{
+									"key": "resolvedtime",
+									"value": "average"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Longest Resolved Time ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b04ab890-9afa-4254-8331-e961e87464fa",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"1598492770000\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications/1?resolvedtime=longest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications",
+								"1"
+							],
+							"query": [
+								{
+									"key": "resolvedtime",
+									"value": "longest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Application Shortest Resolved Time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d16ff38-7676-4467-b906-eaee25ef5353",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"639255861175\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications/1?resolvedtime=average",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications",
+								"1"
+							],
+							"query": [
+								{
+									"key": "resolvedtime",
+									"value": "average"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solutions Count Per Application By Id ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ac26861f-f098-4083-8df9-bee842863934",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Application 1 solution count\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"10\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications/1/solutions_count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications",
+								"1",
+								"solutions_count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Reports By An Appliction By Application Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e7cc3b7-7ccb-40a7-ab2b-8f64ea0bc272",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Your test name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.length).to.eql(9);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications/2/bugreports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications",
+								"2",
+								"bugreports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Clients Count Per Application by Application Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "adb1a666-22d0-43dc-a93a-966ebf5baa35",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"How many clients have interacted with application 1\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"13\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/applications/1/clients_count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications",
+								"1",
+								"clients_count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c31253c3-e1ff-4367-b671-15be6ecc99df",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert application was updated\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.gitLink).to.eql(\"https://www.kyleiscool.com\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":425, \"title\":\"cool app man\", \"gitLink\":\"https://www.kyleiscool.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/applications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"applications"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "BugReport",
+			"item": [
+				{
+					"name": "Get All Bug Reports",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60cbbd14-2e81-4b22-953b-ead7a92b5052",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Your test name\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.length).to.eql(33);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Reports By Client Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f634095e-984d-4fa1-b7c0-027c726bef06",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the bug reports belong to TheRaidman\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    for(let i=0; i < jsonData.length; i++) {",
+									"        pm.expect(jsonData[i].username).to.eql(\"TheRaidman\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?username=TheRaidman",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "TheRaidman"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Bug Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "622d9576-990b-4cee-a267-a99b8c0f99d3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert the response title equals the request title\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.title).to.eql(\"updated cool bug report\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bId\": 4,\r\n    \"title\": \"updated cool bug report\",\r\n    \"description\": \"no thank you\",\r\n    \"repSteps\": \"idk you do it\",\r\n    \"username\": \"Nuria\",\r\n    \"severity\": \"Low\",\r\n    \"priority\": \"Medium\",\r\n    \"status\": \"Unresolved\",\r\n    \"location\": \"Line 22\",\r\n    \"approvedTime\": 1589330112570,\r\n    \"resolvedTime\": 1589359173000,\r\n    \"pointValue\": 123,\r\n    \"app\": {\r\n        \"id\": 237,\r\n        \"title\": \"Expense Reimbursement System\",\r\n        \"gitLink\": \"www.asite2.com\"\r\n    },\r\n    \"solutions\": [],\r\n    \"createdTime\": 1589328000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/bugreports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Bug Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6956ffb6-539d-4c57-9152-346134a0d34d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert non zero id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.value).not.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bId\": 0,\r\n    \"title\": \"Cool bug report man\",\r\n    \"description\": \"yeah it sure is\",\r\n    \"repSteps\": \"idk you do it\",\r\n    \"username\": \"Nuria\",\r\n    \"severity\": \"Low\",\r\n    \"priority\": \"Medium\",\r\n    \"status\": \"Unresolved\",\r\n    \"location\": \"Line 22\",\r\n    \"approvedTime\": 1589330112570,\r\n    \"resolvedTime\": 1589359173000,\r\n    \"pointValue\": 123,\r\n    \"app\": {\r\n        \"id\": 237,\r\n        \"title\": \"Expense Reimbursement System\",\r\n        \"gitLink\": \"www.google.com.com\"\r\n    },\r\n    \"solutions\": [],\r\n    \"createdTime\": 1589328000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/bugreports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Report By Bug Report Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ffcd0e5e-49ac-4f60-bbff-17b63f686e7d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the first bug report is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bId).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Report Count Of Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "47a10986-5fc5-4b77-8ff3-1f49c975e5c0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the *count* of resolved bug reports\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"12\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?status=resolved&count=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "resolved"
+								},
+								{
+									"key": "count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Report Count of Priority",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a1b951c2-ff43-4da3-a42c-82094db94296",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the *count* of high priority bug reports\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"19\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?priority=high&count=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": "high"
+								},
+								{
+									"key": "count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Report Count Of Severity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dba3f74f-cd3e-4521-b072-088d02a19586",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the *count* of medium severity bug reports\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"11\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?severity=Medium&count=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "severity",
+									"value": "Medium"
+								},
+								{
+									"key": "count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort Bug Report By Creation Date (Asc)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64ef9cbb-24cc-480f-9627-ab92dd1564c3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the first bug report \", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].bId).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Assert the last bug report\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[jsonData.length -1].bId).to.eql(202);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?sort=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Reports By Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2fd35417-b118-4333-9d6a-34b620e7c4ae",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the list of bug reports' statuses are resolved\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    for(let i=0; i < jsonData.length; i++) {",
+									"        pm.expect(jsonData[i].status).to.eql(\"Resolved\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?status=resolved",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "resolved"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bug Report By Creation Date (Desc)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bb32b21e-2f43-4465-b6e9-8cdea123c864",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the first bug report \", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].bId).to.eql(202);",
+									"});",
+									"",
+									"pm.test(\"Assert the last bug report\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[jsonData.length -1].bId).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports?sort=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Create new Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "07234801-937e-419e-8c49-b7b66468f702",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert non zero id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.cId).not.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cId\": 0,\r\n    \"fName\": \"Kyle\",\r\n    \"lName\": \"CoolGuy\",\r\n    \"username\": \"KCG\",\r\n    \"email\": \"kyleissupercoolandsmart@gmail.com\",\r\n    \"password\": \"yeahyeaheayhyeahyeahyeahyeahyeah\",\r\n    \"role\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa1c196e-4645-45ec-acc6-4cad35a1d518",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Assert the response name equals the request name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fName).to.eql(\"Amanda\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cId\": 318,\r\n    \"fName\": \"Amanda\",\r\n    \"lName\": \"Penlass\",\r\n    \"username\": \"pengirl37\",\r\n    \"email\": \"pengirl37@gmail.com\",\r\n    \"password\": \"ilikepensalot\",\r\n    \"role\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "997dc4c5-ef28-4f14-ac26-5924f4bc48a0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// PLEASE REFACTOR THIS TO USE POST INSTEAD OF GET",
+									"// YOU SHOULD **NEVER** USE A GET RUQUEST TO LOG SOMEONE IN.",
+									"// YOU CAN PLAINLY SEE THE CREDENTIALS AS ***PLAINTEXT*** IN THE QUERY PARAMS",
+									"pm.test(\"Log a client in\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.cId).to.eql(20);",
+									"    pm.expect(jsonData.fName).to.eql(\"Dylan\");",
+									"    pm.expect(jsonData.lName).to.eql(\"Graham\");",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/login?username=Nuria&password=Password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Nuria"
+								},
+								{
+									"key": "password",
+									"value": "Password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "968f8a87-ba50-4d13-8dd6-2072e909b332",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the first client is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.cId).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solution Count By Client ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "59a4d1d4-dd5e-4784-b0fd-8c3a59d03423",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the *count* of solutions this client has made\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"2\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/1/solutions?count=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"1",
+								"solutions"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solutions By Client ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8c47ef1c-b797-409d-a17c-78af84db3f03",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert that the list of solutions belongs to client 1\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    for(let i=0; i < jsonData.length; i++) {",
+									"        pm.expect(jsonData[i].client.username).to.eql(\"TheRaidman\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/1/solutions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"1",
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Bug Reports By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3b3be25-1a29-46b7-b1eb-df570225742f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert that the list of bug reports belongs to client 1\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    for(let i=0; i < jsonData.length; i++) {",
+									"        pm.expect(jsonData[i].username).to.eql(\"TheRaidman\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/1/bugreports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"1",
+								"bugreports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Bug Report Count By Client ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "611f88c4-0566-4521-adab-b777e6ef5891",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert that the *count* of bug reports belongs to client 1\", function () {",
+									"    pm.response.to.have.body(\"6\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/1/bugreports?count=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"1",
+								"bugreports"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Clients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "87ffaec9-b193-42bc-9bed-adb07edef61a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert correct number of clients\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(24);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count of All Clients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "01187b9c-32fa-462c-be54-9d90efaae315",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert correct number of clients with query parameter\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"24\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients?count=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client By Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3fc7929-68e3-4c69-b513-ab28976a2338",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert correct client is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.cId).to.eql(20);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients?username=Nuria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Nuria"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client By Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0fe5d881-d89b-482d-a2ab-d8cfe9cfc291",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the correct client is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.fName).to.eql(\"Amanda\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients?email=pengirl37@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "pengirl37@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Points By Client ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f18e3071-501f-4faa-bfb7-67cd72e2df36",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert client 20's points\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"486\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/clients/20/points",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"clients",
+								"20",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leaderboard Usernames",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "20843bb1-a718-410b-8289-267f73dcaee7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/leaderboard/usernames",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"leaderboard",
+								"usernames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leaderboard Points",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b091ba6-9a6f-498a-abaf-e1c2d09dad93",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/leaderboard/points",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"leaderboard",
+								"points"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Solution",
+			"item": [
+				{
+					"name": "Create new Solution ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76179f02-c07f-4932-a449-320b0e1e04f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert non zero id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).not.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"title\": \"you are smartn’t,\",\r\n    \"description\": \"ok thats mean im sorry\",\r\n    \"status\": \"Accepted\",\r\n    \"timeSubmitted\": 1590090202225,\r\n    \"br\": {\r\n        \"bId\": 3,\r\n        \"title\": \"Jackson objectmapper ignores additional ‘}’ at the end of json string while deserialising json string to Hollowing Object\",\r\n        \"description\": \"import com. Dark.souls import public class public class MyClass { public class MyClass { String introText: Humans are turning into undead.  As we can see, string which I am passing to mapper.readValue is invalid json string(has additional } at the end). But when I run the code it runs successfully and giving following output. The first flames fades and and bells of awakening must be found and one undead will change the world. But I can’t beat the first boss!\",\r\n        \"repSteps\": \"import com.fasterxml.jackson.databind.ObjectMapper; import java.io.IOException; import com.fasterxml.jackson.core.JsonParseException; import com.fasterxml.jackson.databind.JsonMappingException; public class MyClass { public static void main(String[] args) { ObjectMapper mapper = new ObjectMapper(); String jsonString = \\\"{\\\"name\\\":\\\"Mahesh\\\", \\\"age\\\":21}}\\\"; try{ Student student = mapper.readValue(jsonString, Student.class); System.out.println(student); jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student); System.out.println(jsonString); } catch (JsonParseException e) { e.printStackTrace();} catch (JsonMappingException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); } } } class Student { private String name; private int age; public Student(){} public String getName() { return name; } public void setName(String name) { this.name = name; } public int getAge() { return age; } public void setAge(int age) { this.age = age; } public String toString(){ return \\\"Student [ name: \\\"+name+\\\", age: \\\"+ age+ \\\" ]\\\"; } } This cause the the fire fades\",\r\n        \"username\": \"Nuria\",\r\n        \"severity\": \"Medium\",\r\n        \"priority\": \"Low\",\r\n        \"status\": \"Resolved\",\r\n        \"location\": \"Line 124\",\r\n        \"approvedTime\": 1588637366384,\r\n        \"resolvedTime\": 1588648449000,\r\n        \"pointValue\": 123,\r\n        \"app\": {\r\n            \"id\": 2,\r\n            \"title\": \"Pizza Ordering Application\",\r\n            \"gitLink\": \"www.site1.com\"\r\n        },\r\n        \"createdTime\": 1588636800000\r\n    },\r\n    \"client\": {\r\n        \"cId\": 20,\r\n        \"fName\": \"Dylan\",\r\n        \"lName\": \"Graham\",\r\n        \"username\": \"Nuria\",\r\n        \"email\": \"Dylangraham140@gmail.com\",\r\n        \"password\": \"Password\",\r\n        \"role\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/solutions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Solution",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "426c5a0e-66e0-4426-bc5f-06761b5b4499",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert request title is equal to response title\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.title).to.eql(\"cool super man\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 48,\r\n    \"title\": \"cool super man\",\r\n    \"description\": \"sorry\",\r\n    \"status\": \"Accepted\",\r\n    \"timeSubmitted\": 1590090202225,\r\n    \"br\": {\r\n        \"bId\": 3,\r\n        \"title\": \"Jackson objectmapper ignores additional ‘}’ at the end of json string while deserialising json string to Hollowing Object\",\r\n        \"description\": \"import com. Dark.souls import public class public class MyClass { public class MyClass { String introText: Humans are turning into undead.  As we can see, string which I am passing to mapper.readValue is invalid json string(has additional } at the end). But when I run the code it runs successfully and giving following output. The first flames fades and and bells of awakening must be found and one undead will change the world. But I can’t beat the first boss!\",\r\n        \"repSteps\": \"import com.fasterxml.jackson.databind.ObjectMapper; import java.io.IOException; import com.fasterxml.jackson.core.JsonParseException; import com.fasterxml.jackson.databind.JsonMappingException; public class MyClass { public static void main(String[] args) { ObjectMapper mapper = new ObjectMapper(); String jsonString = \\\"{\\\"name\\\":\\\"Mahesh\\\", \\\"age\\\":21}}\\\"; try{ Student student = mapper.readValue(jsonString, Student.class); System.out.println(student); jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student); System.out.println(jsonString); } catch (JsonParseException e) { e.printStackTrace();} catch (JsonMappingException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); } } } class Student { private String name; private int age; public Student(){} public String getName() { return name; } public void setName(String name) { this.name = name; } public int getAge() { return age; } public void setAge(int age) { this.age = age; } public String toString(){ return \\\"Student [ name: \\\"+name+\\\", age: \\\"+ age+ \\\" ]\\\"; } } This cause the the fire fades\",\r\n        \"username\": \"Nuria\",\r\n        \"severity\": \"Medium\",\r\n        \"priority\": \"Low\",\r\n        \"status\": \"Resolved\",\r\n        \"location\": \"Line 124\",\r\n        \"approvedTime\": 1588637366384,\r\n        \"resolvedTime\": 1588648449000,\r\n        \"pointValue\": 123,\r\n        \"app\": {\r\n            \"id\": 2,\r\n            \"title\": \"Pizza Ordering Application\",\r\n            \"gitLink\": \"www.site1.com\"\r\n        },\r\n        \"createdTime\": 1588636800000\r\n    },\r\n    \"client\": {\r\n        \"cId\": 20,\r\n        \"fName\": \"Dylan\",\r\n        \"lName\": \"Graham\",\r\n        \"username\": \"Nuria\",\r\n        \"email\": \"Dylangraham140@gmail.com\",\r\n        \"password\": \"Password\",\r\n        \"role\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9111/solutions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solution By Solution ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cab4ef1a-ff69-4187-b059-95d7d78dd7b1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert the first solution is returned\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/solutions/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"solutions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solutions By Status (Accepted)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5dcfc378-566f-49fc-96d3-6aa6ea867654",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert that the list of solution statuses are accepted\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    for(let i=0; i < jsonData.length; i++) {",
+									"        pm.expect(jsonData[i].status).to.eql(\"Accepted\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/solutions?status=Accepted",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"solutions"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Accepted"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Solutions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "01a6d9a2-e0c8-4dc2-99d2-fbcdff020f32",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(34);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/solutions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Solutions By Bug Report ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a45c6847-1ff5-4094-a526-276cc6642c0a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert that the list of solution belong to the first bug report\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    for(let i=0; i < jsonData.length; i++) {",
+									"        pm.expect(jsonData[i].br.bId).to.eql(1);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9111/bugreports/1/solutions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9111",
+							"path": [
+								"bugreports",
+								"1",
+								"solutions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
