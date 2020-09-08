@@ -2,6 +2,14 @@ DROP TABLE IF EXISTS solution;
 DROP TABLE IF EXISTS bug_report;
 DROP TABLE IF EXISTS client;
 DROP TABLE IF EXISTS application;
+DROP TABLE IF EXISTS reset_password;
+
+CREATE TABLE reset_password(
+	id int PRIMARY KEY AUTO_INCREMENT,
+	username varchar(200) UNIQUE,
+	email varchar(200),
+	api_key varchar(200)
+);
 
 CREATE TABLE application (
 application_id int(11) PRIMARY KEY AUTO_INCREMENT,
@@ -53,7 +61,7 @@ CREATE TABLE solution (
   CONSTRAINT FK_client_id_solution FOREIGN KEY (solver_client_id) REFERENCES client (client_id)
 );
 
-	INSERT INTO application(application_id,application_title,application_git_link) VALUES (1,'Bug Bounty System','git.com');
+INSERT INTO application(application_id,application_title,application_git_link) VALUES (1,'Bug Bounty System','git.com');
 INSERT INTO application(application_id,application_title,application_git_link) VALUES (2,'Pizza Ordering Application','www.site1.com');
 INSERT INTO application(application_id,application_title,application_git_link) VALUES (237,'Expense Reimbursement System','www.asite2.com');
 INSERT INTO application(application_id,application_title,application_git_link) VALUES (238,'DriveForce','www.bsite3.com');
@@ -250,6 +258,7 @@ INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug
 <p>2) Voila, you have a bug</p>','TheRaidman','High','Medium','Resolved','I have no Idea',0,1597713858678,1597708845678,0,1);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (202,'Test br','<p>This is a testing bug report</p>','<p>Just refresh page</p>','user1','Medium','Medium','Resolved','repos',0,1598492770000,1598486400000,0,1);
 
+INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (4,'Zakaria','Zak lastname','Zak','2007wvu@gmail.com','password',1);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (1,'Jesse','the real jesse','TheRaidman','nb231111@gmail.com','password',1);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (2,'Jian','Qiu','JianQiu','jian@email.com','password',1);
 INSERT INTO client(client_id,client_first_name,client_last_name,client_username,client_email,client_password,client_role) VALUES (3,'Bin','Nai','Emailman','MircoPassword@gmail.com','password',1);

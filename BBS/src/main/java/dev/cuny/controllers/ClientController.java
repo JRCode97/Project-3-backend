@@ -1,5 +1,6 @@
 package dev.cuny.controllers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import dev.cuny.dtos.EmailDto;
 import dev.cuny.entities.Client;
+import dev.cuny.entities.ResetPassword;
 import dev.cuny.services.BugReportService;
 import dev.cuny.services.ClientService;
 
@@ -140,5 +143,23 @@ public class ClientController {
 	public List<Integer> getLeaderboardpoints() {
 		return cs.leaderboardpoints();
 
+	}
+
+	@PostMapping(value = "/forgotPassword")
+	public Boolean senEmail(@RequestBody EmailDto emailDto) throws IOException {
+		if(cs.getClientByUsername(emailDto.getUsername()) == null) {
+			return false;
+		}
+		ResetPassword rp = cs.savePasswordRequest(emailDto);
+		return cs.sendEmail("Password Reset Request", rp);
+	}
+
+	@GetMapping(value = "/verifyAccount") // /verifyAccount?username=Zak&email=2007wvu@gmail.com&key=a7i0qnaZ051BMZq03I9w0CdV36qTOg
+	public Client resetPassword(@RequestParam (required = true) String username,
+								 @RequestParam (required = true) String email,
+								 @RequestParam(required = true) String key) {
+		
+		return cs.verifyResetPasswordClient(username, email, key);
+		
 	}
 }
