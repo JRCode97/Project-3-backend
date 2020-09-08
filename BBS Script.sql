@@ -64,10 +64,17 @@ UNIQUE KEY `application_UN` (`application_title`)
 	  CONSTRAINT `FK_client_id_solution` FOREIGN KEY (`solver_client_id`) REFERENCES `client` (`client_id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
+	CREATE TABLE `reset_password`(
+	`id` int PRIMARY KEY AUTO_INCREMENT,
+	`username` varchar(200) UNIQUE,
+	`email` varchar(200),
+	`api_key` varchar(200)
+	);
+
 END;
 
-CALL teardown_db(); 
-CALL setup_db(); 
+CALL teardown_db();
+CALL setup_db();
 CALL populate_db();
 
 SELECT * FROM solution;
@@ -79,12 +86,15 @@ DROP TABLE solution;
 DROP TABLE client;
 DROP TABLE bug_report;
 DROP TABLE application;
+DROP TABLE reset_password;
+
 END;
 
 
-CREATE OR REPLACE PROCEDURE populate_db() AS 
+CREATE OR REPLACE PROCEDURE populate_db() AS
 BEGIN
-	INSERT INTO application(application_id,application_title,application_git_link) VALUES (1,'Bug Bounty System','git.com');
+
+INSERT INTO application(application_id,application_title,application_git_link) VALUES (1,'Bug Bounty System','git.com');
 INSERT INTO application(application_id,application_title,application_git_link) VALUES (2,'Pizza Ordering Application','www.site1.com');
 INSERT INTO application(application_id,application_title,application_git_link) VALUES (237,'Expense Reimbursement System','www.asite2.com');
 INSERT INTO application(application_id,application_title,application_git_link) VALUES (238,'DriveForce','www.bsite3.com');
@@ -97,7 +107,7 @@ INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (5,'How to call back a parents name called "God of tablewars" from child table','I''ve linked them via the Designer view so when I go to insert a name game (I''m doing this via the phpMyAdmin control panel) as soon as I click on "console_id" it gives me a drop down of 1 - PS4, 2 - Xbox and so on. So the games table can now read from consoles table no problem so I think I''ve got <b>everything correct<b> from that side of things.','0 I have two tables as follows: games id | game_name | console_id 1 God of War 1 2 Zelda 3 3 Sonic 4 consoles id | console_name 1 PS4 2 Xbox 3 Switch 4 Mega Drive','AlwaysDeugging','High','High','Resolved','Line 129',1590535087867,1590535187867,1522235187867,213,2);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (8,'Q.spread and pyramid of Endless Horizons','2 I have this code: Q.spread([ Q.nfcall(employee.save.bind(employee)), ],function(emp){ Q.spread([Q.nfcall(dept.save.bind(dept))],function(dept){ console.log("success") },function(e){ console.error(e); mongoose.disconnect(); }) },function(e){ console.error(e); mongoose.disconnect(); }) Although it works great, it starts to look like the pyramid of doom. Is there a way to refactor it to be more "promising"? I expected something like this to be working: Q.spread([ Q.nfcall(employee.save.bind(employee)) ]).then(function(emp){ var dept = new Department(); return Q.spread([ Q.nfcall(dept.save.bind(dept)) ]) }).then(function(dept){ console.log("success"); }).catch(function(e){ console.error(e); }) but it isn''t.','Q.spread([ Q.nfcall(employee.save.bind(employee)), ],function(emp){ Q.spread([Q.nfcall(dept.save.bind(dept))],function(dept){ console.log("success") },function(e){ console.error(e); mongoose.disconnect(); }) },function(e){ console.error(e); mongoose.disconnect(); }) Although it works great, it starts to look like the pyramid of doom. Is there a way to refactor it to be more "promising"? I expected something like this to be working: Q.spread([ Q.nfcall(employee.save.bind(employee)) ]).then(function(emp){ var dept = new Department(); return Q.spread([ Q.nfcall(dept.save.bind(dept)) ]) }).then(function(dept){ console.log("success"); }).catch(function(e){ console.error(e); }) but it isn''t. The doomslayer is playing with a cute dog','Nuria','Low','High','Resolved','Line 342',1590535187007,1597948998735,1553544878679,40,2);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (21,'When using the code from Bioshock it causes my compter','<p><em><b>The Big Daddy Header files aren''t compiled by themselves; they''re #included into .cpp files, and the .cpp files are compiled. So it''s possible for a header file X to reference macros that are defined in some other header file Y (that does not include X), and when both Y and X are included (in that specific order) into some source (.cpp) file, then all the references will work out.</b></p></em>','I think it''s not only about Python. In many languages I have not found any default prime number generator or prime checker. Why e.g Python math module has no prime number methods? Or maybe there is somewhere, but I don''t know it? If not, what is the reason to not implementing standard prime number generator or prime checking algorithms?','TheRaidMan','Low','High','Requested','Line 2',1590535181167,1590535187867,1590535195208,214,237);
-INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (22,'Javasimpleservice is not sending a email to my email','<p>I have been studying (old) 3D rendering and Stomp mail techniques for the past weeks and think that I now have a fair understanding of the way 3D rendering in Doom works. It uses raycasting to render the 3D scene … rendering different from Doom rendering? Does the Quake world use 3D vertices and are they all projected instead of raycasting for intersections? I would love to hear a clear explanation of the … IT BUGGES ME OUT.<p>','<pconst message: string = ''hello world'';<p>','Nuria','Medium','Low','Resolved','Line 123',1590535187167,1590611976359,1590535187867,343,1);
+INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (22,'Javasimpleservice is not sending a email to my email','<p>I have been studying (old) 3D rendering and Stomp mail techniques for the past weeks and think that I now have a fair understanding of the way 3D rendering in Doom works. It uses raycasting to render the 3D scene ï¿½ rendering different from Doom rendering? Does the Quake world use 3D vertices and are they all projected instead of raycasting for intersections? I would love to hear a clear explanation of the ï¿½ IT BUGGES ME OUT.<p>','<pconst message: string = ''hello world'';<p>','Nuria','Medium','Low','Resolved','Line 123',1590535187167,1590611976359,1590535187867,343,1);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (25,'My jenkins is not working anymore!','<p>The jekins would not open in the tomcat today. The port 8080 is not working</p>','I think it''s not only about Python. In many languages I have not found any default prime number generator or prime checker. Why e.g Python math module has no prime number methods? Or maybe there is somewhere, but I don''t know it? If not, what is the reason to not implementing standard prime number generator or prime checking algorithms?','AlwaysDeugging','High','Medium','Resolved','In the back end',1590535181867,1590801861281,1590535187867,420,238);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (31,'My email services is failing to send emails.','I would like to have a table which has words included in td. I am wondering if there is any way that search result shown irrespective of the way user searched. for example td contains " love and dance and sing " but the code that I have show result only when user types "love and dance and sing " . If user type "dance and love" it doesn''t show.I want to show result irrespective of arrangement of words, ie , if user types "sing and dance" or dance and love" result should show up.','still trying to help the backend','Thehiddenbug','Medium','High','Unresolved','Line 234',1590535124967,1590535187867,1590535187867,124,1);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (61,'My Half-Life program is keeps getting null pointer errors','Everyone keeps changing the database so I don''t know when but when running a test all of my point went missing and now it is saying I have null points not 0 points','Physicist Gordon Will Free-Wael data based is changed to remove any points under his namelate for work at the Black Mesa Research Facility  Gordon arrives at the Lambda Complex, where scientists under tiff learn the portal is being forced open on the other side by an immensely powerful entity. They have developed teleportation technology that allows Gordon to travel to Xen, where he is tasked to stop the entity','TheRaidman','High','High','Unresolved','Line 4',1590535084847,1590535187867,1590535187867,10,1);
@@ -162,7 +172,7 @@ artifacts:
     - HelloWorld.js
 </code></pre>
 <p>Out of curiosity I thought it might have been a formatting error, but I tried checking in some garbage text and received the following error instead:</p>
-<pre><code>Phase context status code: YAML_FILE_ERROR Message: stat 
+<pre><code>Phase context status code: YAML_FILE_ERROR Message: stat
 </code></pre>
 </div>','Nuria','Low','High','Requested','In the back end',1590535187867,1590535187867,1590535144208,6,1);
 INSERT INTO bug_report(bug_report_id,bug_report_title,bug_report_description,bug_report_reproduction_steps,client_username,severity,priority,status,location,approved_time,resolved_time,date_created,point_value,application_id) VALUES (110,'My API keeps changing when I change the size of my screen','better','<p>Use the front end for more than 5 minutes.</p>','AlwaysDeugging','Medium','Medium','Unresolved','In the back end',1590535187867,1590535187867,1590535195308,5,1);
@@ -284,7 +294,7 @@ INSERT INTO solution(solution_id,solution_title,solution_description,status,subm
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (13,'This a problem with spring 3.0.0','The X of your xyproblem.info is still unclear. You''re literally stating "And I want to perform a specific action each time a request comes to MyServlet". This is incomplete information. As it stands now, the answer would simply be, "just put it in your service() method as you did". But it has absolutely not the same lifecycle as the ServletRequestListener. It''s still unclear why you''re trying to compare to it. What exactly is that "some clean up stuff" that you''re apparently trying to perform. If it were e.g. closing a JDBC connection then everything of this all is wrong.','Pending',1590539300178,1,32);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (14,'Fix the Html','There are indeed different solutions depending on the content of the "clean up stuff". If it only concerns the current request and no external, no injected or shared resources and does not involve http stuff (such as headers, auth, ..) then try-finally could be fine. Otherwise a more suitable <Filter> would do the job in most other cases.','Pending',1590539321008,22,24);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (15,'Problem in setting date and time from java code','In a real application you would use the initAsync function such that the loading of the libraries does not block the main thread. In a simple example this does not matter.','Pending',1590039324908,1,23);
-INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (16,'Change the import to java.util.list','Assuming you run on Linux, you have to make sure you can perform ''sudo'' without entering the password. You did not specify how the server is launched, but for regular accounts, sudo will require password per session. Also, please log the executed command on the server, including the return code. – dash-o yesterday','Rejected',1590088261112,25,2);
+INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (16,'Change the import to java.util.list','Assuming you run on Linux, you have to make sure you can perform ''sudo'' without entering the password. You did not specify how the server is launched, but for regular accounts, sudo will require password per session. Also, please log the executed command on the server, including the return code. ï¿½ dash-o yesterday','Rejected',1590088261112,25,2);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (17,'Import ng-repeat is out of date, use ng for.','import { Injectable } from ''@angular/core'';
 import { HttpClient } from ''@angular/common/http'';
 import { BugReport } from ''src/app/models/BugReport''
@@ -333,18 +343,18 @@ export class ApiServiceService {
   getClientById(id: number): Promise<Client> {
     return this.http.get<Client>(this.path + `/clients/${id}`).toPromise();
   }
-  //to be set within the login function 
+  //to be set within the login function
   setLoggedClient(client: Client) {
     localStorage.setItem(''client'', JSON.stringify(client));
   }
-  //to be used anywhere the user objec is needed  , it is better to call it in the component constructor 
+  //to be used anywhere the user objec is needed  , it is better to call it in the component constructor
   getLoggedClient(): Client {
     let val = localStorage.getItem(''client'');
     let client = new Client();
     client = JSON.parse(val)
     return client;
   }
-  //used on logout 
+  //used on logout
   clearLoggedClient() {
     localStorage.clear();
   }
@@ -354,16 +364,16 @@ export class ApiServiceService {
 
   //################ Start of Solution Section ###################
 
-  //1. Add new Solution 
+  //1. Add new Solution
   async postSolution(slution: Solution): Promise<any> {
     let ticketPromise = await this.http.post(this.path + "/solutions", slution).toPromise();
     return ticketPromise;
   }
-  //2. Get all Solutions  by Bug Report ID 
+  //2. Get all Solutions  by Bug Report ID
   getSolutionsByBugId(brId: number): Promise<Array<Solution>> {
     return this.http.get<Array<Solution>>(this.path + ''/query/solutions/bugreport?id='' + brId).toPromise();
   }
-  
+
   //################ End of Solution Section ###################
 }','Accepted',1590088470121,25,23);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (18,'Fix the Service Html  3','<div class="container">
@@ -382,7 +392,7 @@ INSERT INTO solution(solution_id,solution_title,solution_description,status,subm
         <ng-container *ngIf="br.app !=null">
             <label id="lblapplication" class="col-sm-2 form-control-plaintext"> {{br.app.title}}</label>
 
-      
+
         </ng-container>      <label for="lbllocation" class="col-sm-2 col-form-label">Location:</label>
         <label id="lbllocation" class="col-sm-2 form-control-plaintext"> {{br.location}}</label>
 
@@ -520,14 +530,14 @@ INSERT INTO solution(solution_id,solution_title,solution_description,status,subm
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (24,'Check to your Main file','You should look into alpha blending for drawing the bubbles. Assuming the reflections on them are static, all you need is a simple image. (If you aren''t sure what the image should be like, look at a black wall in the game. The white parts you see should be what the red, green, blue AND alpha channels of the image look like.)','Rejected',1590095990243,3,108);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (25,'Get hired at revature','They will train you! Learn everything you need to solve this bug and get paid!','Accepted',1590541476321,3,108);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (26,'You need to change the vsyc code to find the fps of the game','understand that you want to do this operation in a non-internet environment.','Accepted',1590000555555,22,109);
-INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (27,'set session.gc_maxlifetime > 65535 seconds','Hi! thanks for your response. Regarding your questions: 1. At least 30 fps 2. At least 1080 3. If I can transmit the video with audio, that would be awesome. Or at least send it sepparate from the video 4. It''s a local environment, so don''t worry about that. Assume a really high bandwith 5. We can use the latest versions of both Yes, compressing things in H264 or H265 would be ideal, but sending that "on the fly" through the network without storing it to the disk (maybe that''s the only way) seems to be a nontrivial thing. –','Accepted',1580001111111,22,109);
+INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (27,'set session.gc_maxlifetime > 65535 seconds','Hi! thanks for your response. Regarding your questions: 1. At least 30 fps 2. At least 1080 3. If I can transmit the video with audio, that would be awesome. Or at least send it sepparate from the video 4. It''s a local environment, so don''t worry about that. Assume a really high bandwith 5. We can use the latest versions of both Yes, compressing things in H264 or H265 would be ideal, but sending that "on the fly" through the network without storing it to the disk (maybe that''s the only way) seems to be a nontrivial thing. ï¿½','Accepted',1580001111111,22,109);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (28,'You are using the wrong tag','Thanks for the link. Does the maximum depend on the session.save_handler? From what I understand from scottmac@php.net it could. @Ryan Vincent - Right now I have set my session_set_cookie_params(4*7*24*60*60) in my phpinfo() I read that the session.cookie_lifetime is indeed this value. However after 24 minutes (the maximum lifetime set by session.gc_maxlifetime) kills it.','Accepted',1570123213123,1,102);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (29,'set session to false if it is off','yes it is possible, if you do self session handler','Accepted',1591204212122,1,102);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (37,'At least 30 fps','compressing things in H264 or H265 would be ideal, but sending that "on the fly" through the network without storing it to the disk (maybe that''s the only way) seems to be a nontrivial thing','Pending',1590678680645,186,108);
-INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (38,'The Observer','CurrentItem.AddObserver(this, new NSString("status"), 
+INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (38,'The Observer','CurrentItem.AddObserver(this, new NSString("status"),
     NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Initial,
     StatusObservationContext.Handle);','Accepted',1590678709868,186,2);
-INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (39,'Load Time Ranges','CurrentItem.AddObserver(this, new NSString("loadedTimeRanges"), 
+INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (39,'Load Time Ranges','CurrentItem.AddObserver(this, new NSString("loadedTimeRanges"),
     NSKeyValueObservingOptions.Initial | NSKeyValueObservingOptions.New,
     LoadedTimeRangesObservationContext.Handle);','Pending',1590678730641,186,32);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (43,'Use sudo','Use basic linux commands to run any programm (application) as root. MacOS should also support them, for example:
@@ -548,29 +558,24 @@ INSERT INTO solution(solution_id,solution_title,solution_description,status,subm
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (47,'New Solution','magic','Rejected',1590765193263,186,20);
 INSERT INTO solution(solution_id,solution_title,solution_description,status,submitted_time,bug_report_id,solver_client_id) VALUES (48,'Summon 117','Jump off the ship','approved',1231201259,3,20);
 
-	
+
 
 END;
 
 
 -- ALTER TABLE client
 -- ADD CONSTRAINT `client_username` UNIQUE (`client_username`);
--- 
+--
 -- ALTER TABLE client AUTO_INCREMENT = 318;
--- 
--- ALTER TABLE bug_report 
+--
+-- ALTER TABLE bug_report
 -- ADD CONSTRAINT FK_application_id FOREIGN KEY (application_id) REFERENCES application(application_id);
--- 
+--
 -- ALTER TABLE bug_report
 -- ADD CONSTRAINT `FK_application_id` FOREIGN KEY (`application_id`) REFERENCES `application` (`application_id`);
--- 
--- ALTER TABLE 
--- ADD CONSTRAINT 
+--
+-- ALTER TABLE
+-- ADD CONSTRAINT
 --  UNIQUE KEY `client_username` (`client_username`);
--- 
+--
 -- ADD CONSTRAINT fk_cust_order_customer FOREIGN KEY cust_order(c_id) REFERENCES customer(c_id)
-
-
-
-
-
