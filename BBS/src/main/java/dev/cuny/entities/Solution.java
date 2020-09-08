@@ -35,7 +35,6 @@ public class Solution {
 	
 	public Solution() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	
